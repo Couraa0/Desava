@@ -9,38 +9,228 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as WargaRouteImport } from './routes/warga'
+import { Route as UmkmRouteImport } from './routes/umkm'
+import { Route as AdminRouteImport } from './routes/admin'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as WargaIndexRouteImport } from './routes/warga.index'
+import { Route as UmkmIndexRouteImport } from './routes/umkm.index'
+import { Route as AdminIndexRouteImport } from './routes/admin.index'
+import { Route as WargaWalletRouteImport } from './routes/warga.wallet'
+import { Route as WargaScannerRouteImport } from './routes/warga.scanner'
+import { Route as WargaAssistantRouteImport } from './routes/warga.assistant'
+import { Route as UmkmMarketplaceRouteImport } from './routes/umkm.marketplace'
+import { Route as UmkmCatalogRouteImport } from './routes/umkm.catalog'
+import { Route as AdminFeedbackRouteImport } from './routes/admin.feedback'
+import { Route as AdminEduwisataRouteImport } from './routes/admin.eduwisata'
+import { Route as AdminDropboxRouteImport } from './routes/admin.dropbox'
 
+const WargaRoute = WargaRouteImport.update({
+  id: '/warga',
+  path: '/warga',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const UmkmRoute = UmkmRouteImport.update({
+  id: '/umkm',
+  path: '/umkm',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AdminRoute = AdminRouteImport.update({
+  id: '/admin',
+  path: '/admin',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const WargaIndexRoute = WargaIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => WargaRoute,
+} as any)
+const UmkmIndexRoute = UmkmIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => UmkmRoute,
+} as any)
+const AdminIndexRoute = AdminIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => AdminRoute,
+} as any)
+const WargaWalletRoute = WargaWalletRouteImport.update({
+  id: '/wallet',
+  path: '/wallet',
+  getParentRoute: () => WargaRoute,
+} as any)
+const WargaScannerRoute = WargaScannerRouteImport.update({
+  id: '/scanner',
+  path: '/scanner',
+  getParentRoute: () => WargaRoute,
+} as any)
+const WargaAssistantRoute = WargaAssistantRouteImport.update({
+  id: '/assistant',
+  path: '/assistant',
+  getParentRoute: () => WargaRoute,
+} as any)
+const UmkmMarketplaceRoute = UmkmMarketplaceRouteImport.update({
+  id: '/marketplace',
+  path: '/marketplace',
+  getParentRoute: () => UmkmRoute,
+} as any)
+const UmkmCatalogRoute = UmkmCatalogRouteImport.update({
+  id: '/catalog',
+  path: '/catalog',
+  getParentRoute: () => UmkmRoute,
+} as any)
+const AdminFeedbackRoute = AdminFeedbackRouteImport.update({
+  id: '/feedback',
+  path: '/feedback',
+  getParentRoute: () => AdminRoute,
+} as any)
+const AdminEduwisataRoute = AdminEduwisataRouteImport.update({
+  id: '/eduwisata',
+  path: '/eduwisata',
+  getParentRoute: () => AdminRoute,
+} as any)
+const AdminDropboxRoute = AdminDropboxRouteImport.update({
+  id: '/dropbox',
+  path: '/dropbox',
+  getParentRoute: () => AdminRoute,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/admin': typeof AdminRouteWithChildren
+  '/umkm': typeof UmkmRouteWithChildren
+  '/warga': typeof WargaRouteWithChildren
+  '/admin/dropbox': typeof AdminDropboxRoute
+  '/admin/eduwisata': typeof AdminEduwisataRoute
+  '/admin/feedback': typeof AdminFeedbackRoute
+  '/umkm/catalog': typeof UmkmCatalogRoute
+  '/umkm/marketplace': typeof UmkmMarketplaceRoute
+  '/warga/assistant': typeof WargaAssistantRoute
+  '/warga/scanner': typeof WargaScannerRoute
+  '/warga/wallet': typeof WargaWalletRoute
+  '/admin/': typeof AdminIndexRoute
+  '/umkm/': typeof UmkmIndexRoute
+  '/warga/': typeof WargaIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/admin/dropbox': typeof AdminDropboxRoute
+  '/admin/eduwisata': typeof AdminEduwisataRoute
+  '/admin/feedback': typeof AdminFeedbackRoute
+  '/umkm/catalog': typeof UmkmCatalogRoute
+  '/umkm/marketplace': typeof UmkmMarketplaceRoute
+  '/warga/assistant': typeof WargaAssistantRoute
+  '/warga/scanner': typeof WargaScannerRoute
+  '/warga/wallet': typeof WargaWalletRoute
+  '/admin': typeof AdminIndexRoute
+  '/umkm': typeof UmkmIndexRoute
+  '/warga': typeof WargaIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/admin': typeof AdminRouteWithChildren
+  '/umkm': typeof UmkmRouteWithChildren
+  '/warga': typeof WargaRouteWithChildren
+  '/admin/dropbox': typeof AdminDropboxRoute
+  '/admin/eduwisata': typeof AdminEduwisataRoute
+  '/admin/feedback': typeof AdminFeedbackRoute
+  '/umkm/catalog': typeof UmkmCatalogRoute
+  '/umkm/marketplace': typeof UmkmMarketplaceRoute
+  '/warga/assistant': typeof WargaAssistantRoute
+  '/warga/scanner': typeof WargaScannerRoute
+  '/warga/wallet': typeof WargaWalletRoute
+  '/admin/': typeof AdminIndexRoute
+  '/umkm/': typeof UmkmIndexRoute
+  '/warga/': typeof WargaIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths:
+    | '/'
+    | '/admin'
+    | '/umkm'
+    | '/warga'
+    | '/admin/dropbox'
+    | '/admin/eduwisata'
+    | '/admin/feedback'
+    | '/umkm/catalog'
+    | '/umkm/marketplace'
+    | '/warga/assistant'
+    | '/warga/scanner'
+    | '/warga/wallet'
+    | '/admin/'
+    | '/umkm/'
+    | '/warga/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to:
+    | '/'
+    | '/admin/dropbox'
+    | '/admin/eduwisata'
+    | '/admin/feedback'
+    | '/umkm/catalog'
+    | '/umkm/marketplace'
+    | '/warga/assistant'
+    | '/warga/scanner'
+    | '/warga/wallet'
+    | '/admin'
+    | '/umkm'
+    | '/warga'
+  id:
+    | '__root__'
+    | '/'
+    | '/admin'
+    | '/umkm'
+    | '/warga'
+    | '/admin/dropbox'
+    | '/admin/eduwisata'
+    | '/admin/feedback'
+    | '/umkm/catalog'
+    | '/umkm/marketplace'
+    | '/warga/assistant'
+    | '/warga/scanner'
+    | '/warga/wallet'
+    | '/admin/'
+    | '/umkm/'
+    | '/warga/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AdminRoute: typeof AdminRouteWithChildren
+  UmkmRoute: typeof UmkmRouteWithChildren
+  WargaRoute: typeof WargaRouteWithChildren
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/warga': {
+      id: '/warga'
+      path: '/warga'
+      fullPath: '/warga'
+      preLoaderRoute: typeof WargaRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/umkm': {
+      id: '/umkm'
+      path: '/umkm'
+      fullPath: '/umkm'
+      preLoaderRoute: typeof UmkmRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/admin': {
+      id: '/admin'
+      path: '/admin'
+      fullPath: '/admin'
+      preLoaderRoute: typeof AdminRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/': {
       id: '/'
       path: '/'
@@ -48,22 +238,138 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/warga/': {
+      id: '/warga/'
+      path: '/'
+      fullPath: '/warga/'
+      preLoaderRoute: typeof WargaIndexRouteImport
+      parentRoute: typeof WargaRoute
+    }
+    '/umkm/': {
+      id: '/umkm/'
+      path: '/'
+      fullPath: '/umkm/'
+      preLoaderRoute: typeof UmkmIndexRouteImport
+      parentRoute: typeof UmkmRoute
+    }
+    '/admin/': {
+      id: '/admin/'
+      path: '/'
+      fullPath: '/admin/'
+      preLoaderRoute: typeof AdminIndexRouteImport
+      parentRoute: typeof AdminRoute
+    }
+    '/warga/wallet': {
+      id: '/warga/wallet'
+      path: '/wallet'
+      fullPath: '/warga/wallet'
+      preLoaderRoute: typeof WargaWalletRouteImport
+      parentRoute: typeof WargaRoute
+    }
+    '/warga/scanner': {
+      id: '/warga/scanner'
+      path: '/scanner'
+      fullPath: '/warga/scanner'
+      preLoaderRoute: typeof WargaScannerRouteImport
+      parentRoute: typeof WargaRoute
+    }
+    '/warga/assistant': {
+      id: '/warga/assistant'
+      path: '/assistant'
+      fullPath: '/warga/assistant'
+      preLoaderRoute: typeof WargaAssistantRouteImport
+      parentRoute: typeof WargaRoute
+    }
+    '/umkm/marketplace': {
+      id: '/umkm/marketplace'
+      path: '/marketplace'
+      fullPath: '/umkm/marketplace'
+      preLoaderRoute: typeof UmkmMarketplaceRouteImport
+      parentRoute: typeof UmkmRoute
+    }
+    '/umkm/catalog': {
+      id: '/umkm/catalog'
+      path: '/catalog'
+      fullPath: '/umkm/catalog'
+      preLoaderRoute: typeof UmkmCatalogRouteImport
+      parentRoute: typeof UmkmRoute
+    }
+    '/admin/feedback': {
+      id: '/admin/feedback'
+      path: '/feedback'
+      fullPath: '/admin/feedback'
+      preLoaderRoute: typeof AdminFeedbackRouteImport
+      parentRoute: typeof AdminRoute
+    }
+    '/admin/eduwisata': {
+      id: '/admin/eduwisata'
+      path: '/eduwisata'
+      fullPath: '/admin/eduwisata'
+      preLoaderRoute: typeof AdminEduwisataRouteImport
+      parentRoute: typeof AdminRoute
+    }
+    '/admin/dropbox': {
+      id: '/admin/dropbox'
+      path: '/dropbox'
+      fullPath: '/admin/dropbox'
+      preLoaderRoute: typeof AdminDropboxRouteImport
+      parentRoute: typeof AdminRoute
+    }
   }
 }
 
+interface AdminRouteChildren {
+  AdminDropboxRoute: typeof AdminDropboxRoute
+  AdminEduwisataRoute: typeof AdminEduwisataRoute
+  AdminFeedbackRoute: typeof AdminFeedbackRoute
+  AdminIndexRoute: typeof AdminIndexRoute
+}
+
+const AdminRouteChildren: AdminRouteChildren = {
+  AdminDropboxRoute: AdminDropboxRoute,
+  AdminEduwisataRoute: AdminEduwisataRoute,
+  AdminFeedbackRoute: AdminFeedbackRoute,
+  AdminIndexRoute: AdminIndexRoute,
+}
+
+const AdminRouteWithChildren = AdminRoute._addFileChildren(AdminRouteChildren)
+
+interface UmkmRouteChildren {
+  UmkmCatalogRoute: typeof UmkmCatalogRoute
+  UmkmMarketplaceRoute: typeof UmkmMarketplaceRoute
+  UmkmIndexRoute: typeof UmkmIndexRoute
+}
+
+const UmkmRouteChildren: UmkmRouteChildren = {
+  UmkmCatalogRoute: UmkmCatalogRoute,
+  UmkmMarketplaceRoute: UmkmMarketplaceRoute,
+  UmkmIndexRoute: UmkmIndexRoute,
+}
+
+const UmkmRouteWithChildren = UmkmRoute._addFileChildren(UmkmRouteChildren)
+
+interface WargaRouteChildren {
+  WargaAssistantRoute: typeof WargaAssistantRoute
+  WargaScannerRoute: typeof WargaScannerRoute
+  WargaWalletRoute: typeof WargaWalletRoute
+  WargaIndexRoute: typeof WargaIndexRoute
+}
+
+const WargaRouteChildren: WargaRouteChildren = {
+  WargaAssistantRoute: WargaAssistantRoute,
+  WargaScannerRoute: WargaScannerRoute,
+  WargaWalletRoute: WargaWalletRoute,
+  WargaIndexRoute: WargaIndexRoute,
+}
+
+const WargaRouteWithChildren = WargaRoute._addFileChildren(WargaRouteChildren)
+
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AdminRoute: AdminRouteWithChildren,
+  UmkmRoute: UmkmRouteWithChildren,
+  WargaRoute: WargaRouteWithChildren,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
-
-import type { getRouter } from './router.tsx'
-import type { startInstance } from './start.ts'
-declare module '@tanstack/react-start' {
-  interface Register {
-    ssr: true
-    router: Awaited<ReturnType<typeof getRouter>>
-    config: Awaited<ReturnType<typeof startInstance.getOptions>>
-  }
-}
