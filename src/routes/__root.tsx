@@ -4,11 +4,7 @@ import {
   Link,
   createRootRouteWithContext,
   useRouter,
-  HeadContent,
-  Scripts,
 } from "@tanstack/react-router";
-
-import appCss from "../styles.css?url";
 
 function NotFoundComponent() {
   return (
@@ -68,62 +64,10 @@ function ErrorComponent({ error, reset }: { error: Error; reset: () => void }) {
 }
 
 export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()({
-  head: () => ({
-    meta: [
-      { charSet: "utf-8" },
-      { name: "viewport", content: "width=device-width, initial-scale=1, viewport-fit=cover" },
-      { title: "Smart Village — Pelopor Desa Pintar & Ekonomi Sirkular" },
-      { name: "description", content: "Platform ekosistem digital untuk kemajuan desa, menghubungkan warga, UMKM, dan pemerintah desa melalui prinsip ekonomi sirkular." },
-      { name: "keywords", content: "smart village, desa pintar, ekonomi sirkular, bank sampah, umkm desa, digitalisasi desa" },
-      { name: "author", content: "Smart Village Team" },
-      { name: "theme-color", content: "#2E9F6B" },
-      
-      { property: "og:site_name", content: "Smart Village" },
-      { property: "og:title", content: "Smart Village — Ekosistem Desa Digital" },
-      { property: "og:description", content: "Platform ekosistem digital untuk kemajuan desa, menghubungkan warga, UMKM, dan pemerintah desa melalui prinsip ekonomi sirkular." },
-      { property: "og:type", content: "website" },
-      { property: "og:url", content: "https://smartvillage.id/" },
-      { property: "og:image", content: "https://smartvillage.id/og-image.jpg" },
-      
-      { name: "twitter:card", content: "summary_large_image" },
-      { name: "twitter:title", content: "Smart Village — Ekosistem Desa Digital" },
-      { name: "twitter:description", content: "Platform ekosistem digital untuk kemajuan desa." },
-      { name: "twitter:image", content: "https://smartvillage.id/og-image.jpg" },
-    ],
-    links: [
-      {
-        rel: "stylesheet",
-        href: appCss,
-      },
-      { rel: "manifest", href: "/manifest.json" },
-      { rel: "icon", type: "image/svg+xml", href: "/favicon.svg" },
-      { rel: "preconnect", href: "https://fonts.googleapis.com" },
-      { rel: "preconnect", href: "https://fonts.gstatic.com", crossOrigin: "anonymous" },
-      {
-        rel: "stylesheet",
-        href: "https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap",
-      },
-    ],
-  }),
-  shellComponent: RootShell,
   component: RootComponent,
   notFoundComponent: NotFoundComponent,
   errorComponent: ErrorComponent,
 });
-
-function RootShell({ children }: { children: React.ReactNode }) {
-  return (
-    <html lang="en">
-      <head>
-        <HeadContent />
-      </head>
-      <body>
-        {children}
-        <Scripts />
-      </body>
-    </html>
-  );
-}
 
 function RootComponent() {
   const { queryClient } = Route.useRouteContext();
