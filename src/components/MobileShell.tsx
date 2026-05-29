@@ -1,16 +1,24 @@
 import type { ReactNode } from "react";
 import { BottomNav, type BottomNavItem } from "./BottomNav";
+import { Header } from "./Header";
+
+interface MobileShellProps {
+  items: BottomNavItem[];
+  children: ReactNode;
+  headerName?: string;
+  headerSubtitle?: string;
+}
 
 export function MobileShell({
   items,
   children,
-}: {
-  items: BottomNavItem[];
-  children: ReactNode;
-}) {
+  headerName,
+  headerSubtitle,
+}: MobileShellProps) {
   return (
-    <div className="min-h-dvh bg-background font-sans">
-      <div className="mx-auto max-w-md pb-24">{children}</div>
+    <div className="pb-[86px] pt-[62px]">
+      <Header name={headerName} subtitle={headerSubtitle} />
+      {children}
       <BottomNav items={items} />
     </div>
   );

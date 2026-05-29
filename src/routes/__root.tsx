@@ -72,14 +72,23 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1, viewport-fit=cover" },
-      { title: "Desa Pintar — Smart Village & Ekonomi Sirkular" },
-      { name: "description", content: "Platform ekosistem digital untuk Desa Pintar dan Ekonomi Sirkular." },
+      { title: "Smart Village — Pelopor Desa Pintar & Ekonomi Sirkular" },
+      { name: "description", content: "Platform ekosistem digital untuk kemajuan desa, menghubungkan warga, UMKM, dan pemerintah desa melalui prinsip ekonomi sirkular." },
+      { name: "keywords", content: "smart village, desa pintar, ekonomi sirkular, bank sampah, umkm desa, digitalisasi desa" },
+      { name: "author", content: "Smart Village Team" },
       { name: "theme-color", content: "#2E9F6B" },
-      { property: "og:title", content: "Desa Pintar — Smart Village" },
-      { property: "og:description", content: "Ekosistem digital warga, UMKM, dan pemerintah desa." },
+      
+      { property: "og:site_name", content: "Smart Village" },
+      { property: "og:title", content: "Smart Village — Ekosistem Desa Digital" },
+      { property: "og:description", content: "Platform ekosistem digital untuk kemajuan desa, menghubungkan warga, UMKM, dan pemerintah desa melalui prinsip ekonomi sirkular." },
       { property: "og:type", content: "website" },
-      { name: "twitter:card", content: "summary" },
-      { name: "twitter:site", content: "@Lovable" },
+      { property: "og:url", content: "https://smartvillage.id/" },
+      { property: "og:image", content: "https://smartvillage.id/og-image.jpg" },
+      
+      { name: "twitter:card", content: "summary_large_image" },
+      { name: "twitter:title", content: "Smart Village — Ekosistem Desa Digital" },
+      { name: "twitter:description", content: "Platform ekosistem digital untuk kemajuan desa." },
+      { name: "twitter:image", content: "https://smartvillage.id/og-image.jpg" },
     ],
     links: [
       {
@@ -87,6 +96,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
         href: appCss,
       },
       { rel: "manifest", href: "/manifest.json" },
+      { rel: "icon", type: "image/svg+xml", href: "/favicon.svg" },
       { rel: "preconnect", href: "https://fonts.googleapis.com" },
       { rel: "preconnect", href: "https://fonts.gstatic.com", crossOrigin: "anonymous" },
       {
@@ -120,8 +130,12 @@ function RootComponent() {
 
   return (
     <QueryClientProvider client={queryClient}>
-      {/* Required: nested routes render here. Removing <Outlet /> breaks all child routes. */}
-      <Outlet />
+      <div className="flex min-h-dvh justify-center bg-muted/20 font-sans">
+        <div className="relative min-h-dvh w-full max-w-md overflow-x-hidden bg-background shadow-2xl sm:border-x sm:border-border">
+          {/* Required: nested routes render here. Removing <Outlet /> breaks all child routes. */}
+          <Outlet />
+        </div>
+      </div>
     </QueryClientProvider>
   );
 }
