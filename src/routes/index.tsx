@@ -26,7 +26,7 @@ function SplashScreen() {
   }, [router]);
 
   return (
-    <div className="flex min-h-dvh flex-col items-center justify-center bg-[image:var(--gradient-primary)]">
+    <div className="relative flex min-h-dvh w-full flex-col items-center justify-center bg-[image:var(--gradient-primary)] overflow-hidden">
       {/* Decorative background shapes */}
       <div className="pointer-events-none absolute left-0 top-0 h-64 w-64 -translate-x-1/2 -translate-y-1/2 rounded-full bg-white/10 blur-3xl" />
       <div className="pointer-events-none absolute bottom-0 right-0 h-80 w-80 translate-x-1/3 translate-y-1/3 rounded-full bg-white/10 blur-3xl" />

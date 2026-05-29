@@ -17,7 +17,7 @@ function Login() {
   const { role } = Route.useSearch();
   const [loading, setLoading] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
-  const { install } = usePwaInstall();
+  const { install, canInstall } = usePwaInstall();
 
   const handleLogin = (e: React.FormEvent) => {
     e.preventDefault();
@@ -32,13 +32,15 @@ function Login() {
   return (
     <div className="flex min-h-dvh flex-col bg-background px-6 pt-12 pb-8 relative">
       {/* Install App Button */}
-      <button 
-        onClick={install}
-        className="absolute top-4 right-4 flex items-center gap-1.5 rounded-full bg-primary/10 px-3 py-1.5 text-xs font-bold text-primary transition-colors hover:bg-primary/20"
-      >
-        <Download className="h-3.5 w-3.5" />
-        Install App
-      </button>
+      {canInstall && (
+        <button 
+          onClick={install}
+          className="absolute top-4 right-4 flex items-center gap-1.5 rounded-full bg-primary/10 px-3 py-1.5 text-xs font-bold text-primary transition-colors hover:bg-primary/20"
+        >
+          <Download className="h-3.5 w-3.5" />
+          Install App
+        </button>
+      )}
 
       {/* Header */}
       <div className="flex flex-col items-center text-center">

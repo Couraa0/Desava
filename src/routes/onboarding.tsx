@@ -35,7 +35,7 @@ const slides = [
 function Onboarding() {
   const router = useRouter();
   const [currentSlide, setCurrentSlide] = useState(0);
-  const { install } = usePwaInstall();
+  const { install, canInstall } = usePwaInstall();
 
   const nextSlide = () => {
     if (currentSlide < slides.length - 1) {
@@ -53,13 +53,17 @@ function Onboarding() {
     <div className="flex min-h-dvh flex-col bg-background">
       {/* Header controls */}
       <div className="flex justify-between items-center p-5">
-        <button 
-          onClick={install}
-          className="flex items-center gap-1.5 rounded-full bg-primary/10 px-3 py-1.5 text-xs font-bold text-primary transition-colors hover:bg-primary/20"
-        >
-          <Download className="h-3.5 w-3.5" />
-          Install App
-        </button>
+        {canInstall ? (
+          <button 
+            onClick={install}
+            className="flex items-center gap-1.5 rounded-full bg-primary/10 px-3 py-1.5 text-xs font-bold text-primary transition-colors hover:bg-primary/20"
+          >
+            <Download className="h-3.5 w-3.5" />
+            Install App
+          </button>
+        ) : (
+          <div />
+        )}
         <button
           onClick={skip}
           className="text-sm font-semibold text-muted-foreground transition-colors hover:text-foreground active:scale-95"
