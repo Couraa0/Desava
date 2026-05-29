@@ -11,14 +11,19 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as WargaRouteImport } from './routes/warga'
 import { Route as UmkmRouteImport } from './routes/umkm'
+import { Route as AdminRouteImport } from './routes/admin'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as WargaIndexRouteImport } from './routes/warga.index'
 import { Route as UmkmIndexRouteImport } from './routes/umkm.index'
+import { Route as AdminIndexRouteImport } from './routes/admin.index'
 import { Route as WargaWalletRouteImport } from './routes/warga.wallet'
 import { Route as WargaScannerRouteImport } from './routes/warga.scanner'
 import { Route as WargaAssistantRouteImport } from './routes/warga.assistant'
 import { Route as UmkmMarketplaceRouteImport } from './routes/umkm.marketplace'
 import { Route as UmkmCatalogRouteImport } from './routes/umkm.catalog'
+import { Route as AdminFeedbackRouteImport } from './routes/admin.feedback'
+import { Route as AdminEduwisataRouteImport } from './routes/admin.eduwisata'
+import { Route as AdminDropboxRouteImport } from './routes/admin.dropbox'
 
 const WargaRoute = WargaRouteImport.update({
   id: '/warga',
@@ -28,6 +33,11 @@ const WargaRoute = WargaRouteImport.update({
 const UmkmRoute = UmkmRouteImport.update({
   id: '/umkm',
   path: '/umkm',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AdminRoute = AdminRouteImport.update({
+  id: '/admin',
+  path: '/admin',
   getParentRoute: () => rootRouteImport,
 } as any)
 const IndexRoute = IndexRouteImport.update({
@@ -44,6 +54,11 @@ const UmkmIndexRoute = UmkmIndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => UmkmRoute,
+} as any)
+const AdminIndexRoute = AdminIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => AdminRoute,
 } as any)
 const WargaWalletRoute = WargaWalletRouteImport.update({
   id: '/wallet',
@@ -70,39 +85,68 @@ const UmkmCatalogRoute = UmkmCatalogRouteImport.update({
   path: '/catalog',
   getParentRoute: () => UmkmRoute,
 } as any)
+const AdminFeedbackRoute = AdminFeedbackRouteImport.update({
+  id: '/feedback',
+  path: '/feedback',
+  getParentRoute: () => AdminRoute,
+} as any)
+const AdminEduwisataRoute = AdminEduwisataRouteImport.update({
+  id: '/eduwisata',
+  path: '/eduwisata',
+  getParentRoute: () => AdminRoute,
+} as any)
+const AdminDropboxRoute = AdminDropboxRouteImport.update({
+  id: '/dropbox',
+  path: '/dropbox',
+  getParentRoute: () => AdminRoute,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/admin': typeof AdminRouteWithChildren
   '/umkm': typeof UmkmRouteWithChildren
   '/warga': typeof WargaRouteWithChildren
+  '/admin/dropbox': typeof AdminDropboxRoute
+  '/admin/eduwisata': typeof AdminEduwisataRoute
+  '/admin/feedback': typeof AdminFeedbackRoute
   '/umkm/catalog': typeof UmkmCatalogRoute
   '/umkm/marketplace': typeof UmkmMarketplaceRoute
   '/warga/assistant': typeof WargaAssistantRoute
   '/warga/scanner': typeof WargaScannerRoute
   '/warga/wallet': typeof WargaWalletRoute
+  '/admin/': typeof AdminIndexRoute
   '/umkm/': typeof UmkmIndexRoute
   '/warga/': typeof WargaIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/admin/dropbox': typeof AdminDropboxRoute
+  '/admin/eduwisata': typeof AdminEduwisataRoute
+  '/admin/feedback': typeof AdminFeedbackRoute
   '/umkm/catalog': typeof UmkmCatalogRoute
   '/umkm/marketplace': typeof UmkmMarketplaceRoute
   '/warga/assistant': typeof WargaAssistantRoute
   '/warga/scanner': typeof WargaScannerRoute
   '/warga/wallet': typeof WargaWalletRoute
+  '/admin': typeof AdminIndexRoute
   '/umkm': typeof UmkmIndexRoute
   '/warga': typeof WargaIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/admin': typeof AdminRouteWithChildren
   '/umkm': typeof UmkmRouteWithChildren
   '/warga': typeof WargaRouteWithChildren
+  '/admin/dropbox': typeof AdminDropboxRoute
+  '/admin/eduwisata': typeof AdminEduwisataRoute
+  '/admin/feedback': typeof AdminFeedbackRoute
   '/umkm/catalog': typeof UmkmCatalogRoute
   '/umkm/marketplace': typeof UmkmMarketplaceRoute
   '/warga/assistant': typeof WargaAssistantRoute
   '/warga/scanner': typeof WargaScannerRoute
   '/warga/wallet': typeof WargaWalletRoute
+  '/admin/': typeof AdminIndexRoute
   '/umkm/': typeof UmkmIndexRoute
   '/warga/': typeof WargaIndexRoute
 }
@@ -110,41 +154,56 @@ export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
+    | '/admin'
     | '/umkm'
     | '/warga'
+    | '/admin/dropbox'
+    | '/admin/eduwisata'
+    | '/admin/feedback'
     | '/umkm/catalog'
     | '/umkm/marketplace'
     | '/warga/assistant'
     | '/warga/scanner'
     | '/warga/wallet'
+    | '/admin/'
     | '/umkm/'
     | '/warga/'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
+    | '/admin/dropbox'
+    | '/admin/eduwisata'
+    | '/admin/feedback'
     | '/umkm/catalog'
     | '/umkm/marketplace'
     | '/warga/assistant'
     | '/warga/scanner'
     | '/warga/wallet'
+    | '/admin'
     | '/umkm'
     | '/warga'
   id:
     | '__root__'
     | '/'
+    | '/admin'
     | '/umkm'
     | '/warga'
+    | '/admin/dropbox'
+    | '/admin/eduwisata'
+    | '/admin/feedback'
     | '/umkm/catalog'
     | '/umkm/marketplace'
     | '/warga/assistant'
     | '/warga/scanner'
     | '/warga/wallet'
+    | '/admin/'
     | '/umkm/'
     | '/warga/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AdminRoute: typeof AdminRouteWithChildren
   UmkmRoute: typeof UmkmRouteWithChildren
   WargaRoute: typeof WargaRouteWithChildren
 }
@@ -163,6 +222,13 @@ declare module '@tanstack/react-router' {
       path: '/umkm'
       fullPath: '/umkm'
       preLoaderRoute: typeof UmkmRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/admin': {
+      id: '/admin'
+      path: '/admin'
+      fullPath: '/admin'
+      preLoaderRoute: typeof AdminRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/': {
@@ -185,6 +251,13 @@ declare module '@tanstack/react-router' {
       fullPath: '/umkm/'
       preLoaderRoute: typeof UmkmIndexRouteImport
       parentRoute: typeof UmkmRoute
+    }
+    '/admin/': {
+      id: '/admin/'
+      path: '/'
+      fullPath: '/admin/'
+      preLoaderRoute: typeof AdminIndexRouteImport
+      parentRoute: typeof AdminRoute
     }
     '/warga/wallet': {
       id: '/warga/wallet'
@@ -221,8 +294,45 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof UmkmCatalogRouteImport
       parentRoute: typeof UmkmRoute
     }
+    '/admin/feedback': {
+      id: '/admin/feedback'
+      path: '/feedback'
+      fullPath: '/admin/feedback'
+      preLoaderRoute: typeof AdminFeedbackRouteImport
+      parentRoute: typeof AdminRoute
+    }
+    '/admin/eduwisata': {
+      id: '/admin/eduwisata'
+      path: '/eduwisata'
+      fullPath: '/admin/eduwisata'
+      preLoaderRoute: typeof AdminEduwisataRouteImport
+      parentRoute: typeof AdminRoute
+    }
+    '/admin/dropbox': {
+      id: '/admin/dropbox'
+      path: '/dropbox'
+      fullPath: '/admin/dropbox'
+      preLoaderRoute: typeof AdminDropboxRouteImport
+      parentRoute: typeof AdminRoute
+    }
   }
 }
+
+interface AdminRouteChildren {
+  AdminDropboxRoute: typeof AdminDropboxRoute
+  AdminEduwisataRoute: typeof AdminEduwisataRoute
+  AdminFeedbackRoute: typeof AdminFeedbackRoute
+  AdminIndexRoute: typeof AdminIndexRoute
+}
+
+const AdminRouteChildren: AdminRouteChildren = {
+  AdminDropboxRoute: AdminDropboxRoute,
+  AdminEduwisataRoute: AdminEduwisataRoute,
+  AdminFeedbackRoute: AdminFeedbackRoute,
+  AdminIndexRoute: AdminIndexRoute,
+}
+
+const AdminRouteWithChildren = AdminRoute._addFileChildren(AdminRouteChildren)
 
 interface UmkmRouteChildren {
   UmkmCatalogRoute: typeof UmkmCatalogRoute
@@ -256,6 +366,7 @@ const WargaRouteWithChildren = WargaRoute._addFileChildren(WargaRouteChildren)
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AdminRoute: AdminRouteWithChildren,
   UmkmRoute: UmkmRouteWithChildren,
   WargaRoute: WargaRouteWithChildren,
 }
