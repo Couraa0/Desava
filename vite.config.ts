@@ -12,7 +12,7 @@ export default defineConfig({
     preset: 'vercel',
     output: {
       dir: '.vercel/output',
-      serverDir: '.vercel/output/functions/index.func',
+      serverDir: '.vercel/output/functions/__server.func',
       publicDir: '.vercel/output/static'
     }
   },
@@ -25,6 +25,7 @@ export default defineConfig({
     plugins: [
       VitePWA({
         registerType: 'autoUpdate',
+        outDir: '.vercel/output/static',
         manifest: {
           name: 'Smart Village',
           short_name: 'SmartVillage',
