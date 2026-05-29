@@ -48,3 +48,5 @@ workbox-*.js
 *.njsproj
 *.sln
 *.sw?
+
+.vercel
