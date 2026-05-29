@@ -10,15 +10,24 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as WargaRouteImport } from './routes/warga'
+import { Route as UmkmRouteImport } from './routes/umkm'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as WargaIndexRouteImport } from './routes/warga.index'
+import { Route as UmkmIndexRouteImport } from './routes/umkm.index'
 import { Route as WargaWalletRouteImport } from './routes/warga.wallet'
 import { Route as WargaScannerRouteImport } from './routes/warga.scanner'
 import { Route as WargaAssistantRouteImport } from './routes/warga.assistant'
+import { Route as UmkmMarketplaceRouteImport } from './routes/umkm.marketplace'
+import { Route as UmkmCatalogRouteImport } from './routes/umkm.catalog'
 
 const WargaRoute = WargaRouteImport.update({
   id: '/warga',
   path: '/warga',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const UmkmRoute = UmkmRouteImport.update({
+  id: '/umkm',
+  path: '/umkm',
   getParentRoute: () => rootRouteImport,
 } as any)
 const IndexRoute = IndexRouteImport.update({
@@ -30,6 +39,11 @@ const WargaIndexRoute = WargaIndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => WargaRoute,
+} as any)
+const UmkmIndexRoute = UmkmIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => UmkmRoute,
 } as any)
 const WargaWalletRoute = WargaWalletRouteImport.update({
   id: '/wallet',
@@ -46,54 +60,92 @@ const WargaAssistantRoute = WargaAssistantRouteImport.update({
   path: '/assistant',
   getParentRoute: () => WargaRoute,
 } as any)
+const UmkmMarketplaceRoute = UmkmMarketplaceRouteImport.update({
+  id: '/marketplace',
+  path: '/marketplace',
+  getParentRoute: () => UmkmRoute,
+} as any)
+const UmkmCatalogRoute = UmkmCatalogRouteImport.update({
+  id: '/catalog',
+  path: '/catalog',
+  getParentRoute: () => UmkmRoute,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/umkm': typeof UmkmRouteWithChildren
   '/warga': typeof WargaRouteWithChildren
+  '/umkm/catalog': typeof UmkmCatalogRoute
+  '/umkm/marketplace': typeof UmkmMarketplaceRoute
   '/warga/assistant': typeof WargaAssistantRoute
   '/warga/scanner': typeof WargaScannerRoute
   '/warga/wallet': typeof WargaWalletRoute
+  '/umkm/': typeof UmkmIndexRoute
   '/warga/': typeof WargaIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/umkm/catalog': typeof UmkmCatalogRoute
+  '/umkm/marketplace': typeof UmkmMarketplaceRoute
   '/warga/assistant': typeof WargaAssistantRoute
   '/warga/scanner': typeof WargaScannerRoute
   '/warga/wallet': typeof WargaWalletRoute
+  '/umkm': typeof UmkmIndexRoute
   '/warga': typeof WargaIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/umkm': typeof UmkmRouteWithChildren
   '/warga': typeof WargaRouteWithChildren
+  '/umkm/catalog': typeof UmkmCatalogRoute
+  '/umkm/marketplace': typeof UmkmMarketplaceRoute
   '/warga/assistant': typeof WargaAssistantRoute
   '/warga/scanner': typeof WargaScannerRoute
   '/warga/wallet': typeof WargaWalletRoute
+  '/umkm/': typeof UmkmIndexRoute
   '/warga/': typeof WargaIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
+    | '/umkm'
     | '/warga'
+    | '/umkm/catalog'
+    | '/umkm/marketplace'
     | '/warga/assistant'
     | '/warga/scanner'
     | '/warga/wallet'
+    | '/umkm/'
     | '/warga/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/warga/assistant' | '/warga/scanner' | '/warga/wallet' | '/warga'
+  to:
+    | '/'
+    | '/umkm/catalog'
+    | '/umkm/marketplace'
+    | '/warga/assistant'
+    | '/warga/scanner'
+    | '/warga/wallet'
+    | '/umkm'
+    | '/warga'
   id:
     | '__root__'
     | '/'
+    | '/umkm'
     | '/warga'
+    | '/umkm/catalog'
+    | '/umkm/marketplace'
     | '/warga/assistant'
     | '/warga/scanner'
     | '/warga/wallet'
+    | '/umkm/'
     | '/warga/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  UmkmRoute: typeof UmkmRouteWithChildren
   WargaRoute: typeof WargaRouteWithChildren
 }
 
@@ -104,6 +156,13 @@ declare module '@tanstack/react-router' {
       path: '/warga'
       fullPath: '/warga'
       preLoaderRoute: typeof WargaRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/umkm': {
+      id: '/umkm'
+      path: '/umkm'
+      fullPath: '/umkm'
+      preLoaderRoute: typeof UmkmRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/': {
@@ -119,6 +178,13 @@ declare module '@tanstack/react-router' {
       fullPath: '/warga/'
       preLoaderRoute: typeof WargaIndexRouteImport
       parentRoute: typeof WargaRoute
+    }
+    '/umkm/': {
+      id: '/umkm/'
+      path: '/'
+      fullPath: '/umkm/'
+      preLoaderRoute: typeof UmkmIndexRouteImport
+      parentRoute: typeof UmkmRoute
     }
     '/warga/wallet': {
       id: '/warga/wallet'
@@ -141,8 +207,36 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof WargaAssistantRouteImport
       parentRoute: typeof WargaRoute
     }
+    '/umkm/marketplace': {
+      id: '/umkm/marketplace'
+      path: '/marketplace'
+      fullPath: '/umkm/marketplace'
+      preLoaderRoute: typeof UmkmMarketplaceRouteImport
+      parentRoute: typeof UmkmRoute
+    }
+    '/umkm/catalog': {
+      id: '/umkm/catalog'
+      path: '/catalog'
+      fullPath: '/umkm/catalog'
+      preLoaderRoute: typeof UmkmCatalogRouteImport
+      parentRoute: typeof UmkmRoute
+    }
   }
 }
+
+interface UmkmRouteChildren {
+  UmkmCatalogRoute: typeof UmkmCatalogRoute
+  UmkmMarketplaceRoute: typeof UmkmMarketplaceRoute
+  UmkmIndexRoute: typeof UmkmIndexRoute
+}
+
+const UmkmRouteChildren: UmkmRouteChildren = {
+  UmkmCatalogRoute: UmkmCatalogRoute,
+  UmkmMarketplaceRoute: UmkmMarketplaceRoute,
+  UmkmIndexRoute: UmkmIndexRoute,
+}
+
+const UmkmRouteWithChildren = UmkmRoute._addFileChildren(UmkmRouteChildren)
 
 interface WargaRouteChildren {
   WargaAssistantRoute: typeof WargaAssistantRoute
@@ -162,8 +256,19 @@ const WargaRouteWithChildren = WargaRoute._addFileChildren(WargaRouteChildren)
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  UmkmRoute: UmkmRouteWithChildren,
   WargaRoute: WargaRouteWithChildren,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
+
+import type { getRouter } from './router.tsx'
+import type { startInstance } from './start.ts'
+declare module '@tanstack/react-start' {
+  interface Register {
+    ssr: true
+    router: Awaited<ReturnType<typeof getRouter>>
+    config: Awaited<ReturnType<typeof startInstance.getOptions>>
+  }
+}
