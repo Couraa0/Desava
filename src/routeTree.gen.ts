@@ -11,6 +11,7 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as WargaRouteImport } from './routes/warga'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as WargaIndexRouteImport } from './routes/warga.index'
 
 const WargaRoute = WargaRouteImport.update({
   id: '/warga',
@@ -22,31 +23,38 @@ const IndexRoute = IndexRouteImport.update({
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const WargaIndexRoute = WargaIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => WargaRoute,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
-  '/warga': typeof WargaRoute
+  '/warga': typeof WargaRouteWithChildren
+  '/warga/': typeof WargaIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
-  '/warga': typeof WargaRoute
+  '/warga': typeof WargaIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
-  '/warga': typeof WargaRoute
+  '/warga': typeof WargaRouteWithChildren
+  '/warga/': typeof WargaIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/warga'
+  fullPaths: '/' | '/warga' | '/warga/'
   fileRoutesByTo: FileRoutesByTo
   to: '/' | '/warga'
-  id: '__root__' | '/' | '/warga'
+  id: '__root__' | '/' | '/warga' | '/warga/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
-  WargaRoute: typeof WargaRoute
+  WargaRoute: typeof WargaRouteWithChildren
 }
 
 declare module '@tanstack/react-router' {
@@ -65,12 +73,29 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/warga/': {
+      id: '/warga/'
+      path: '/'
+      fullPath: '/warga/'
+      preLoaderRoute: typeof WargaIndexRouteImport
+      parentRoute: typeof WargaRoute
+    }
   }
 }
 
+interface WargaRouteChildren {
+  WargaIndexRoute: typeof WargaIndexRoute
+}
+
+const WargaRouteChildren: WargaRouteChildren = {
+  WargaIndexRoute: WargaIndexRoute,
+}
+
+const WargaRouteWithChildren = WargaRoute._addFileChildren(WargaRouteChildren)
+
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
-  WargaRoute: WargaRoute,
+  WargaRoute: WargaRouteWithChildren,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
