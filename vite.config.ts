@@ -9,7 +9,12 @@ import { VitePWA } from 'vite-plugin-pwa';
 
 export default defineConfig({
   nitro: {
-    preset: 'vercel'
+    preset: 'vercel',
+    output: {
+      dir: '.vercel/output',
+      serverDir: '.vercel/output/functions/__server.func',
+      publicDir: '.vercel/output/static'
+    }
   },
   tanstackStart: {
     // Redirect TanStack Start's bundled server entry to src/server.ts (our SSR error wrapper).
