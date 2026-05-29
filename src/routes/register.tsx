@@ -107,7 +107,7 @@ function Register() {
       <div className="mt-8 flex items-center gap-4">
         <div className="h-px flex-1 bg-border" />
         <span className="text-xs text-muted-foreground whitespace-nowrap">atau daftar dengan</span>
-        <div className="h-px w-full bg-border" />
+        <div className="h-px flex-1 bg-border" />
       </div>
 
       {/* Social Register */}

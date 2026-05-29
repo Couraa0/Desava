@@ -28,7 +28,7 @@ export function BottomNav({ items }: { items: BottomNavItem[] }) {
         {centerItem && (
           <svg
             className="absolute left-0 top-0 h-full w-full"
-            viewBox="0 0 360 64"
+            viewBox="0 0 360 72"
             preserveAspectRatio="none"
             xmlns="http://www.w3.org/2000/svg"
           >
@@ -40,8 +40,8 @@ export function BottomNav({ items }: { items: BottomNavItem[] }) {
                 A36,36 0 0,0 198,8
                 Q202,0 212,0
                 L360,0
-                L360,64
-                L0,64
+                L360,72
+                L0,72
                 Z
               "
               className="fill-background"
@@ -51,14 +51,14 @@ export function BottomNav({ items }: { items: BottomNavItem[] }) {
         )}
 
         {/* Nav bar */}
-        <div className="relative flex h-[64px] items-center justify-between border-t border-border/50 bg-background/95 px-2 backdrop-blur-2xl sm:border-x">
+        <div className="relative flex h-[72px] items-center justify-between border-t border-border/50 bg-background/95 px-2 backdrop-blur-2xl sm:border-x">
           {/* Left items */}
           {leftItems.map(({ to, label, icon: Icon }) => (
             <NavItem key={to} to={to} label={label} Icon={Icon} />
           ))}
 
           {/* Center FAB placeholder — reserves space */}
-          {centerItem && <div className="w-[76px] shrink-0" />}
+          {centerItem && <div className="w-[80px] shrink-0" />}
 
           {/* Right items */}
           {rightItems.map(({ to, label, icon: Icon }) => (
@@ -68,17 +68,17 @@ export function BottomNav({ items }: { items: BottomNavItem[] }) {
 
         {/* Floating Center FAB */}
         {centerItem && (
-          <div className="pointer-events-none absolute bottom-3 left-1/2 -translate-x-1/2">
+          <div className="pointer-events-none absolute bottom-4 left-1/2 -translate-x-1/2">
             <Link
               to={centerItem.to}
               activeOptions={{ exact: true }}
-              className="pointer-events-auto group relative flex h-[60px] w-[60px] items-center justify-center"
+              className="pointer-events-auto group relative flex h-[66px] w-[66px] items-center justify-center"
             >
               {/* Glow */}
               <span className="absolute inset-0 scale-110 rounded-full bg-primary/20 blur-md transition-all duration-300 group-hover:scale-125 group-hover:bg-primary/30" />
               {/* Button */}
-              <span className="relative flex h-[56px] w-[56px] items-center justify-center rounded-full bg-[image:var(--gradient-primary)] shadow-[0_6px_24px_-4px_var(--color-primary)] transition-transform duration-200 active:scale-90 group-hover:-translate-y-0.5">
-                <centerItem.icon className="h-[26px] w-[26px] text-primary-foreground" strokeWidth={2} />
+              <span className="relative flex h-[60px] w-[60px] items-center justify-center rounded-full bg-[image:var(--gradient-primary)] shadow-[0_6px_24px_-4px_var(--color-primary)] transition-transform duration-200 active:scale-90 group-hover:-translate-y-0.5">
+                <centerItem.icon className="h-[28px] w-[28px] text-primary-foreground" strokeWidth={2} />
               </span>
             </Link>
           </div>
@@ -102,12 +102,12 @@ function NavItem({
       <Link
         to={to}
         activeOptions={{ exact: true }}
-        className="group flex flex-col items-center gap-[3px] py-2 text-muted-foreground/50 transition-all duration-200 data-[status=active]:text-primary"
+        className="group flex flex-col items-center gap-[4px] py-2 text-muted-foreground/50 transition-all duration-200 data-[status=active]:text-primary"
       >
-        <span className="relative flex h-7 w-7 items-center justify-center transition-transform duration-200 group-data-[status=active]:scale-110">
-          <Icon className="h-[20px] w-[20px]" strokeWidth={2} />
+        <span className="relative flex h-8 w-8 items-center justify-center transition-transform duration-200 group-data-[status=active]:scale-110">
+          <Icon className="h-[22px] w-[22px]" strokeWidth={2} />
         </span>
-        <span className="text-[10px] font-medium leading-none tracking-wide transition-all duration-200 group-data-[status=active]:font-bold">
+        <span className="text-[11px] font-medium leading-none tracking-wide transition-all duration-200 group-data-[status=active]:font-bold">
           {label}
         </span>
       </Link>

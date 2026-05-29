@@ -28,7 +28,7 @@ function WargaLayout() {
       </MobileShell>
       
       {/* Floating AI Assistant Button */}
-      <div className="fixed bottom-[90px] left-1/2 z-40 flex w-full max-w-md -translate-x-1/2 justify-end px-5 pointer-events-none">
+      <div className="fixed bottom-[98px] left-1/2 z-40 flex w-full max-w-md -translate-x-1/2 justify-end px-5 pointer-events-none">
         <button
           onClick={() => setAssistantOpen(true)}
           className="pointer-events-auto flex h-12 w-12 items-center justify-center rounded-full bg-[image:var(--gradient-primary)] text-primary-foreground shadow-[0_8px_32px_-4px_var(--color-primary)] transition-transform hover:scale-105 active:scale-95"
