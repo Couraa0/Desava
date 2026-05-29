@@ -1,4 +1,4 @@
-import { createFileRoute, Outlet } from "@tanstack/react-router";
+import { createFileRoute, Outlet, useLocation } from "@tanstack/react-router";
 import { Home, ScanLine, Wallet, MessageCircle, UserCircle, Store, Recycle } from "lucide-react";
 import { MobileShell } from "@/components/MobileShell";
 import { AssistantModal } from "@/components/AssistantModal";
@@ -10,6 +10,14 @@ export const Route = createFileRoute("/warga")({
 
 function WargaLayout() {
   const [isAssistantOpen, setAssistantOpen] = useState(false);
+  const location = useLocation();
+
+  // Show chatbot only on Beranda (Home)
+  const allowedPaths = [
+    "/warga", 
+    "/warga/"
+  ];
+  const showAssistant = allowedPaths.includes(location.pathname);
 
   return (
     <>
@@ -27,15 +35,17 @@ function WargaLayout() {
         <Outlet />
       </MobileShell>
       
-      {/* Floating AI Assistant Button */}
-      <div className="fixed bottom-[98px] left-1/2 z-40 flex w-full max-w-md -translate-x-1/2 justify-end px-5 pointer-events-none">
-        <button
-          onClick={() => setAssistantOpen(true)}
-          className="pointer-events-auto flex h-12 w-12 items-center justify-center rounded-full bg-[image:var(--gradient-primary)] text-primary-foreground shadow-[0_8px_32px_-4px_var(--color-primary)] transition-transform hover:scale-105 active:scale-95"
-        >
-          <MessageCircle className="h-5 w-5" />
-        </button>
-      </div>
+      {/* Floating AI Assistant Button (Only on allowed pages) */}
+      {showAssistant && (
+        <div className="fixed bottom-[98px] left-1/2 z-40 flex w-full max-w-md -translate-x-1/2 justify-end px-5 pointer-events-none">
+          <button
+            onClick={() => setAssistantOpen(true)}
+            className="pointer-events-auto flex h-12 w-12 items-center justify-center rounded-full bg-[image:var(--gradient-primary)] text-primary-foreground shadow-[0_8px_32px_-4px_var(--color-primary)] transition-transform hover:scale-105 active:scale-95"
+          >
+            <MessageCircle className="h-5 w-5" />
+          </button>
+        </div>
+      )}
 
       {/* Pop-up Assistant Modal */}
       <AssistantModal isOpen={isAssistantOpen} onClose={() => setAssistantOpen(false)} />

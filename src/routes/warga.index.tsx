@@ -28,9 +28,9 @@ const services = [
   { icon: Recycle, label: "Bank Sampah", tone: "primary", to: "/warga/dropbox" },
   { icon: Wallet, label: "Dompet", tone: "earth", to: "/warga/wallet" },
   { icon: Store, label: "Pasar", tone: "primary", to: "/warga/marketplace" },
-  { icon: Wallet, label: "Tagihan", tone: "earth", to: "/warga/wallet" },
-  { icon: Trophy, label: "Leaderboard", tone: "primary", to: "/warga" },
-  { icon: Zap, label: "Pengumuman", tone: "earth", to: "/warga" },
+  { icon: Wallet, label: "Tagihan", tone: "earth", to: "/warga/bills" },
+  { icon: Trophy, label: "Leaderboard", tone: "primary", to: "/warga/leaderboard" },
+  { icon: Zap, label: "Pengumuman", tone: "earth", to: "/warga/announcements" },
 ];
 
 function WargaHome() {

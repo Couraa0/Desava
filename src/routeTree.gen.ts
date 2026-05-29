@@ -24,7 +24,10 @@ import { Route as WargaWalletRouteImport } from './routes/warga.wallet'
 import { Route as WargaScannerRouteImport } from './routes/warga.scanner'
 import { Route as WargaProfilRouteImport } from './routes/warga.profil'
 import { Route as WargaMarketplaceRouteImport } from './routes/warga.marketplace'
+import { Route as WargaLeaderboardRouteImport } from './routes/warga.leaderboard'
 import { Route as WargaDropboxRouteImport } from './routes/warga.dropbox'
+import { Route as WargaBillsRouteImport } from './routes/warga.bills'
+import { Route as WargaAnnouncementsRouteImport } from './routes/warga.announcements'
 import { Route as UmkmProfilRouteImport } from './routes/umkm.profil'
 import { Route as UmkmOrdersRouteImport } from './routes/umkm.orders'
 import { Route as UmkmCatalogRouteImport } from './routes/umkm.catalog'
@@ -32,6 +35,7 @@ import { Route as AdminProfilRouteImport } from './routes/admin.profil'
 import { Route as AdminFeedbackRouteImport } from './routes/admin.feedback'
 import { Route as AdminEduwisataRouteImport } from './routes/admin.eduwisata'
 import { Route as AdminDropboxRouteImport } from './routes/admin.dropbox'
+import { Route as AdminAnnouncementsRouteImport } from './routes/admin.announcements'
 
 const WargaRoute = WargaRouteImport.update({
   id: '/warga',
@@ -108,9 +112,24 @@ const WargaMarketplaceRoute = WargaMarketplaceRouteImport.update({
   path: '/marketplace',
   getParentRoute: () => WargaRoute,
 } as any)
+const WargaLeaderboardRoute = WargaLeaderboardRouteImport.update({
+  id: '/leaderboard',
+  path: '/leaderboard',
+  getParentRoute: () => WargaRoute,
+} as any)
 const WargaDropboxRoute = WargaDropboxRouteImport.update({
   id: '/dropbox',
   path: '/dropbox',
+  getParentRoute: () => WargaRoute,
+} as any)
+const WargaBillsRoute = WargaBillsRouteImport.update({
+  id: '/bills',
+  path: '/bills',
+  getParentRoute: () => WargaRoute,
+} as any)
+const WargaAnnouncementsRoute = WargaAnnouncementsRouteImport.update({
+  id: '/announcements',
+  path: '/announcements',
   getParentRoute: () => WargaRoute,
 } as any)
 const UmkmProfilRoute = UmkmProfilRouteImport.update({
@@ -148,6 +167,11 @@ const AdminDropboxRoute = AdminDropboxRouteImport.update({
   path: '/dropbox',
   getParentRoute: () => AdminRoute,
 } as any)
+const AdminAnnouncementsRoute = AdminAnnouncementsRouteImport.update({
+  id: '/announcements',
+  path: '/announcements',
+  getParentRoute: () => AdminRoute,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -158,6 +182,7 @@ export interface FileRoutesByFullPath {
   '/roles': typeof RolesRoute
   '/umkm': typeof UmkmRouteWithChildren
   '/warga': typeof WargaRouteWithChildren
+  '/admin/announcements': typeof AdminAnnouncementsRoute
   '/admin/dropbox': typeof AdminDropboxRoute
   '/admin/eduwisata': typeof AdminEduwisataRoute
   '/admin/feedback': typeof AdminFeedbackRoute
@@ -165,7 +190,10 @@ export interface FileRoutesByFullPath {
   '/umkm/catalog': typeof UmkmCatalogRoute
   '/umkm/orders': typeof UmkmOrdersRoute
   '/umkm/profil': typeof UmkmProfilRoute
+  '/warga/announcements': typeof WargaAnnouncementsRoute
+  '/warga/bills': typeof WargaBillsRoute
   '/warga/dropbox': typeof WargaDropboxRoute
+  '/warga/leaderboard': typeof WargaLeaderboardRoute
   '/warga/marketplace': typeof WargaMarketplaceRoute
   '/warga/profil': typeof WargaProfilRoute
   '/warga/scanner': typeof WargaScannerRoute
@@ -180,6 +208,7 @@ export interface FileRoutesByTo {
   '/onboarding': typeof OnboardingRoute
   '/register': typeof RegisterRoute
   '/roles': typeof RolesRoute
+  '/admin/announcements': typeof AdminAnnouncementsRoute
   '/admin/dropbox': typeof AdminDropboxRoute
   '/admin/eduwisata': typeof AdminEduwisataRoute
   '/admin/feedback': typeof AdminFeedbackRoute
@@ -187,7 +216,10 @@ export interface FileRoutesByTo {
   '/umkm/catalog': typeof UmkmCatalogRoute
   '/umkm/orders': typeof UmkmOrdersRoute
   '/umkm/profil': typeof UmkmProfilRoute
+  '/warga/announcements': typeof WargaAnnouncementsRoute
+  '/warga/bills': typeof WargaBillsRoute
   '/warga/dropbox': typeof WargaDropboxRoute
+  '/warga/leaderboard': typeof WargaLeaderboardRoute
   '/warga/marketplace': typeof WargaMarketplaceRoute
   '/warga/profil': typeof WargaProfilRoute
   '/warga/scanner': typeof WargaScannerRoute
@@ -206,6 +238,7 @@ export interface FileRoutesById {
   '/roles': typeof RolesRoute
   '/umkm': typeof UmkmRouteWithChildren
   '/warga': typeof WargaRouteWithChildren
+  '/admin/announcements': typeof AdminAnnouncementsRoute
   '/admin/dropbox': typeof AdminDropboxRoute
   '/admin/eduwisata': typeof AdminEduwisataRoute
   '/admin/feedback': typeof AdminFeedbackRoute
@@ -213,7 +246,10 @@ export interface FileRoutesById {
   '/umkm/catalog': typeof UmkmCatalogRoute
   '/umkm/orders': typeof UmkmOrdersRoute
   '/umkm/profil': typeof UmkmProfilRoute
+  '/warga/announcements': typeof WargaAnnouncementsRoute
+  '/warga/bills': typeof WargaBillsRoute
   '/warga/dropbox': typeof WargaDropboxRoute
+  '/warga/leaderboard': typeof WargaLeaderboardRoute
   '/warga/marketplace': typeof WargaMarketplaceRoute
   '/warga/profil': typeof WargaProfilRoute
   '/warga/scanner': typeof WargaScannerRoute
@@ -233,6 +269,7 @@ export interface FileRouteTypes {
     | '/roles'
     | '/umkm'
     | '/warga'
+    | '/admin/announcements'
     | '/admin/dropbox'
     | '/admin/eduwisata'
     | '/admin/feedback'
@@ -240,7 +277,10 @@ export interface FileRouteTypes {
     | '/umkm/catalog'
     | '/umkm/orders'
     | '/umkm/profil'
+    | '/warga/announcements'
+    | '/warga/bills'
     | '/warga/dropbox'
+    | '/warga/leaderboard'
     | '/warga/marketplace'
     | '/warga/profil'
     | '/warga/scanner'
@@ -255,6 +295,7 @@ export interface FileRouteTypes {
     | '/onboarding'
     | '/register'
     | '/roles'
+    | '/admin/announcements'
     | '/admin/dropbox'
     | '/admin/eduwisata'
     | '/admin/feedback'
@@ -262,7 +303,10 @@ export interface FileRouteTypes {
     | '/umkm/catalog'
     | '/umkm/orders'
     | '/umkm/profil'
+    | '/warga/announcements'
+    | '/warga/bills'
     | '/warga/dropbox'
+    | '/warga/leaderboard'
     | '/warga/marketplace'
     | '/warga/profil'
     | '/warga/scanner'
@@ -280,6 +324,7 @@ export interface FileRouteTypes {
     | '/roles'
     | '/umkm'
     | '/warga'
+    | '/admin/announcements'
     | '/admin/dropbox'
     | '/admin/eduwisata'
     | '/admin/feedback'
@@ -287,7 +332,10 @@ export interface FileRouteTypes {
     | '/umkm/catalog'
     | '/umkm/orders'
     | '/umkm/profil'
+    | '/warga/announcements'
+    | '/warga/bills'
     | '/warga/dropbox'
+    | '/warga/leaderboard'
     | '/warga/marketplace'
     | '/warga/profil'
     | '/warga/scanner'
@@ -415,11 +463,32 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof WargaMarketplaceRouteImport
       parentRoute: typeof WargaRoute
     }
+    '/warga/leaderboard': {
+      id: '/warga/leaderboard'
+      path: '/leaderboard'
+      fullPath: '/warga/leaderboard'
+      preLoaderRoute: typeof WargaLeaderboardRouteImport
+      parentRoute: typeof WargaRoute
+    }
     '/warga/dropbox': {
       id: '/warga/dropbox'
       path: '/dropbox'
       fullPath: '/warga/dropbox'
       preLoaderRoute: typeof WargaDropboxRouteImport
+      parentRoute: typeof WargaRoute
+    }
+    '/warga/bills': {
+      id: '/warga/bills'
+      path: '/bills'
+      fullPath: '/warga/bills'
+      preLoaderRoute: typeof WargaBillsRouteImport
+      parentRoute: typeof WargaRoute
+    }
+    '/warga/announcements': {
+      id: '/warga/announcements'
+      path: '/announcements'
+      fullPath: '/warga/announcements'
+      preLoaderRoute: typeof WargaAnnouncementsRouteImport
       parentRoute: typeof WargaRoute
     }
     '/umkm/profil': {
@@ -471,10 +540,18 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AdminDropboxRouteImport
       parentRoute: typeof AdminRoute
     }
+    '/admin/announcements': {
+      id: '/admin/announcements'
+      path: '/announcements'
+      fullPath: '/admin/announcements'
+      preLoaderRoute: typeof AdminAnnouncementsRouteImport
+      parentRoute: typeof AdminRoute
+    }
   }
 }
 
 interface AdminRouteChildren {
+  AdminAnnouncementsRoute: typeof AdminAnnouncementsRoute
   AdminDropboxRoute: typeof AdminDropboxRoute
   AdminEduwisataRoute: typeof AdminEduwisataRoute
   AdminFeedbackRoute: typeof AdminFeedbackRoute
@@ -483,6 +560,7 @@ interface AdminRouteChildren {
 }
 
 const AdminRouteChildren: AdminRouteChildren = {
+  AdminAnnouncementsRoute: AdminAnnouncementsRoute,
   AdminDropboxRoute: AdminDropboxRoute,
   AdminEduwisataRoute: AdminEduwisataRoute,
   AdminFeedbackRoute: AdminFeedbackRoute,
@@ -509,7 +587,10 @@ const UmkmRouteChildren: UmkmRouteChildren = {
 const UmkmRouteWithChildren = UmkmRoute._addFileChildren(UmkmRouteChildren)
 
 interface WargaRouteChildren {
+  WargaAnnouncementsRoute: typeof WargaAnnouncementsRoute
+  WargaBillsRoute: typeof WargaBillsRoute
   WargaDropboxRoute: typeof WargaDropboxRoute
+  WargaLeaderboardRoute: typeof WargaLeaderboardRoute
   WargaMarketplaceRoute: typeof WargaMarketplaceRoute
   WargaProfilRoute: typeof WargaProfilRoute
   WargaScannerRoute: typeof WargaScannerRoute
@@ -518,7 +599,10 @@ interface WargaRouteChildren {
 }
 
 const WargaRouteChildren: WargaRouteChildren = {
+  WargaAnnouncementsRoute: WargaAnnouncementsRoute,
+  WargaBillsRoute: WargaBillsRoute,
   WargaDropboxRoute: WargaDropboxRoute,
+  WargaLeaderboardRoute: WargaLeaderboardRoute,
   WargaMarketplaceRoute: WargaMarketplaceRoute,
   WargaProfilRoute: WargaProfilRoute,
   WargaScannerRoute: WargaScannerRoute,
