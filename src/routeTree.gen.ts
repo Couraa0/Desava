@@ -12,6 +12,7 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as WargaRouteImport } from './routes/warga'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as WargaIndexRouteImport } from './routes/warga.index'
+import { Route as WargaScannerRouteImport } from './routes/warga.scanner'
 
 const WargaRoute = WargaRouteImport.update({
   id: '/warga',
@@ -28,28 +29,36 @@ const WargaIndexRoute = WargaIndexRouteImport.update({
   path: '/',
   getParentRoute: () => WargaRoute,
 } as any)
+const WargaScannerRoute = WargaScannerRouteImport.update({
+  id: '/scanner',
+  path: '/scanner',
+  getParentRoute: () => WargaRoute,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/warga': typeof WargaRouteWithChildren
+  '/warga/scanner': typeof WargaScannerRoute
   '/warga/': typeof WargaIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/warga/scanner': typeof WargaScannerRoute
   '/warga': typeof WargaIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/warga': typeof WargaRouteWithChildren
+  '/warga/scanner': typeof WargaScannerRoute
   '/warga/': typeof WargaIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/warga' | '/warga/'
+  fullPaths: '/' | '/warga' | '/warga/scanner' | '/warga/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/warga'
-  id: '__root__' | '/' | '/warga' | '/warga/'
+  to: '/' | '/warga/scanner' | '/warga'
+  id: '__root__' | '/' | '/warga' | '/warga/scanner' | '/warga/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -80,14 +89,23 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof WargaIndexRouteImport
       parentRoute: typeof WargaRoute
     }
+    '/warga/scanner': {
+      id: '/warga/scanner'
+      path: '/scanner'
+      fullPath: '/warga/scanner'
+      preLoaderRoute: typeof WargaScannerRouteImport
+      parentRoute: typeof WargaRoute
+    }
   }
 }
 
 interface WargaRouteChildren {
+  WargaScannerRoute: typeof WargaScannerRoute
   WargaIndexRoute: typeof WargaIndexRoute
 }
 
 const WargaRouteChildren: WargaRouteChildren = {
+  WargaScannerRoute: WargaScannerRoute,
   WargaIndexRoute: WargaIndexRoute,
 }
 
