@@ -14,6 +14,7 @@ import { Route as IndexRouteImport } from './routes/index'
 import { Route as WargaIndexRouteImport } from './routes/warga.index'
 import { Route as WargaWalletRouteImport } from './routes/warga.wallet'
 import { Route as WargaScannerRouteImport } from './routes/warga.scanner'
+import { Route as WargaAssistantRouteImport } from './routes/warga.assistant'
 
 const WargaRoute = WargaRouteImport.update({
   id: '/warga',
@@ -40,16 +41,23 @@ const WargaScannerRoute = WargaScannerRouteImport.update({
   path: '/scanner',
   getParentRoute: () => WargaRoute,
 } as any)
+const WargaAssistantRoute = WargaAssistantRouteImport.update({
+  id: '/assistant',
+  path: '/assistant',
+  getParentRoute: () => WargaRoute,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/warga': typeof WargaRouteWithChildren
+  '/warga/assistant': typeof WargaAssistantRoute
   '/warga/scanner': typeof WargaScannerRoute
   '/warga/wallet': typeof WargaWalletRoute
   '/warga/': typeof WargaIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/warga/assistant': typeof WargaAssistantRoute
   '/warga/scanner': typeof WargaScannerRoute
   '/warga/wallet': typeof WargaWalletRoute
   '/warga': typeof WargaIndexRoute
@@ -58,19 +66,27 @@ export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/warga': typeof WargaRouteWithChildren
+  '/warga/assistant': typeof WargaAssistantRoute
   '/warga/scanner': typeof WargaScannerRoute
   '/warga/wallet': typeof WargaWalletRoute
   '/warga/': typeof WargaIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/warga' | '/warga/scanner' | '/warga/wallet' | '/warga/'
+  fullPaths:
+    | '/'
+    | '/warga'
+    | '/warga/assistant'
+    | '/warga/scanner'
+    | '/warga/wallet'
+    | '/warga/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/warga/scanner' | '/warga/wallet' | '/warga'
+  to: '/' | '/warga/assistant' | '/warga/scanner' | '/warga/wallet' | '/warga'
   id:
     | '__root__'
     | '/'
     | '/warga'
+    | '/warga/assistant'
     | '/warga/scanner'
     | '/warga/wallet'
     | '/warga/'
@@ -118,16 +134,25 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof WargaScannerRouteImport
       parentRoute: typeof WargaRoute
     }
+    '/warga/assistant': {
+      id: '/warga/assistant'
+      path: '/assistant'
+      fullPath: '/warga/assistant'
+      preLoaderRoute: typeof WargaAssistantRouteImport
+      parentRoute: typeof WargaRoute
+    }
   }
 }
 
 interface WargaRouteChildren {
+  WargaAssistantRoute: typeof WargaAssistantRoute
   WargaScannerRoute: typeof WargaScannerRoute
   WargaWalletRoute: typeof WargaWalletRoute
   WargaIndexRoute: typeof WargaIndexRoute
 }
 
 const WargaRouteChildren: WargaRouteChildren = {
+  WargaAssistantRoute: WargaAssistantRoute,
   WargaScannerRoute: WargaScannerRoute,
   WargaWalletRoute: WargaWalletRoute,
   WargaIndexRoute: WargaIndexRoute,
