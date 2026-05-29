@@ -12,6 +12,7 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as WargaRouteImport } from './routes/warga'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as WargaIndexRouteImport } from './routes/warga.index'
+import { Route as WargaWalletRouteImport } from './routes/warga.wallet'
 import { Route as WargaScannerRouteImport } from './routes/warga.scanner'
 
 const WargaRoute = WargaRouteImport.update({
@@ -29,6 +30,11 @@ const WargaIndexRoute = WargaIndexRouteImport.update({
   path: '/',
   getParentRoute: () => WargaRoute,
 } as any)
+const WargaWalletRoute = WargaWalletRouteImport.update({
+  id: '/wallet',
+  path: '/wallet',
+  getParentRoute: () => WargaRoute,
+} as any)
 const WargaScannerRoute = WargaScannerRouteImport.update({
   id: '/scanner',
   path: '/scanner',
@@ -39,11 +45,13 @@ export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/warga': typeof WargaRouteWithChildren
   '/warga/scanner': typeof WargaScannerRoute
+  '/warga/wallet': typeof WargaWalletRoute
   '/warga/': typeof WargaIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/warga/scanner': typeof WargaScannerRoute
+  '/warga/wallet': typeof WargaWalletRoute
   '/warga': typeof WargaIndexRoute
 }
 export interface FileRoutesById {
@@ -51,14 +59,21 @@ export interface FileRoutesById {
   '/': typeof IndexRoute
   '/warga': typeof WargaRouteWithChildren
   '/warga/scanner': typeof WargaScannerRoute
+  '/warga/wallet': typeof WargaWalletRoute
   '/warga/': typeof WargaIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/warga' | '/warga/scanner' | '/warga/'
+  fullPaths: '/' | '/warga' | '/warga/scanner' | '/warga/wallet' | '/warga/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/warga/scanner' | '/warga'
-  id: '__root__' | '/' | '/warga' | '/warga/scanner' | '/warga/'
+  to: '/' | '/warga/scanner' | '/warga/wallet' | '/warga'
+  id:
+    | '__root__'
+    | '/'
+    | '/warga'
+    | '/warga/scanner'
+    | '/warga/wallet'
+    | '/warga/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -89,6 +104,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof WargaIndexRouteImport
       parentRoute: typeof WargaRoute
     }
+    '/warga/wallet': {
+      id: '/warga/wallet'
+      path: '/wallet'
+      fullPath: '/warga/wallet'
+      preLoaderRoute: typeof WargaWalletRouteImport
+      parentRoute: typeof WargaRoute
+    }
     '/warga/scanner': {
       id: '/warga/scanner'
       path: '/scanner'
@@ -101,11 +123,13 @@ declare module '@tanstack/react-router' {
 
 interface WargaRouteChildren {
   WargaScannerRoute: typeof WargaScannerRoute
+  WargaWalletRoute: typeof WargaWalletRoute
   WargaIndexRoute: typeof WargaIndexRoute
 }
 
 const WargaRouteChildren: WargaRouteChildren = {
   WargaScannerRoute: WargaScannerRoute,
+  WargaWalletRoute: WargaWalletRoute,
   WargaIndexRoute: WargaIndexRoute,
 }
 
