@@ -63,6 +63,13 @@ function Scanner() {
     };
   }, []);
 
+  // Sync stream to video element once it's mounted
+  useEffect(() => {
+    if (videoRef.current && stream) {
+      videoRef.current.srcObject = stream;
+    }
+  }, [stream, capturedImage]);
+
   const startCamera = async () => {
     setDetected(null);
     setCapturedImage(null);
@@ -79,9 +86,6 @@ function Scanner() {
         audio: false,
       });
       setStream(mediaStream);
-      if (videoRef.current) {
-        videoRef.current.srcObject = mediaStream;
-      }
     } catch (err: any) {
       console.error("Camera access error:", err);
       toast.error("Gagal membuka kamera", {
