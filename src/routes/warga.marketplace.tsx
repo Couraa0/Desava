@@ -11,12 +11,12 @@ export const Route = createFileRoute("/warga/marketplace")({
 const categories = ["Semua", "Pupuk & Bibit", "Kerajinan", "Sembako", "Lainnya"];
 
 const items = [
-  { id: 1, name: "Pupuk Kompos Premium", price: "Rp 15.000", stock: "120 kg", src: "TPS3R Desa", category: "Pupuk & Bibit", rating: 4.9, sold: 421, color: "from-emerald-400 to-green-500" },
-  { id: 2, name: "Tas Belanja Anyaman", price: "Rp 35.000", stock: "24 pcs", src: "UMKM Bu Siti", category: "Kerajinan", rating: 4.8, sold: 112, color: "from-amber-400 to-orange-400" },
-  { id: 3, name: "Beras Lokal Organik 5kg", price: "Rp 68.000", stock: "45 sak", src: "Koptan Makmur", category: "Sembako", rating: 4.9, sold: 856, color: "from-yellow-400 to-amber-500" },
-  { id: 4, name: "Sabun Lerak Cair 500ml", price: "Rp 18.500", stock: "32 btl", src: "Eco Desa", category: "Lainnya", rating: 4.7, sold: 234, color: "from-blue-400 to-cyan-400" },
-  { id: 5, name: "Bibit Cabai Rawit", price: "Rp 5.000", stock: "89 polybag", src: "KWT Melati", category: "Pupuk & Bibit", rating: 4.6, sold: 345, color: "from-emerald-300 to-green-400" },
-  { id: 6, name: "Keripik Singkong Renyah", price: "Rp 12.000", stock: "56 bks", src: "UMKM Pak Budi", category: "Sembako", rating: 4.8, sold: 567, color: "from-yellow-300 to-orange-300" },
+  { id: 1, name: "Pupuk Kompos Premium", price: "Rp 15.000", stock: "120 kg", src: "TPS3R Desa", category: "Pupuk & Bibit", rating: 4.9, sold: 421, img: "/products/pupuk-kompos.png" },
+  { id: 2, name: "Tas Belanja Anyaman", price: "Rp 35.000", stock: "24 pcs", src: "UMKM Bu Siti", category: "Kerajinan", rating: 4.8, sold: 112, img: "/products/tas-anyaman.png" },
+  { id: 3, name: "Beras Lokal Organik 5kg", price: "Rp 68.000", stock: "45 sak", src: "Koptan Makmur", category: "Sembako", rating: 4.9, sold: 856, img: "/products/beras-organik.png" },
+  { id: 4, name: "Sabun Lerak Cair 500ml", price: "Rp 18.500", stock: "32 btl", src: "Eco Desa", category: "Lainnya", rating: 4.7, sold: 234, img: "/products/sabun-lerak.png" },
+  { id: 5, name: "Bibit Cabai Rawit", price: "Rp 5.000", stock: "89 polybag", src: "KWT Melati", category: "Pupuk & Bibit", rating: 4.6, sold: 345, img: "/products/bibit-cabai.png" },
+  { id: 6, name: "Keripik Singkong Renyah", price: "Rp 12.000", stock: "56 bks", src: "UMKM Pak Budi", category: "Sembako", rating: 4.8, sold: 567, img: "/products/keripik-singkong.png" },
 ];
 
 function WargaMarketplace() {
@@ -83,18 +83,25 @@ function WargaMarketplace() {
             key={item.id}
             className="flex flex-col rounded-2xl border border-border bg-card text-left transition-all hover:border-primary/40 hover:shadow-[var(--shadow-soft)]"
           >
-            {/* Image placeholder */}
-            <div className={`h-28 w-full rounded-t-2xl bg-gradient-to-br ${item.color} p-3`}>
-              <div className="flex items-start justify-between">
-                <span className="rounded-lg bg-white/20 px-2 py-0.5 text-[10px] font-semibold text-white backdrop-blur-sm">
-                  {item.category}
-                </span>
-                <div className="flex items-center gap-0.5 rounded-lg bg-white/20 px-1.5 py-0.5 backdrop-blur-sm">
-                  <Star className="h-2.5 w-2.5 fill-yellow-300 text-yellow-300" />
-                  <span className="text-[10px] font-bold text-white">{item.rating}</span>
+            {/* Product image */}
+            <div className="relative h-28 w-full overflow-hidden rounded-t-2xl bg-muted">
+              <img
+                src={item.img}
+                alt={item.name}
+                className="h-full w-full object-cover"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-black/20 p-3">
+                <div className="flex items-start justify-between">
+                  <span className="rounded-lg bg-black/40 px-2 py-0.5 text-[10px] font-semibold text-white backdrop-blur-sm">
+                    {item.category}
+                  </span>
+                  <div className="flex items-center gap-0.5 rounded-lg bg-black/40 px-1.5 py-0.5 backdrop-blur-sm">
+                    <Star className="h-2.5 w-2.5 fill-yellow-300 text-yellow-300" />
+                    <span className="text-[10px] font-bold text-white">{item.rating}</span>
+                  </div>
                 </div>
+                <div className="absolute bottom-3 left-3 text-[11px] font-semibold text-white drop-shadow-[0_1px_3px_rgba(0,0,0,0.8)]">Stok: {item.stock}</div>
               </div>
-              <div className="mt-2 text-[11px] font-medium text-white/80">Stok: {item.stock}</div>
             </div>
 
             <div className="flex flex-1 flex-col p-3">

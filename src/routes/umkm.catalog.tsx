@@ -1,6 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useState } from "react";
-import { Plus, Pencil, Archive, Star, TrendingUp, Package } from "lucide-react";
+import { Plus, Pencil, Archive, Star, TrendingUp } from "lucide-react";
 
 export const Route = createFileRoute("/umkm/catalog")({
   head: () => ({ meta: [{ title: "Katalog Produk UMKM" }] }),
@@ -8,14 +8,14 @@ export const Route = createFileRoute("/umkm/catalog")({
 });
 
 const products = [
-  { id: 1, name: "Pupuk Kompos Premium 5kg", price: "Rp 25.000", stock: 42, sold: 180, rating: 4.9, active: true, color: "from-emerald-400 to-green-500" },
-  { id: 2, name: "Pot Sabut Kelapa (Set 3)", price: "Rp 35.000", stock: 18, sold: 94, rating: 4.7, active: true, color: "from-amber-400 to-orange-400" },
-  { id: 3, name: "Tas Belanja Daur Ulang", price: "Rp 28.000", stock: 7, sold: 213, rating: 4.6, active: true, color: "from-teal-400 to-cyan-500" },
-  { id: 4, name: "Briket Arang Tempurung", price: "Rp 18.000/kg", stock: 30, sold: 56, rating: 4.5, active: true, color: "from-slate-500 to-slate-700" },
-  { id: 5, name: "Sabun Organik Lidah Buaya", price: "Rp 15.000/pcs", stock: 0, sold: 128, rating: 4.8, active: false, color: "from-violet-400 to-purple-500" },
-  { id: 6, name: "Minyak Kelapa VCO 250ml", price: "Rp 55.000", stock: 12, sold: 67, rating: 4.9, active: true, color: "from-yellow-400 to-amber-500" },
-  { id: 7, name: "Kerajinan Bambu Mini", price: "Rp 45.000", stock: 5, sold: 39, rating: 4.4, active: true, color: "from-lime-400 to-green-400" },
-  { id: 8, name: "Kompos Cair 1L", price: "Rp 12.000", stock: 0, sold: 91, rating: 4.6, active: false, color: "from-blue-400 to-cyan-400" },
+  { id: 1, name: "Pupuk Kompos Premium 5kg", price: "Rp 25.000", stock: 42, sold: 180, rating: 4.9, active: true, img: "/products/pupuk-kompos.png" },
+  { id: 2, name: "Pot Sabut Kelapa (Set 3)", price: "Rp 35.000", stock: 18, sold: 94, rating: 4.7, active: true, img: "/products/pot-sabut-kelapa.png" },
+  { id: 3, name: "Tas Belanja Daur Ulang", price: "Rp 28.000", stock: 7, sold: 213, rating: 4.6, active: true, img: "/products/tas-anyaman.png" },
+  { id: 4, name: "Briket Arang Tempurung", price: "Rp 18.000/kg", stock: 30, sold: 56, rating: 4.5, active: true, img: "/products/briket-arang.png" },
+  { id: 5, name: "Sabun Organik Lidah Buaya", price: "Rp 15.000/pcs", stock: 0, sold: 128, rating: 4.8, active: false, img: "/products/sabun-organik.png" },
+  { id: 6, name: "Minyak Kelapa VCO 250ml", price: "Rp 55.000", stock: 12, sold: 67, rating: 4.9, active: true, img: "/products/minyak-vco.png" },
+  { id: 7, name: "Kerajinan Bambu Mini", price: "Rp 45.000", stock: 5, sold: 39, rating: 4.4, active: true, img: "/products/kerajinan-bambu.png" },
+  { id: 8, name: "Kompos Cair 1L", price: "Rp 12.000", stock: 0, sold: 91, rating: 4.6, active: false, img: "/products/kompos-cair.png" },
 ];
 
 function Catalog() {
@@ -75,9 +75,9 @@ function Catalog() {
       <div className="mx-5 mt-4 space-y-3">
         {filtered.map((p) => (
           <div key={p.id} className="flex items-center gap-3 rounded-2xl border border-border bg-card p-3">
-            {/* Image */}
-            <div className={`h-16 w-16 shrink-0 rounded-xl bg-gradient-to-br ${p.color} flex items-center justify-center text-white/80`}>
-              <Package className="h-6 w-6" />
+            {/* Product image */}
+            <div className="h-16 w-16 shrink-0 overflow-hidden rounded-xl bg-muted">
+              <img src={p.img} alt={p.name} className="h-full w-full object-cover" />
             </div>
             <div className="min-w-0 flex-1">
               <div className="flex items-start justify-between gap-2">
