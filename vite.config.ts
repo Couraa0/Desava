@@ -4,6 +4,7 @@ import { TanStackRouterVite } from "@tanstack/router-plugin/vite";
 import { VitePWA } from "vite-plugin-pwa";
 import tsconfigPaths from "vite-tsconfig-paths";
 import tailwindcss from "@tailwindcss/vite";
+import basicSsl from "@vitejs/plugin-basic-ssl";
 import { rmSync, mkdirSync, writeFileSync } from "node:fs";
 import { join } from "node:path";
 
@@ -48,6 +49,7 @@ function vercelOutputPlugin() {
 
 export default defineConfig({
   plugins: [
+    basicSsl(),
     TanStackRouterVite(),
     react(),
     tailwindcss(),

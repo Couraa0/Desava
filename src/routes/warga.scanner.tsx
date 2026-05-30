@@ -68,17 +68,25 @@ function Scanner() {
     setCapturedImage(null);
     setScanning(false);
     try {
+      if (!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia) {
+        toast.error("Kamera tidak didukung", {
+          description: "Pastikan Anda menggunakan HTTPS atau localhost untuk mengakses kamera.",
+        });
+        return;
+      }
       const mediaStream = await navigator.mediaDevices.getUserMedia({
-        video: { facingMode: "environment" },
+        video: { facingMode: { ideal: "environment" } },
         audio: false,
       });
       setStream(mediaStream);
       if (videoRef.current) {
         videoRef.current.srcObject = mediaStream;
       }
-    } catch (err) {
+    } catch (err: any) {
       console.error("Camera access error:", err);
-      // Fallback silently if blocked, the UI will show an enable button
+      toast.error("Gagal membuka kamera", {
+        description: err.message || "Pastikan Anda telah memberikan izin kamera.",
+      });
     }
   };
 
