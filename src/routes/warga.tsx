@@ -20,7 +20,7 @@ function WargaLayout() {
   const showAssistant = allowedPaths.includes(location.pathname);
 
   return (
-    <>
+    <div className="theme-warga min-h-dvh">
       <MobileShell
         headerName="Bu Ratna"
         headerSubtitle="Warga Desa"
@@ -49,6 +49,6 @@ function WargaLayout() {
 
       {/* Pop-up Assistant Modal */}
       <AssistantModal isOpen={isAssistantOpen} onClose={() => setAssistantOpen(false)} />
-    </>
+    </div>
   );
 }

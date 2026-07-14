@@ -1,6 +1,7 @@
 import { LogOut, User, Bell } from "lucide-react";
 import { useRouter } from "@tanstack/react-router";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { ImpactTicker } from "./ImpactTicker";
 
 interface HeaderProps {
   name?: string;
@@ -16,11 +17,11 @@ export function Header({ name = "Smart Village", subtitle, avatarSrc = "" }: Hea
   };
 
   return (
-    <header className="fixed top-0 left-1/2 z-40 w-full max-w-md -translate-x-1/2">
+    <header className="fixed top-0 left-1/2 z-40 w-full max-w-md -translate-x-1/2 bg-background/90 backdrop-blur-xl">
       {/* Gradient top accent line */}
       <div className="h-[2px] w-full bg-[image:var(--gradient-primary)]" />
 
-      <div className="flex h-[60px] items-center justify-between bg-background/90 px-5 backdrop-blur-xl">
+      <div className="flex h-[60px] items-center justify-between px-5">
         {/* Left — Avatar + Name */}
         <div className="flex items-center gap-3">
           <div className="relative">
@@ -67,6 +68,9 @@ export function Header({ name = "Smart Village", subtitle, avatarSrc = "" }: Hea
           </button>
         </div>
       </div>
+
+      {/* Ticker bar */}
+      <ImpactTicker />
 
       {/* Subtle bottom shadow */}
       <div className="h-px w-full bg-gradient-to-r from-transparent via-border to-transparent" />

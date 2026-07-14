@@ -8,14 +8,14 @@ export const Route = createFileRoute("/umkm/catalog")({
 });
 
 const products = [
-  { id: 1, name: "Pupuk Kompos Premium 5kg", price: "Rp 25.000", stock: 42, sold: 180, rating: 4.9, active: true, img: "/products/pupuk-kompos.png" },
-  { id: 2, name: "Pot Sabut Kelapa (Set 3)", price: "Rp 35.000", stock: 18, sold: 94, rating: 4.7, active: true, img: "/products/pot-sabut-kelapa.png" },
-  { id: 3, name: "Tas Belanja Daur Ulang", price: "Rp 28.000", stock: 7, sold: 213, rating: 4.6, active: true, img: "/products/tas-anyaman.png" },
-  { id: 4, name: "Briket Arang Tempurung", price: "Rp 18.000/kg", stock: 30, sold: 56, rating: 4.5, active: true, img: "/products/briket-arang.png" },
-  { id: 5, name: "Sabun Organik Lidah Buaya", price: "Rp 15.000/pcs", stock: 0, sold: 128, rating: 4.8, active: false, img: "/products/sabun-organik.png" },
-  { id: 6, name: "Minyak Kelapa VCO 250ml", price: "Rp 55.000", stock: 12, sold: 67, rating: 4.9, active: true, img: "/products/minyak-vco.png" },
-  { id: 7, name: "Kerajinan Bambu Mini", price: "Rp 45.000", stock: 5, sold: 39, rating: 4.4, active: true, img: "/products/kerajinan-bambu.png" },
-  { id: 8, name: "Kompos Cair 1L", price: "Rp 12.000", stock: 0, sold: 91, rating: 4.6, active: false, img: "/products/kompos-cair.png" },
+  { id: 1, name: "Pupuk Kompos Premium 5kg", price: "Rp 25.000", stock: 42, sold: 180, rating: 4.9, active: true, img: "/products/pupuk-kompos.png", badges: ["Eco Product", "Best Seller"] },
+  { id: 2, name: "Pot Sabut Kelapa (Set 3)", price: "Rp 35.000", stock: 18, sold: 94, rating: 4.7, active: true, img: "/products/pot-sabut-kelapa.png", badges: ["Circular Product"] },
+  { id: 3, name: "Tas Belanja Daur Ulang", price: "Rp 28.000", stock: 7, sold: 213, rating: 4.6, active: true, img: "/products/tas-anyaman.png", badges: ["Circular Product", "Best Seller"] },
+  { id: 4, name: "Briket Arang Tempurung", price: "Rp 18.000/kg", stock: 30, sold: 56, rating: 4.5, active: true, img: "/products/briket-arang.png", badges: ["Circular Product"] },
+  { id: 5, name: "Sabun Organik Lidah Buaya", price: "Rp 15.000/pcs", stock: 0, sold: 128, rating: 4.8, active: false, img: "/products/sabun-organik.png", badges: ["Eco Product"] },
+  { id: 6, name: "Minyak Kelapa VCO 250ml", price: "Rp 55.000", stock: 12, sold: 67, rating: 4.9, active: true, img: "/products/minyak-vco.png", badges: ["Local Favorite"] },
+  { id: 7, name: "Kerajinan Bambu Mini", price: "Rp 45.000", stock: 5, sold: 39, rating: 4.4, active: true, img: "/products/kerajinan-bambu.png", badges: ["Local Favorite"] },
+  { id: 8, name: "Kompos Cair 1L", price: "Rp 12.000", stock: 0, sold: 91, rating: 4.6, active: false, img: "/products/kompos-cair.png", badges: ["Eco Product"] },
 ];
 
 function Catalog() {
@@ -90,7 +90,21 @@ function Catalog() {
                   {p.stock === 0 ? "Habis" : p.stock <= 8 ? "Sedikit" : "Tersedia"}
                 </span>
               </div>
-              <p className="text-sm font-bold text-primary">{p.price}</p>
+              {p.badges && (
+                <div className="mt-1 flex gap-1 flex-wrap">
+                  {p.badges.map((b) => (
+                    <span key={b} className={`rounded px-1.5 py-0.5 text-[7px] font-extrabold uppercase border ${
+                      b === "Eco Product" ? "bg-emerald-50 text-emerald-600 border-emerald-200" :
+                      b === "Circular Product" ? "bg-amber-50 text-amber-600 border-amber-200" :
+                      b === "Best Seller" ? "bg-red-50 text-red-600 border-red-200" :
+                      "bg-indigo-50 text-indigo-600 border-indigo-200"
+                    }`}>
+                      {b}
+                    </span>
+                  ))}
+                </div>
+              )}
+              <p className="text-sm font-bold text-primary mt-1">{p.price}</p>
               <div className="mt-1 flex items-center gap-3 text-[10px] text-muted-foreground">
                 <span className="flex items-center gap-0.5">
                   <Star className="h-2.5 w-2.5 fill-yellow-400 text-yellow-400" /> {p.rating}

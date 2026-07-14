@@ -11,34 +11,33 @@ export const Route = createFileRoute("/roles")({
   }),
   component: Roles,
 });
-
 const roles = [
   {
     to: "/login",
     search: { role: "warga" as const },
     label: "Warga Desa",
-    desc: "Scan sampah, tabung poin hijau, akses layanan.",
+    desc: "Setor sampah, kumpulkan poin, belanja produk lokal",
     icon: Users,
-    gradient: "from-emerald-500 to-green-600",
+    gradient: "from-emerald-500 to-emerald-600",
     bg: "bg-emerald-50",
   },
   {
     to: "/login",
     search: { role: "umkm" as const },
     label: "UMKM & Petani",
-    desc: "Marketplace sirkular & kelola katalog produk.",
+    desc: "Kelola produk, pesanan, dan bahan baku sirkular",
     icon: Store,
-    gradient: "from-amber-500 to-orange-500",
+    gradient: "from-amber-500 to-amber-600",
     bg: "bg-amber-50",
   },
   {
     to: "/login",
     search: { role: "admin" as const },
     label: "Pemerintah Desa",
-    desc: "Statistik, monitor drop-box & edu-wisata.",
+    desc: "Pantau indikator desa, layanan publik, dan ekonomi sirkular",
     icon: ShieldCheck,
-    gradient: "from-violet-500 to-purple-600",
-    bg: "bg-violet-50",
+    gradient: "from-indigo-500 to-indigo-600",
+    bg: "bg-indigo-50",
   },
 ];
 
@@ -52,7 +51,7 @@ function Roles() {
   const { install, canInstall } = usePwaInstall();
 
   return (
-    <div className="flex min-h-dvh flex-col bg-background px-5 relative">
+    <div className="flex min-h-dvh flex-col bg-background px-5 relative pb-4">
       {/* Install App Button */}
       {canInstall && (
         <button 
@@ -66,18 +65,20 @@ function Roles() {
 
       {/* Top bar */}
       <div className="flex flex-col items-center pt-12 text-center">
-        <div className="flex h-16 w-16 items-center justify-center rounded-3xl bg-[#2E9F6B] shadow-lg shadow-primary/20">
+        <div className="flex h-16 w-16 items-center justify-center rounded-3xl bg-emerald-600 shadow-lg shadow-primary/20 animate-pulse">
           <Sprout className="h-8 w-8 text-yellow-400" />
         </div>
-        <div className="mt-4">
-          <span className="text-xs font-bold tracking-widest text-[#2E9F6B]">SMART VILLAGE</span>
-          <p className="text-[10px] text-muted-foreground leading-none mt-1">Ekosistem Sirkular Digital</p>
+        <div className="mt-4 px-2">
+          <span className="text-xl font-black tracking-widest text-emerald-600">DESAVA</span>
+          <p className="text-[10px] text-muted-foreground font-semibold leading-relaxed mt-2.5 max-w-xs mx-auto">
+            DESAVA: Smart Sustainable Village Ecosystem | Powered by AI | Connecting Community • Government • Circular Economy
+          </p>
         </div>
       </div>
 
       {/* Hero text */}
       <div className="mt-8 text-center">
-        <h1 className="text-2xl font-bold leading-tight text-foreground">
+        <h1 className="text-2xl font-black leading-tight text-foreground">
           Pilih Peran Anda
         </h1>
         <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
@@ -89,7 +90,7 @@ function Roles() {
       <div className="mt-6 grid grid-cols-3 gap-2">
         {stats.map(({ icon: Icon, val, lbl }) => (
           <div key={lbl} className="rounded-2xl border border-border bg-card p-3 text-center">
-            <Icon className="mx-auto h-4 w-4 text-primary" />
+            <Icon className="mx-auto h-4 w-4 text-emerald-600" />
             <p className="mt-1.5 text-sm font-black text-foreground">{val}</p>
             <p className="text-[10px] text-muted-foreground">{lbl}</p>
           </div>
@@ -112,7 +113,7 @@ function Roles() {
               </div>
               <div className="min-w-0 flex-1">
                 <p className="text-base font-bold text-foreground">{label}</p>
-                <p className="truncate text-xs text-muted-foreground">{desc}</p>
+                <p className="text-xs text-muted-foreground leading-normal mt-0.5">{desc}</p>
               </div>
               <ArrowRight className="h-4 w-4 shrink-0 text-muted-foreground transition-transform group-hover:translate-x-0.5 group-hover:text-primary" />
             </Link>
@@ -121,9 +122,13 @@ function Roles() {
       </div>
 
       {/* Footer */}
-      <p className="py-8 text-center text-[10px] text-muted-foreground">
-        v0.1 • Smart Village App
-      </p>
+      <div className="py-6 mt-8 border-t border-border/50 text-center">
+        <p className="text-[9px] font-semibold text-muted-foreground/50 leading-relaxed max-w-xs mx-auto">
+          DESAVA: Smart Sustainable Village Ecosystem | Powered by AI <br />
+          Connecting Community • Government • Circular Economy
+        </p>
+        <p className="mt-1.5 text-[8px] text-muted-foreground/30">v0.1 • Smart Village App</p>
+      </div>
     </div>
   );
 }

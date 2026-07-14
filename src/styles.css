@@ -109,6 +109,42 @@
   --sidebar-ring: oklch(0.704 0.04 256.788);
 }
 
+.theme-warga {
+  --primary: oklch(0.68 0.19 146.46); /* Emerald Green #10B981 */
+  --primary-foreground: oklch(0.99 0.005 150);
+  --primary-glow: oklch(0.78 0.16 142);
+  --accent: oklch(0.96 0.04 146.46);
+  --accent-foreground: oklch(0.35 0.1 146.46);
+  --ring: oklch(0.68 0.19 146.46);
+  --gradient-primary: linear-gradient(135deg, oklch(0.68 0.19 146.46), oklch(0.78 0.16 142));
+  --shadow-soft: 0 8px 24px -12px color-mix(in oklab, oklch(0.68 0.19 146.46) 35%, transparent);
+}
+
+.theme-umkm {
+  --primary: oklch(0.669 0.179 66.89); /* Amber / Earthy Brown #D97706 */
+  --primary-foreground: oklch(0.99 0.005 60);
+  --primary-glow: oklch(0.76 0.18 68);
+  --accent: oklch(0.96 0.04 70);
+  --accent-foreground: oklch(0.35 0.1 66.89);
+  --ring: oklch(0.669 0.179 66.89);
+  --gradient-primary: linear-gradient(135deg, oklch(0.669 0.179 66.89), oklch(0.76 0.18 68));
+  --gradient-earth: linear-gradient(135deg, oklch(0.669 0.179 66.89), oklch(0.76 0.18 68));
+  --earth: oklch(0.669 0.179 66.89);
+  --earth-soft: oklch(0.96 0.04 70);
+  --shadow-soft: 0 8px 24px -12px color-mix(in oklab, oklch(0.669 0.179 66.89) 35%, transparent);
+}
+
+.theme-admin {
+  --primary: oklch(0.585 0.233 277.12); /* Indigo / Purple #6366F1 */
+  --primary-foreground: oklch(0.99 0.005 280);
+  --primary-glow: oklch(0.68 0.22 285);
+  --accent: oklch(0.95 0.04 280);
+  --accent-foreground: oklch(0.35 0.1 277.12);
+  --ring: oklch(0.585 0.233 277.12);
+  --gradient-primary: linear-gradient(135deg, oklch(0.585 0.233 277.12), oklch(0.68 0.22 285));
+  --shadow-soft: 0 8px 24px -12px color-mix(in oklab, oklch(0.585 0.233 277.12) 35%, transparent);
+}
+
 .dark {
   --background: oklch(0.129 0.042 264.695);
   --foreground: oklch(0.984 0.003 247.858);

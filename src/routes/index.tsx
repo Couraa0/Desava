@@ -43,11 +43,14 @@ function SplashScreen() {
           <div className="absolute inset-0 -z-10 animate-ping rounded-3xl bg-white/40" />
         </div>
         
-        <h1 className="text-3xl font-black tracking-tight text-primary-foreground">
-          Smart Village
+        <h1 className="text-4xl font-extrabold tracking-tight text-white drop-shadow-md">
+          DESAVA
         </h1>
-        <p className="mt-2 text-sm font-medium tracking-wide text-primary-foreground/80">
-          Smart Village & Sirkular
+        <p className="mt-2.5 text-center text-xs font-semibold tracking-wide text-white/90 max-w-[280px] leading-relaxed">
+          Smart Sustainable Village Ecosystem | Powered by AI
+        </p>
+        <p className="mt-1 text-center text-[10px] text-white/70 max-w-[300px] leading-relaxed">
+          Connecting Community • Government • Circular Economy
         </p>
 
         {/* Loading indicator */}

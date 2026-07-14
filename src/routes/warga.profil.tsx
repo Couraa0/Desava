@@ -12,10 +12,11 @@ export const Route = createFileRoute("/warga/profil")({
 });
 
 const achievements = [
-  { icon: Recycle, title: "Eco Warrior", desc: "Setor 50+ kg sampah", unlocked: true },
-  { icon: Coins, title: "Penabung Hijau", desc: "Kumpulkan Rp 100K", unlocked: true },
-  { icon: Sprout, title: "Petani Digital", desc: "Tukar 3 bibit tani", unlocked: false },
-  { icon: Trophy, title: "Top Desa #1", desc: "Masuk 5 besar desa", unlocked: false },
+  { icon: Trophy, title: "Eco Hero", desc: "Scan & setor sampah 10 kali", unlocked: true },
+  { icon: Star, title: "Top Recycler", desc: "Masuk 3 besar peringkat desa", unlocked: true },
+  { icon: Recycle, title: "Zero Waste", desc: "Memilah 100% sampah rumah tangga", unlocked: true },
+  { icon: Award, title: "100 kg Club", desc: "Menyetor total 100 kg sampah", unlocked: false },
+  { icon: Sprout, title: "Green Champion", desc: "Menjadi teladan lingkungan warga", unlocked: false },
 ];
 
 const stats = [

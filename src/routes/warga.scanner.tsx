@@ -1,6 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useState, useRef, useEffect } from "react";
-import { Camera, Zap, ImageIcon, CheckCircle, XCircle, Clock, ChevronRight, RefreshCw } from "lucide-react";
+import { Camera, Zap, ImageIcon, CheckCircle, XCircle, Clock, ChevronRight, RefreshCw, Sparkles } from "lucide-react";
 import { toast } from "sonner";
 
 export const Route = createFileRoute("/warga/scanner")({
@@ -258,7 +258,7 @@ function Scanner() {
           <div className="absolute inset-0 flex flex-col items-center justify-center bg-black/50 backdrop-blur-[2px]">
             <div className="flex flex-col items-center gap-3">
               <div className="h-12 w-12 animate-spin rounded-full border-[3px] border-white/20 border-t-primary" />
-              <p className="text-xs font-semibold text-white/90">Mendeteksi jenis sampah…</p>
+              <p className="text-xs font-semibold text-white/90 flex items-center gap-1.5"><Sparkles className="h-3.5 w-3.5 text-purple-400 animate-pulse" /> Menganalisis dengan AI...</p>
             </div>
             <span className="absolute inset-x-8 top-1/3 h-px animate-pulse bg-gradient-to-r from-transparent via-primary to-transparent shadow-[0_0_12px_var(--color-primary)]" />
           </div>
@@ -270,8 +270,8 @@ function Scanner() {
             <div className="flex h-14 w-14 items-center justify-center rounded-full bg-primary/20 backdrop-blur-md border border-primary/40 animate-bounce">
               <CheckCircle className="h-8 w-8 text-primary drop-shadow-lg" />
             </div>
-            <p className="text-lg font-black text-white">{detected.name}</p>
-            <span className="rounded-full bg-primary px-3 py-1 text-[11px] font-bold text-white shadow-md">{detected.accuracy}% akurasi</span>
+            <p className="text-lg font-black text-white flex items-center gap-1.5">{detected.name}</p>
+            <span className="rounded-full bg-purple-600 px-3 py-1 text-[11px] font-bold text-white shadow-md flex items-center gap-1"><Sparkles className="h-3 w-3 fill-white" /> AI: {detected.accuracy}% akurasi</span>
           </div>
         )}
 
@@ -327,17 +327,22 @@ function Scanner() {
         <div className="mx-5 mt-4 rounded-2xl border border-border bg-card p-4 shadow-[var(--shadow-soft)] animate-in fade-in slide-in-from-bottom-4 duration-300">
           <div className="flex items-start justify-between">
             <div>
-              <span className={`inline-block rounded-full px-2.5 py-0.5 text-[9px] font-bold uppercase mb-1.5 ${
-                detected.color === "emerald" ? "bg-emerald-50 text-emerald-600 border border-emerald-100" :
-                detected.color === "amber" ? "bg-amber-50 text-amber-600 border border-amber-100" :
-                "bg-violet-50 text-violet-600 border border-violet-100"
-              }`}>
-                {detected.type}
-              </span>
-              <p className="text-base font-extrabold text-foreground leading-snug">{detected.name}</p>
+              <div className="flex items-center gap-1.5 flex-wrap">
+                <span className={`inline-block rounded-full px-2.5 py-0.5 text-[9px] font-bold uppercase ${
+                  detected.color === "emerald" ? "bg-emerald-50 text-emerald-600 border border-emerald-100" :
+                  detected.color === "amber" ? "bg-amber-50 text-amber-600 border border-amber-100" :
+                  "bg-violet-50 text-violet-600 border border-violet-100"
+                }`}>
+                  {detected.type}
+                </span>
+                <span className="inline-flex items-center gap-0.5 rounded-full bg-purple-50 text-purple-600 border border-purple-100 px-1.5 py-0.5 text-[8px] font-extrabold">
+                  <Sparkles className="h-2 w-2" /> AI Eco-Scan
+                </span>
+              </div>
+              <p className="text-base font-extrabold text-foreground leading-snug mt-1.5">{detected.name}</p>
             </div>
-            <span className="rounded-full bg-primary/10 px-2.5 py-1 text-[11px] font-bold text-primary shrink-0">
-              {detected.accuracy}% Cocok
+            <span className="rounded-full bg-purple-100 px-2.5 py-1 text-[11px] font-bold text-purple-700 shrink-0 flex items-center gap-1.5">
+              <Sparkles className="h-3 w-3" /> {detected.accuracy}% Cocok
             </span>
           </div>
           
@@ -345,7 +350,12 @@ function Scanner() {
           
           <div className="mt-4 pt-4 border-t border-border/80 flex items-center justify-between">
             <div>
-              <p className="text-[10px] text-muted-foreground uppercase tracking-wider font-bold">Estimasi Harga Setor</p>
+              <p className="text-[10px] text-muted-foreground uppercase tracking-wider font-bold flex items-center gap-1">
+                Estimasi Harga Setor
+                <span className="inline-flex items-center gap-0.5 text-[8px] font-black text-purple-700 bg-purple-100 px-1.5 py-0.5 rounded-full">
+                  <Sparkles className="h-2 w-2" /> AI Prediction
+                </span>
+              </p>
               <p className="text-xl font-black text-primary mt-0.5">{detected.price}</p>
             </div>
             <button className="rounded-xl bg-[image:var(--gradient-primary)] px-4 py-2.5 text-xs font-bold text-primary-foreground shadow-[var(--shadow-soft)] hover:translate-y-[-1px] transition-all active:scale-95">

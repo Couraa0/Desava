@@ -1,6 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useState } from "react";
-import { Star, MessageSquare, CheckCircle, Clock, Filter } from "lucide-react";
+import { Star, MessageSquare, CheckCircle, Clock, Filter, Sparkles } from "lucide-react";
 
 export const Route = createFileRoute("/admin/feedback")({
   head: () => ({ meta: [{ title: "Citizen Feedback — Smart Village" }] }),
@@ -69,6 +69,28 @@ function Feedback() {
             </div>
           </div>
         </div>
+      </div>
+
+      {/* AI Feedback Sentiment Summarizer Widget */}
+      <div className="mx-5 mt-4">
+        <section className="relative overflow-hidden rounded-2xl border border-purple-500/20 bg-gradient-to-r from-purple-500/10 to-indigo-500/5 p-4 shadow-sm">
+          <div className="flex gap-3">
+            <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-purple-500/10 text-purple-600">
+              <Sparkles className="h-4.5 w-4.5 animate-pulse" />
+            </div>
+            <div className="flex-1 min-w-0">
+              <span className="inline-flex items-center gap-1 rounded-full bg-purple-500/10 px-2 py-0.5 text-[9px] font-bold text-purple-700">
+                🔮 AI Aspirasi Analisis
+              </span>
+              <p className="mt-1.5 text-xs font-bold text-foreground">
+                Top Issues Minggu Ini: Air Bersih, Lampu Jalan, Bank Sampah
+              </p>
+              <p className="text-[10px] text-muted-foreground leading-relaxed mt-0.5">
+                AI mendeteksi sentimen kepuasan Bank Sampah tinggi (94%), sementara keluhan Air Bersih & Lampu Jalan membutuhkan tindakan segera.
+              </p>
+            </div>
+          </div>
+        </section>
       </div>
 
       {/* Topic scores */}

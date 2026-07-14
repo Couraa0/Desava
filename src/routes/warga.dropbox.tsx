@@ -1,18 +1,18 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useEffect, useRef } from "react";
-import { MapPin, Navigation, Map, Info, QrCode } from "lucide-react";
+import { MapPin, Navigation, Map, Info, QrCode, Sparkles } from "lucide-react";
 
 export const Route = createFileRoute("/warga/dropbox")({
-  head: () => ({ meta: [{ title: "Lokasi Drop-Box — Smart Village" }] }),
+  head: () => ({ meta: [{ title: "Lokasi Drop-Box — DESAVA" }] }),
   component: WargaDropbox,
 });
 
 const boxes = [
-  { id: "DB-01", loc: "FASILKOM UNSIKA", lat: -6.3225, lng: 107.3060, dist: "1.2 km", status: "Tersedia" },
-  { id: "DB-02", loc: "Gedung Rektorat", lat: -6.3232, lng: 107.3065, dist: "0.8 km", status: "Tersedia" },
-  { id: "DB-03", loc: "Fakultas Teknik", lat: -6.3218, lng: 107.3055, dist: "2.1 km", status: "Tersedia" },
-  { id: "DB-04", loc: "Perpustakaan", lat: -6.3240, lng: 107.3070, dist: "0.5 km", status: "Penuh" },
-  { id: "DB-05", loc: "Gerbang Utama", lat: -6.3250, lng: 107.3058, dist: "3.4 km", status: "Tersedia" },
+  { id: "DB-01", loc: "FASILKOM UNSIKA", lat: -6.3225, lng: 107.3060, dist: "1.2 km", status: "Tersedia", aiPrediction: "Diprediksi penuh dalam 12 jam" },
+  { id: "DB-02", loc: "Gedung Rektorat", lat: -6.3232, lng: 107.3065, dist: "0.8 km", status: "Tersedia", aiPrediction: "Diprediksi penuh dalam 3 jam (Setor segera!)" },
+  { id: "DB-03", loc: "Fakultas Teknik", lat: -6.3218, lng: 107.3055, dist: "2.1 km", status: "Tersedia", aiPrediction: "Aman hingga 2 hari ke depan" },
+  { id: "DB-04", loc: "Perpustakaan", lat: -6.3240, lng: 107.3070, dist: "0.5 km", status: "Penuh", aiPrediction: "Segera dikosongkan dalam 30 menit oleh petugas" },
+  { id: "DB-05", loc: "Gerbang Utama", lat: -6.3250, lng: 107.3058, dist: "3.4 km", status: "Tersedia", aiPrediction: "Aman hingga 3 hari ke depan" },
 ];
 
 function LeafletMap() {
@@ -197,6 +197,12 @@ function WargaDropbox() {
                         {b.status}
                       </span>
                     </div>
+                    {b.aiPrediction && (
+                      <p className="mt-2 text-[10px] text-purple-600 font-extrabold flex items-center gap-1">
+                        <Sparkles className="h-3 w-3 fill-purple-100" />
+                        <span>{b.aiPrediction}</span>
+                      </p>
+                    )}
                   </div>
                   <button className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-accent text-primary transition-colors hover:bg-primary/20">
                     <Navigation className="h-4 w-4" />

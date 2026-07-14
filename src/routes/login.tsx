@@ -29,8 +29,10 @@ function Login() {
     }, 1500);
   };
 
+  const themeClass = role === "warga" ? "theme-warga" : role === "umkm" ? "theme-umkm" : "theme-admin";
+
   return (
-    <div className="flex min-h-dvh flex-col bg-background px-6 pt-12 pb-8 relative">
+    <div className={`${themeClass} flex min-h-dvh flex-col bg-background px-6 pt-12 pb-8 relative`}>
       {/* Install App Button */}
       {canInstall && (
         <button 
@@ -44,14 +46,14 @@ function Login() {
 
       {/* Header */}
       <div className="flex flex-col items-center text-center">
-        <div className="flex h-16 w-16 items-center justify-center rounded-3xl bg-[#2E9F6B] shadow-lg shadow-primary/20">
+        <div className="flex h-16 w-16 items-center justify-center rounded-3xl bg-[image:var(--gradient-primary)] shadow-lg shadow-primary/20">
           <Sprout className="h-8 w-8 text-yellow-400" />
         </div>
         <h1 className="mt-8 text-2xl font-bold leading-tight text-foreground">
-          Selamat datang <br /> kembali ke Smart Village!
+          Selamat datang <br /> kembali ke DESAVA!
         </h1>
         <p className="mt-3 text-sm text-muted-foreground">
-          Masuk untuk melanjutkan
+          Masuk sebagai <strong className="text-primary capitalize">{role === "admin" ? "Pemerintah Desa" : role === "umkm" ? "UMKM & Petani" : "Warga Desa"}</strong>
         </p>
       </div>
 
@@ -96,7 +98,7 @@ function Login() {
         <button
           type="submit"
           disabled={loading}
-          className="mt-6 flex w-full items-center justify-center rounded-2xl bg-[#2E9F6B] py-4 text-sm font-bold text-white shadow-lg shadow-primary/25 transition-transform active:scale-[0.98] disabled:opacity-70 disabled:active:scale-100"
+          className="mt-6 flex w-full items-center justify-center rounded-2xl bg-[image:var(--gradient-primary)] py-4 text-sm font-bold text-white shadow-lg shadow-primary/25 transition-transform active:scale-[0.98] disabled:opacity-70 disabled:active:scale-100"
         >
           {loading ? (
             <span className="h-5 w-5 animate-spin rounded-full border-2 border-white/30 border-t-white" />
@@ -123,10 +125,18 @@ function Login() {
 
       {/* Register Link */}
       {role !== "admin" && (
-        <p className="mt-auto pt-8 text-center text-sm text-muted-foreground">
-          Belum punya akun? <Link to="/register" search={{ role }} className="font-semibold text-[#2E9F6B] hover:underline">Daftar</Link>
+        <p className="mt-6 text-center text-sm text-muted-foreground">
+          Belum punya akun? <Link to="/register" search={{ role }} className="font-semibold text-primary hover:underline">Daftar</Link>
         </p>
       )}
+
+      {/* Tagline footer */}
+      <div className="mt-auto pt-8 text-center border-t border-border/30">
+        <p className="text-[9px] font-semibold text-muted-foreground/50 leading-relaxed max-w-xs mx-auto">
+          DESAVA: Smart Sustainable Village Ecosystem | Powered by AI <br />
+          Connecting Community • Government • Circular Economy
+        </p>
+      </div>
     </div>
   );
 }

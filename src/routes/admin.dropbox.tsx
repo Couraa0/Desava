@@ -1,18 +1,18 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useEffect, useRef } from "react";
-import { MapPin, AlertCircle, CheckCircle, RefreshCw } from "lucide-react";
+import { MapPin, AlertCircle, CheckCircle, RefreshCw, Sparkles } from "lucide-react";
 
 export const Route = createFileRoute("/admin/dropbox")({
-  head: () => ({ meta: [{ title: "Smart Drop-Box Monitor" }] }),
+  head: () => ({ meta: [{ title: "Smart Drop-Box Monitor — DESAVA" }] }),
   component: DropboxMonitor,
 });
 
 const boxes = [
-  { id: "DB-01", loc: "FASILKOM UNSIKA", lat: -6.3225, lng: 107.3060, capacity: 82, status: "Penuh", lastUpdate: "5 menit lalu" },
-  { id: "DB-02", loc: "Gedung Rektorat", lat: -6.3232, lng: 107.3065, capacity: 47, status: "Normal", lastUpdate: "12 menit lalu" },
-  { id: "DB-03", loc: "Fakultas Teknik", lat: -6.3218, lng: 107.3055, capacity: 23, status: "Normal", lastUpdate: "8 menit lalu" },
-  { id: "DB-04", loc: "Perpustakaan", lat: -6.3240, lng: 107.3070, capacity: 91, status: "Penuh", lastUpdate: "2 menit lalu" },
-  { id: "DB-05", loc: "Gerbang Utama", lat: -6.3250, lng: 107.3058, capacity: 58, status: "Normal", lastUpdate: "20 menit lalu" },
+  { id: "DB-01", loc: "FASILKOM UNSIKA", lat: -6.3225, lng: 107.3060, capacity: 82, status: "Penuh", lastUpdate: "5 menit lalu", aiPrediction: "Diprediksi penuh dalam 12 jam (rekomendasi pengosongan)" },
+  { id: "DB-02", loc: "Gedung Rektorat", lat: -6.3232, lng: 107.3065, capacity: 47, status: "Normal", lastUpdate: "12 menit lalu", aiPrediction: "Aman hingga 36 jam ke depan" },
+  { id: "DB-03", loc: "Fakultas Teknik", lat: -6.3218, lng: 107.3055, capacity: 23, status: "Normal", lastUpdate: "8 menit lalu", aiPrediction: "Aman hingga 48 jam ke depan" },
+  { id: "DB-04", loc: "Perpustakaan", lat: -6.3240, lng: 107.3070, capacity: 91, status: "Penuh", lastUpdate: "2 menit lalu", aiPrediction: "Perlu pengosongan segera (dalam 30 menit)" },
+  { id: "DB-05", loc: "Gerbang Utama", lat: -6.3250, lng: 107.3058, capacity: 58, status: "Normal", lastUpdate: "20 menit lalu", aiPrediction: "Aman hingga 24 jam ke depan" },
 ];
 
 function LeafletMap() {
@@ -207,6 +207,12 @@ function DropboxMonitor() {
                         <span className={`text-sm font-black ${full ? "text-destructive" : "text-primary"}`}>{b.capacity}%</span>
                       </div>
                       <p className="text-[10px] text-muted-foreground">{b.status} • {b.lastUpdate}</p>
+                      {b.aiPrediction && (
+                        <p className="mt-2 text-[10px] text-purple-600 font-extrabold flex items-center gap-1.5">
+                          <Sparkles className="h-3 w-3 fill-purple-100 animate-pulse" />
+                          <span>{b.aiPrediction}</span>
+                        </p>
+                      )}
                     </div>
                   </div>
                   <div className="mt-2 h-2 overflow-hidden rounded-full bg-muted">

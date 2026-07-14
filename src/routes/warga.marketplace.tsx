@@ -11,12 +11,12 @@ export const Route = createFileRoute("/warga/marketplace")({
 const categories = ["Semua", "Pupuk & Bibit", "Kerajinan", "Sembako", "Lainnya"];
 
 const items = [
-  { id: 1, name: "Pupuk Kompos Premium", price: "Rp 15.000", stock: "120 kg", src: "TPS3R Desa", category: "Pupuk & Bibit", rating: 4.9, sold: 421, img: "/products/pupuk-kompos.png" },
-  { id: 2, name: "Tas Belanja Anyaman", price: "Rp 35.000", stock: "24 pcs", src: "UMKM Bu Siti", category: "Kerajinan", rating: 4.8, sold: 112, img: "/products/tas-anyaman.png" },
-  { id: 3, name: "Beras Lokal Organik 5kg", price: "Rp 68.000", stock: "45 sak", src: "Koptan Makmur", category: "Sembako", rating: 4.9, sold: 856, img: "/products/beras-organik.png" },
-  { id: 4, name: "Sabun Lerak Cair 500ml", price: "Rp 18.500", stock: "32 btl", src: "Eco Desa", category: "Lainnya", rating: 4.7, sold: 234, img: "/products/sabun-lerak.png" },
-  { id: 5, name: "Bibit Cabai Rawit", price: "Rp 5.000", stock: "89 polybag", src: "KWT Melati", category: "Pupuk & Bibit", rating: 4.6, sold: 345, img: "/products/bibit-cabai.png" },
-  { id: 6, name: "Keripik Singkong Renyah", price: "Rp 12.000", stock: "56 bks", src: "UMKM Pak Budi", category: "Sembako", rating: 4.8, sold: 567, img: "/products/keripik-singkong.png" },
+  { id: 1, name: "Pupuk Kompos Premium", price: "Rp 15.000", stock: "120 kg", src: "TPS3R Desa", category: "Pupuk & Bibit", rating: 4.9, sold: 421, img: "/products/pupuk-kompos.png", badges: ["Eco Product", "Best Seller"] },
+  { id: 2, name: "Tas Belanja Anyaman", price: "Rp 35.000", stock: "24 pcs", src: "UMKM Bu Siti", category: "Kerajinan", rating: 4.8, sold: 112, img: "/products/tas-anyaman.png", badges: ["Circular Product"] },
+  { id: 3, name: "Beras Lokal Organik 5kg", price: "Rp 68.000", stock: "45 sak", src: "Koptan Makmur", category: "Sembako", rating: 4.9, sold: 856, img: "/products/beras-organik.png", badges: ["Local Favorite"] },
+  { id: 4, name: "Sabun Lerak Cair 500ml", price: "Rp 18.500", stock: "32 btl", src: "Eco Desa", category: "Lainnya", rating: 4.7, sold: 234, img: "/products/sabun-lerak.png", badges: ["Eco Product", "Circular Product"] },
+  { id: 5, name: "Bibit Cabai Rawit", price: "Rp 5.000", stock: "89 polybag", src: "KWT Melati", category: "Pupuk & Bibit", rating: 4.6, sold: 345, img: "/products/bibit-cabai.png", badges: ["Eco Product"] },
+  { id: 6, name: "Keripik Singkong Renyah", price: "Rp 12.000", stock: "56 bks", src: "UMKM Pak Budi", category: "Sembako", rating: 4.8, sold: 567, img: "/products/keripik-singkong.png", badges: ["Local Favorite"] },
 ];
 
 function WargaMarketplace() {
@@ -107,6 +107,20 @@ function WargaMarketplace() {
             <div className="flex flex-1 flex-col p-3">
               <p className="text-sm font-bold leading-tight text-foreground">{item.name}</p>
               <p className="mt-0.5 text-[10px] text-muted-foreground">{item.src} • {item.sold} terjual</p>
+              {item.badges && (
+                <div className="mt-2 flex gap-1 flex-wrap">
+                  {item.badges.map((badge) => (
+                    <span key={badge} className={`rounded px-1.5 py-0.5 text-[8px] font-extrabold uppercase border ${
+                      badge === "Eco Product" ? "bg-emerald-50 text-emerald-600 border-emerald-200" :
+                      badge === "Circular Product" ? "bg-amber-50 text-amber-600 border-amber-200" :
+                      badge === "Best Seller" ? "bg-red-50 text-red-600 border-red-200" :
+                      "bg-indigo-50 text-indigo-600 border-indigo-200"
+                    }`}>
+                      {badge}
+                    </span>
+                  ))}
+                </div>
+              )}
               <div className="mt-auto pt-3 flex items-center justify-between">
                 <p className="text-sm font-bold text-primary">{item.price}</p>
                 <button

@@ -16,7 +16,7 @@ export function MobileShell({
   headerSubtitle,
 }: MobileShellProps) {
   return (
-    <div className="pb-[96px] pt-[62px]">
+    <div className="pb-[96px] pt-[92px]">
       <Header name={headerName} subtitle={headerSubtitle} />
       {children}
       <BottomNav items={items} />

@@ -10,22 +10,22 @@ export const Route = createFileRoute("/onboarding")({
 
 const slides = [
   {
-    title: "Pilah Sampah Jadi Berkah",
-    desc: "Scan sampah Anda dengan AI, tukarkan dengan poin hijau, dan wujudkan lingkungan desa yang lebih bersih.",
+    title: "Dari Sampah Menjadi Nilai",
+    desc: "Scan sampah menggunakan AI dan ubah menjadi poin hijau serta pendapatan.",
     icon: ScanLine,
     color: "text-emerald-500",
     bg: "bg-emerald-100",
   },
   {
-    title: "Dukung UMKM Lokal",
-    desc: "Beli produk sirkular dan kebutuhan sehari-hari langsung dari UMKM desa menggunakan poin atau saldo.",
+    title: "Dukung Ekonomi Desa",
+    desc: "Belanja produk UMKM lokal dan bangun ekonomi sirkular bersama.",
     icon: Store,
     color: "text-amber-500",
     bg: "bg-amber-100",
   },
   {
-    title: "Smart Village Terintegrasi",
-    desc: "Akses layanan desa, lapor masalah lingkungan, dan pantau aktivitas desa dalam satu genggaman.",
+    title: "Smart Village dalam Satu Aplikasi",
+    desc: "Layanan desa, marketplace, AI, lingkungan, dan dashboard pemerintah terintegrasi.",
     icon: Users,
     color: "text-violet-500",
     bg: "bg-violet-100",
@@ -150,6 +150,11 @@ function Onboarding() {
             </p>
           )}
         </div>
+        {/* Tagline footer */}
+        <p className="mt-6 text-center text-[9px] font-semibold text-muted-foreground/50 leading-relaxed max-w-xs mx-auto">
+          DESAVA: Smart Sustainable Village Ecosystem | Powered by AI <br />
+          Connecting Community • Government • Circular Economy
+        </p>
       </div>
     </div>
   );

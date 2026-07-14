@@ -71,11 +71,11 @@ function UmkmProfil() {
         <h1 className="text-xl font-black text-foreground">Berkah Tani Sejahtera</h1>
         <p className="text-sm text-muted-foreground">UMKM Smart Village • Dusun Mawar</p>
         <div className="mt-1.5 flex flex-wrap items-center gap-2">
-          <span className="flex items-center gap-1 rounded-full bg-[color:var(--earth-soft)] px-2.5 py-0.5 text-[11px] font-bold text-[color:var(--earth)]">
-            <Medal className="h-3 w-3" /> UMKM Terbaik #1
+          <span className="flex items-center gap-1 rounded-full bg-emerald-50 border border-emerald-250 px-2.5 py-0.5 text-[11px] font-extrabold text-emerald-700">
+            ✓ Verified Business
           </span>
-          <span className="rounded-full bg-primary/10 px-2.5 py-0.5 text-[11px] font-bold text-primary">
-            ✓ Terverifikasi
+          <span className="flex items-center gap-1 rounded-full bg-amber-50 border border-amber-250 px-2.5 py-0.5 text-[11px] font-extrabold text-amber-700">
+            ⭐ Circular Champion
           </span>
         </div>
         <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
