@@ -57,17 +57,17 @@ export default defineConfig({
     VitePWA({
       registerType: "autoUpdate",
       manifest: {
-        name: "Smart Village",
-        short_name: "SmartVillage",
-        description: "Aplikasi ekosistem sirkular digital.",
+        name: "Desava",
+        short_name: "Desava",
+        description: "Aplikasi ekosistem sirkular digital Desava.",
         theme_color: "#2E9F6B",
         background_color: "#ffffff",
         display: "standalone",
         icons: [
           {
-            src: "/icon.svg",
-            sizes: "192x192 512x512",
-            type: "image/svg+xml",
+            src: "/logo/Desava.jpeg",
+            sizes: "512x512",
+            type: "image/jpeg",
           },
         ],
       },

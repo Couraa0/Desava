@@ -5,7 +5,7 @@ import { GoogleIcon } from "../components/SocialIcons";
 import { usePwaInstall } from "../hooks/usePwaInstall";
 
 export const Route = createFileRoute("/login")({
-  head: () => ({ meta: [{ title: "Masuk — Smart Village" }] }),
+  head: () => ({ meta: [{ title: "Masuk | Desava" }] }),
   validateSearch: (search: Record<string, unknown>) => ({
     role: (search.role as "warga" | "umkm" | "admin") || "warga",
   }),
@@ -46,8 +46,8 @@ function Login() {
 
       {/* Header */}
       <div className="flex flex-col items-center text-center">
-        <div className="flex h-16 w-16 items-center justify-center rounded-3xl bg-[image:var(--gradient-primary)] shadow-lg shadow-primary/20">
-          <Sprout className="h-8 w-8 text-yellow-400" />
+        <div className="flex h-16 w-16 items-center justify-center rounded-3xl bg-white p-2 shadow-lg shadow-primary/20 overflow-hidden">
+          <img src="/logo/Desava.jpeg" alt="Desava Logo" className="h-12 w-12 object-contain" />
         </div>
         <h1 className="mt-8 text-2xl font-bold leading-tight text-foreground">
           Selamat datang <br /> kembali ke DESAVA!

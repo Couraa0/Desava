@@ -7,7 +7,7 @@ import {
 } from "lucide-react";
 
 export const Route = createFileRoute("/umkm/profil")({
-  head: () => ({ meta: [{ title: "Profil UMKM — Berkah Tani" }] }),
+  head: () => ({ meta: [{ title: "Profil UMKM | Berkah Tani | Desava" }] }),
   component: UmkmProfil,
 });
 
@@ -69,7 +69,7 @@ function UmkmProfil() {
       {/* Info */}
       <div className="mt-12 px-5">
         <h1 className="text-xl font-black text-foreground">Berkah Tani Sejahtera</h1>
-        <p className="text-sm text-muted-foreground">UMKM Smart Village • Dusun Mawar</p>
+        <p className="text-sm text-muted-foreground">UMKM Desava • Dusun Mawar</p>
         <div className="mt-1.5 flex flex-wrap items-center gap-2">
           <span className="flex items-center gap-1 rounded-full bg-emerald-50 border border-emerald-250 px-2.5 py-0.5 text-[11px] font-extrabold text-emerald-700">
             ✓ Verified Business
@@ -131,7 +131,7 @@ function UmkmProfil() {
           <LogOut className="h-4 w-4" /> Keluar dari Akun
         </button>
       </div>
-      <p className="mt-5 text-center text-[10px] text-muted-foreground">Smart Village v0.1 • Dibuat dengan sepenuh hati</p>
+      <p className="mt-5 text-center text-[10px] text-muted-foreground">Desava v0.1 • Dibuat dengan sepenuh hati</p>
     </div>
   );
 }

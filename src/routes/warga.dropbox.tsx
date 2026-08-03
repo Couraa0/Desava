@@ -3,7 +3,7 @@ import { useEffect, useRef } from "react";
 import { MapPin, Navigation, Map, Info, QrCode, Sparkles } from "lucide-react";
 
 export const Route = createFileRoute("/warga/dropbox")({
-  head: () => ({ meta: [{ title: "Lokasi Drop-Box — DESAVA" }] }),
+  head: () => ({ meta: [{ title: "Lokasi Drop-Box | DESAVA" }] }),
   component: WargaDropbox,
 });
 

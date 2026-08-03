@@ -67,7 +67,7 @@
 
 :root {
   --radius: 0.625rem;
-  /* Smart Village — White / Emerald Green / Earth Brown */
+  /* Desava — White / Emerald Green / Earth Brown */
   --background: oklch(0.99 0.003 120);            /* near-white #F8F9FA-ish */
   --foreground: oklch(0.22 0.03 150);             /* deep green-black */
   --card: oklch(1 0 0);

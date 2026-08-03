@@ -3,7 +3,7 @@ import { useState } from "react";
 import { Search, SlidersHorizontal, Clock, Package2, CheckCircle2, XCircle } from "lucide-react";
 
 export const Route = createFileRoute("/umkm/orders")({
-  head: () => ({ meta: [{ title: "Daftar Pesanan — Smart Village" }] }),
+  head: () => ({ meta: [{ title: "Daftar Pesanan | Desava" }] }),
   component: UmkmOrders,
 });
 

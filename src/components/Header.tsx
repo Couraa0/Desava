@@ -9,7 +9,7 @@ interface HeaderProps {
   avatarSrc?: string;
 }
 
-export function Header({ name = "Smart Village", subtitle, avatarSrc = "" }: HeaderProps) {
+export function Header({ name = "Desava", subtitle, avatarSrc = "" }: HeaderProps) {
   const router = useRouter();
 
   const handleLogout = () => {
@@ -25,8 +25,8 @@ export function Header({ name = "Smart Village", subtitle, avatarSrc = "" }: Hea
         {/* Left — Avatar + Name */}
         <div className="flex items-center gap-3">
           <div className="relative">
-            <Avatar className="h-9 w-9 ring-2 ring-primary/20 ring-offset-1 ring-offset-background transition-all">
-              <AvatarImage src={avatarSrc} alt={name} />
+            <Avatar className="h-9 w-9 ring-2 ring-primary/20 ring-offset-1 ring-offset-background transition-all overflow-hidden">
+              <AvatarImage src={avatarSrc || "/logo/Desava.jpeg"} alt={name} className="object-cover" />
               <AvatarFallback className="bg-[image:var(--gradient-primary)] text-primary-foreground text-xs font-bold">
                 {name.slice(0, 2).toUpperCase()}
               </AvatarFallback>

@@ -4,7 +4,7 @@ import { Wallet, ChevronLeft, CreditCard, Droplets, Zap, Shield, ArrowRight, Che
 import { toast } from "sonner";
 
 export const Route = createFileRoute("/warga/bills")({
-  head: () => ({ meta: [{ title: "Tagihan Bulanan — Smart Village" }] }),
+  head: () => ({ meta: [{ title: "Tagihan Bulanan | Desava" }] }),
   component: WargaBills,
 });
 

@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import { Leaf } from "lucide-react";
 
 export const Route = createFileRoute("/")({
+  head: () => ({ meta: [{ title: "Desava | Ekosistem Desa Digital" }] }),
   component: SplashScreen,
 });
 
@@ -37,8 +38,8 @@ function SplashScreen() {
           show ? "translate-y-0 opacity-100 scale-100" : "translate-y-8 opacity-0 scale-90"
         }`}
       >
-        <div className="relative mb-6 flex h-24 w-24 items-center justify-center rounded-3xl bg-white shadow-2xl">
-          <Leaf className="h-12 w-12 text-primary" strokeWidth={2.5} />
+        <div className="relative mb-6 flex h-24 w-24 items-center justify-center rounded-3xl bg-white shadow-2xl p-4 overflow-hidden">
+          <img src="/logo/Desava.jpeg" alt="Desava Logo" className="h-16 w-16 object-contain" />
           {/* Subtle pulse effect */}
           <div className="absolute inset-0 -z-10 animate-ping rounded-3xl bg-white/40" />
         </div>

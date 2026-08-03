@@ -4,7 +4,7 @@ import { Leaf, ArrowRight, ScanLine, Store, Users, CheckCircle, Download } from 
 import { usePwaInstall } from "../hooks/usePwaInstall";
 
 export const Route = createFileRoute("/onboarding")({
-  head: () => ({ meta: [{ title: "Onboarding — Smart Village" }] }),
+  head: () => ({ meta: [{ title: "Onboarding | Desava" }] }),
   component: Onboarding,
 });
 
@@ -24,7 +24,7 @@ const slides = [
     bg: "bg-amber-100",
   },
   {
-    title: "Smart Village dalam Satu Aplikasi",
+    title: "Desava dalam Satu Aplikasi",
     desc: "Layanan desa, marketplace, AI, lingkungan, dan dashboard pemerintah terintegrasi.",
     icon: Users,
     color: "text-violet-500",

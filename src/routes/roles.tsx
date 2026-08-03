@@ -5,8 +5,8 @@ import { usePwaInstall } from "../hooks/usePwaInstall";
 export const Route = createFileRoute("/roles")({
   head: () => ({
     meta: [
-      { title: "Pilih Peran — Smart Village" },
-      { name: "description", content: "Pilih peran Anda untuk masuk ke ekosistem digital Smart Village." },
+      { title: "Pilih Peran | Desava" },
+      { name: "description", content: "Pilih peran Anda untuk masuk ke ekosistem digital Desava." },
     ],
   }),
   component: Roles,
@@ -65,8 +65,8 @@ function Roles() {
 
       {/* Top bar */}
       <div className="flex flex-col items-center pt-12 text-center">
-        <div className="flex h-16 w-16 items-center justify-center rounded-3xl bg-emerald-600 shadow-lg shadow-primary/20 animate-pulse">
-          <Sprout className="h-8 w-8 text-yellow-400" />
+        <div className="flex h-16 w-16 items-center justify-center rounded-3xl bg-white p-2 shadow-lg shadow-primary/20 animate-pulse overflow-hidden">
+          <img src="/logo/Desava.jpeg" alt="Desava Logo" className="h-12 w-12 object-contain" />
         </div>
         <div className="mt-4 px-2">
           <span className="text-xl font-black tracking-widest text-emerald-600">DESAVA</span>
@@ -127,7 +127,7 @@ function Roles() {
           DESAVA: Smart Sustainable Village Ecosystem | Powered by AI <br />
           Connecting Community • Government • Circular Economy
         </p>
-        <p className="mt-1.5 text-[8px] text-muted-foreground/30">v0.1 • Smart Village App</p>
+        <p className="mt-1.5 text-[8px] text-muted-foreground/30">v0.1 • Desava App</p>
       </div>
     </div>
   );

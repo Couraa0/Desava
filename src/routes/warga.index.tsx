@@ -8,7 +8,7 @@ import { CircularFlywheel } from "@/components/CircularFlywheel";
 
 export const Route = createFileRoute("/warga/")(
   {
-    head: () => ({ meta: [{ title: "Beranda Warga — DESAVA" }] }),
+    head: () => ({ meta: [{ title: "Beranda Warga | DESAVA" }] }),
     component: WargaHome,
   }
 );

@@ -7,7 +7,7 @@ import { CircularFlywheel } from "@/components/CircularFlywheel";
 import { toast } from "sonner";
 
 export const Route = createFileRoute("/admin/")({
-  head: () => ({ meta: [{ title: "Dashboard Admin Desa — DESAVA" }] }),
+  head: () => ({ meta: [{ title: "Dashboard Admin Desa | DESAVA" }] }),
   component: AdminHome,
 });
 

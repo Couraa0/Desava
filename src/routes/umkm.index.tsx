@@ -6,7 +6,7 @@ import {
 import { CircularFlywheel } from "@/components/CircularFlywheel";
 
 export const Route = createFileRoute("/umkm/")({
-  head: () => ({ meta: [{ title: "Dashboard UMKM — DESAVA" }] }),
+  head: () => ({ meta: [{ title: "Dashboard UMKM | DESAVA" }] }),
   component: UmkmHome,
 });
 

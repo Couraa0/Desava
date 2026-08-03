@@ -4,7 +4,7 @@ import { ChevronLeft, Bell, Calendar, User, Tag, Clock, ArrowRight, CheckCircle2
 import { toast } from "sonner";
 
 export const Route = createFileRoute("/warga/announcements")({
-  head: () => ({ meta: [{ title: "Pengumuman Desa — Smart Village" }] }),
+  head: () => ({ meta: [{ title: "Pengumuman Desa | Desava" }] }),
   component: WargaAnnouncements,
 });
 
@@ -41,7 +41,7 @@ function WargaAnnouncements() {
       category: "info-penting",
       title: "Pemasangan Dropbox Pintar Baru di Dusun II",
       summary: "Dropbox pintar sensor otomatis kini hadir di Pos Ronda Dusun II untuk memudahkan penyetoran sampah 24 jam.",
-      content: "Dropbox baru ini dapat menampung hingga 100 kg sampah plastik botol PET. Warga Dusun II tidak perlu lagi berjalan jauh ke balai desa untuk menyetor sampah. Sensor timbangan otomatis akan langsung mencatat setoran poin ke nomor WhatsApp Anda yang terdaftar di aplikasi Smart Village.",
+      content: "Dropbox baru ini dapat menampung hingga 100 kg sampah plastik botol PET. Warga Dusun II tidak perlu lagi berjalan jauh ke balai desa untuk menyetor sampah. Sensor timbangan otomatis akan langsung mencatat setoran poin ke nomor WhatsApp Anda yang terdaftar di aplikasi Desava.",
       date: "28 Mei 2026",
       author: "Pemerintah Desa",
     },

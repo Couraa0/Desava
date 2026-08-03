@@ -2,7 +2,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import { ArrowDownLeft, ArrowUpRight, Recycle, Gift, CreditCard, TrendingUp, Coins, ShoppingCart, Smartphone, Sprout } from "lucide-react";
 
 export const Route = createFileRoute("/warga/wallet")({
-  head: () => ({ meta: [{ title: "Green Wallet — Smart Village" }] }),
+  head: () => ({ meta: [{ title: "Green Wallet | Desava" }] }),
   component: WalletPage,
 });
 

@@ -7,7 +7,7 @@ import {
 } from "lucide-react";
 
 export const Route = createFileRoute("/admin/profil")({
-  head: () => ({ meta: [{ title: "Profil Admin — Pak Budi" }] }),
+  head: () => ({ meta: [{ title: "Profil Admin | Pak Budi | Desava" }] }),
   component: AdminProfil,
 });
 
@@ -70,7 +70,7 @@ function AdminProfil() {
       {/* Info */}
       <div className="mt-12 px-5">
         <h1 className="text-xl font-black text-foreground">Budi Santoso, S.Sos.</h1>
-        <p className="text-sm text-muted-foreground">Kepala Smart Village • Periode 2022–2028</p>
+        <p className="text-sm text-muted-foreground">Kepala Desava • Periode 2022–2028</p>
         <div className="mt-1.5 flex flex-wrap items-center gap-2">
           <span className="flex items-center gap-1 rounded-full bg-violet-100 px-2.5 py-0.5 text-[11px] font-bold text-violet-700">
             <Building className="h-3 w-3" /> Administrator
@@ -80,7 +80,7 @@ function AdminProfil() {
           </span>
         </div>
         <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
-          Memimpin transformasi digital Smart Village menuju desa berkelanjutan & ekonomi sirkular berbasis teknologi.
+          Memimpin transformasi digital Desava menuju desa berkelanjutan & ekonomi sirkular berbasis teknologi.
         </p>
       </div>
 
@@ -132,7 +132,7 @@ function AdminProfil() {
           <LogOut className="h-4 w-4" /> Keluar dari Sistem
         </button>
       </div>
-      <p className="mt-5 text-center text-[10px] text-muted-foreground">Smart Village v0.1 • Admin Portal</p>
+      <p className="mt-5 text-center text-[10px] text-muted-foreground">Desava v0.1 • Admin Portal</p>
     </div>
   );
 }

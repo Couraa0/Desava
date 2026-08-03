@@ -4,7 +4,7 @@ import { Mail, Lock, User, Phone, Eye, EyeOff, Sprout } from "lucide-react";
 import { GoogleIcon } from "../components/SocialIcons";
 
 export const Route = createFileRoute("/register")({
-  head: () => ({ meta: [{ title: "Daftar — Smart Village" }] }),
+  head: () => ({ meta: [{ title: "Daftar | Desava" }] }),
   validateSearch: (search: Record<string, unknown>) => ({
     role: (search.role as "warga" | "umkm") || "warga",
   }),
@@ -31,11 +31,11 @@ function Register() {
     <div className="flex min-h-dvh flex-col bg-background px-6 pt-10 pb-8">
       {/* Header */}
       <div className="flex flex-col items-center text-center">
-        <div className="flex h-16 w-16 items-center justify-center rounded-3xl bg-[#2E9F6B] shadow-lg shadow-primary/20">
-          <Sprout className="h-8 w-8 text-yellow-400" />
+        <div className="flex h-16 w-16 items-center justify-center rounded-3xl bg-white p-2 shadow-lg shadow-primary/20 overflow-hidden">
+          <img src="/logo/Desava.jpeg" alt="Desava Logo" className="h-12 w-12 object-contain" />
         </div>
         <h1 className="mt-8 text-2xl font-bold leading-tight text-foreground">
-          Buat Akun <br /> Smart Village
+          Buat Akun <br /> Desava
         </h1>
         <p className="mt-3 text-sm text-muted-foreground">
           Mulai kontribusi untuk desa hijau & cerdas.

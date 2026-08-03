@@ -7,7 +7,7 @@ import {
 } from "lucide-react";
 
 export const Route = createFileRoute("/warga/profil")({
-  head: () => ({ meta: [{ title: "Profil — Bu Ratna" }] }),
+  head: () => ({ meta: [{ title: "Profil Warga | Desava" }] }),
   component: WargaProfil,
 });
 
@@ -84,7 +84,7 @@ function WargaProfil() {
         <div className="flex items-start justify-between">
           <div>
             <h1 className="text-xl font-black text-foreground">Bu Ratna Sari</h1>
-            <p className="text-sm text-muted-foreground">Warga Smart Village • RW 03</p>
+            <p className="text-sm text-muted-foreground">Warga Desava • RW 03</p>
             <div className="mt-1.5 flex items-center gap-2">
               <span className="flex items-center gap-1 rounded-full bg-primary/10 px-2.5 py-0.5 text-[11px] font-bold text-primary">
                 <Trophy className="h-3 w-3" /> Peringkat #2
@@ -189,7 +189,7 @@ function WargaProfil() {
 
       {/* App version */}
       <p className="mt-5 text-center text-[10px] text-muted-foreground">
-        Smart Village v0.1 • Dibuat dengan sepenuh hati
+        Desava v0.1 • Dibuat dengan sepenuh hati
       </p>
     </div>
   );

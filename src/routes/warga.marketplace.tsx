@@ -4,7 +4,7 @@ import { Search, SlidersHorizontal, Star, ShoppingCart, CheckCircle2 } from "luc
 import { toast } from "sonner";
 
 export const Route = createFileRoute("/warga/marketplace")({
-  head: () => ({ meta: [{ title: "Marketplace — Smart Village" }] }),
+  head: () => ({ meta: [{ title: "Marketplace | Desava" }] }),
   component: WargaMarketplace,
 });
 

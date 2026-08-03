@@ -4,7 +4,7 @@ import { ChevronLeft, Plus, Trash2, Megaphone, CheckCircle, Clock, Calendar, Use
 import { toast } from "sonner";
 
 export const Route = createFileRoute("/admin/announcements")({
-  head: () => ({ meta: [{ title: "Kelola Pengumuman — Admin Desa" }] }),
+  head: () => ({ meta: [{ title: "Kelola Pengumuman | Admin Desa | Desava" }] }),
   component: AdminAnnouncements,
 });
 
@@ -55,7 +55,7 @@ function AdminAnnouncements() {
         category: "info-penting",
         title: "Pemasangan Dropbox Pintar Baru di Dusun II",
         summary: "Dropbox pintar sensor otomatis kini hadir di Pos Ronda Dusun II untuk memudahkan penyetoran sampah 24 jam.",
-        content: "Dropbox baru ini dapat menampung hingga 100 kg sampah plastik botol PET. Warga Dusun II tidak perlu lagi berjalan jauh ke balai desa untuk menyetor sampah. Sensor timbangan otomatis akan langsung mencatat setoran poin ke nomor WhatsApp Anda yang terdaftar di aplikasi Smart Village.",
+        content: "Dropbox baru ini dapat menampung hingga 100 kg sampah plastik botol PET. Warga Dusun II tidak perlu lagi berjalan jauh ke balai desa untuk menyetor sampah. Sensor timbangan otomatis akan langsung mencatat setoran poin ke nomor WhatsApp Anda yang terdaftar di aplikasi Desava.",
         date: "28 Mei 2026",
         author: "Pemerintah Desa",
       }

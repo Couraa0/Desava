@@ -3,7 +3,7 @@ import { useState } from "react";
 import { Plus, Pencil, Archive, Star, TrendingUp } from "lucide-react";
 
 export const Route = createFileRoute("/umkm/catalog")({
-  head: () => ({ meta: [{ title: "Katalog Produk UMKM" }] }),
+  head: () => ({ meta: [{ title: "Katalog Produk UMKM | Desava" }] }),
   component: Catalog,
 });
 

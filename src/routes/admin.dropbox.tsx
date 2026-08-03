@@ -3,7 +3,7 @@ import { useEffect, useRef } from "react";
 import { MapPin, AlertCircle, CheckCircle, RefreshCw, Sparkles } from "lucide-react";
 
 export const Route = createFileRoute("/admin/dropbox")({
-  head: () => ({ meta: [{ title: "Smart Drop-Box Monitor — DESAVA" }] }),
+  head: () => ({ meta: [{ title: "Smart Drop-Box Monitor | DESAVA" }] }),
   component: DropboxMonitor,
 });
 

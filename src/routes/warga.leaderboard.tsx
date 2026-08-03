@@ -3,7 +3,7 @@ import { useState } from "react";
 import { Trophy, ChevronLeft, Award, Medal, Crown, Star, Search, ArrowUp, ArrowRight } from "lucide-react";
 
 export const Route = createFileRoute("/warga/leaderboard")({
-  head: () => ({ meta: [{ title: "Papan Peringkat Desa — Smart Village" }] }),
+  head: () => ({ meta: [{ title: "Papan Peringkat Desa | Desava" }] }),
   component: WargaLeaderboard,
 });
 

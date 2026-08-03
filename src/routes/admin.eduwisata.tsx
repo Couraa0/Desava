@@ -6,7 +6,7 @@ import {
 } from "lucide-react";
 
 export const Route = createFileRoute("/admin/eduwisata")({
-  head: () => ({ meta: [{ title: "Potensi Desa — DESAVA" }] }),
+  head: () => ({ meta: [{ title: "Potensi Desa | DESAVA" }] }),
   component: Eduwisata,
 });
 
@@ -36,7 +36,7 @@ const featuredProducts = [
 
 const campaigns = [
   { title: "Zero Waste Ramadan 2026", participants: 312, target: 500, active: true },
-  { title: "1.000 Pohon Smart Village", participants: 487, target: 1000, active: true },
+  { title: "1.000 Pohon Desava", participants: 487, target: 1000, active: true },
   { title: "Pilah Sampah dari Rumah", participants: 612, target: 850, active: false },
 ];
 

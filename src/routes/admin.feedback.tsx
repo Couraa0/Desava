@@ -3,7 +3,7 @@ import { useState } from "react";
 import { Star, MessageSquare, CheckCircle, Clock, Filter, Sparkles } from "lucide-react";
 
 export const Route = createFileRoute("/admin/feedback")({
-  head: () => ({ meta: [{ title: "Citizen Feedback — Smart Village" }] }),
+  head: () => ({ meta: [{ title: "Citizen Feedback | Desava" }] }),
   component: Feedback,
 });
 

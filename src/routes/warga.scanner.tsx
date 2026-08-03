@@ -4,7 +4,7 @@ import { Camera, Zap, ImageIcon, CheckCircle, XCircle, Clock, ChevronRight, Refr
 import { toast } from "sonner";
 
 export const Route = createFileRoute("/warga/scanner")({
-  head: () => ({ meta: [{ title: "AI Eco-Scanner — Smart Village" }] }),
+  head: () => ({ meta: [{ title: "AI Eco-Scanner | Desava" }] }),
   component: Scanner,
 });
 
