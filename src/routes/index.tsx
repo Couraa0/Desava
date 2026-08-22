@@ -27,42 +27,42 @@ function SplashScreen() {
   }, [router]);
 
   return (
-    <div className="relative flex min-h-dvh w-full flex-col items-center justify-center bg-[image:var(--gradient-primary)] overflow-hidden">
-      {/* Decorative background shapes */}
-      <div className="pointer-events-none absolute left-0 top-0 h-64 w-64 -translate-x-1/2 -translate-y-1/2 rounded-full bg-white/10 blur-3xl" />
-      <div className="pointer-events-none absolute bottom-0 right-0 h-80 w-80 translate-x-1/3 translate-y-1/3 rounded-full bg-white/10 blur-3xl" />
+    <div className="relative flex min-h-dvh w-full flex-col items-center justify-center hero-landing-bg overflow-hidden">
+      {/* Decorative glow overlays */}
+      <div className="pointer-events-none absolute left-0 top-1/4 h-80 w-80 -translate-x-1/2 rounded-full bg-emerald-500/10 blur-3xl" />
+      <div className="pointer-events-none absolute right-0 bottom-1/4 h-96 w-96 translate-x-1/3 rounded-full bg-purple-500/5 blur-3xl" />
 
       {/* Logo container */}
       <div
-        className={`flex flex-col items-center transition-all duration-700 ease-out ${
-          show ? "translate-y-0 opacity-100 scale-100" : "translate-y-8 opacity-0 scale-90"
+        className={`flex flex-col items-center transition-all duration-1000 ease-out px-6 ${
+          show ? "translate-y-0 opacity-100 scale-100" : "translate-y-12 opacity-0 scale-95"
         }`}
       >
-        <div className="relative mb-6 flex h-24 w-24 items-center justify-center rounded-3xl bg-white shadow-2xl p-4 overflow-hidden">
-          <img src="/logo/Desava.jpeg" alt="Desava Logo" className="h-16 w-16 object-contain" />
-          {/* Subtle pulse effect */}
-          <div className="absolute inset-0 -z-10 animate-ping rounded-3xl bg-white/40" />
+        {/* Glow behind logo */}
+        <div className="relative mb-8 flex h-28 w-28 items-center justify-center rounded-[2.5rem] bg-white border border-emerald-500/15 p-5 shadow-[0_15px_35px_rgba(16,185,129,0.18)] overflow-hidden animate-float">
+          <img src="/logo/Desava.jpeg" alt="Desava Logo" className="h-16 w-16 object-contain rounded-2xl" />
         </div>
         
-        <h1 className="text-4xl font-extrabold tracking-tight text-white drop-shadow-md">
+        <h1 className="text-5xl font-black tracking-widest text-emerald-900 font-display drop-shadow-[0_2px_8px_rgba(16,185,129,0.15)]">
           DESAVA
         </h1>
-        <p className="mt-2.5 text-center text-xs font-semibold tracking-wide text-white/90 max-w-[280px] leading-relaxed">
-          Smart Sustainable Village Ecosystem | Powered by AI
+        
+        <div className="mt-4 flex items-center gap-1.5 rounded-full bg-emerald-600/10 border border-emerald-650/30 px-3 py-1">
+          <span className="h-2 w-2 rounded-full bg-emerald-600 animate-pulse" />
+          <span className="text-[10px] font-extrabold uppercase tracking-widest text-emerald-700">Powered by AI</span>
+        </div>
+
+        <p className="mt-6 text-center text-xs font-extrabold tracking-wide text-zinc-800 max-w-[280px] leading-relaxed drop-shadow-xs">
+          Smart Sustainable Village Ecosystem
         </p>
-        <p className="mt-1 text-center text-[10px] text-white/70 max-w-[300px] leading-relaxed">
+        
+        <p className="mt-2 text-center text-[10px] font-bold text-zinc-600 max-w-[300px] leading-relaxed">
           Connecting Community • Government • Circular Economy
         </p>
 
-        {/* Loading indicator */}
-        <div className="mt-12 flex gap-1.5">
-          {[0, 1, 2].map((i) => (
-            <div
-              key={i}
-              className="h-2 w-2 rounded-full bg-white animate-bounce"
-              style={{ animationDelay: `${i * 0.15}s` }}
-            />
-          ))}
+        {/* Custom Progress/Loading Bar */}
+        <div className="mt-16 w-40 h-[4px] rounded-full bg-zinc-300 overflow-hidden relative">
+          <div className="absolute left-0 top-0 h-full w-2/3 bg-gradient-to-r from-emerald-600 to-emerald-400 rounded-full shadow-[0_0_8px_rgba(16,185,129,0.4)]" />
         </div>
       </div>
     </div>
