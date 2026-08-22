@@ -27,43 +27,53 @@ function SplashScreen() {
   }, [router]);
 
   return (
-    <div className="relative flex min-h-dvh w-full flex-col items-center justify-center hero-landing-bg overflow-hidden">
-      {/* Decorative glow overlays */}
-      <div className="pointer-events-none absolute left-0 top-1/4 h-80 w-80 -translate-x-1/2 rounded-full bg-emerald-500/10 blur-3xl" />
-      <div className="pointer-events-none absolute right-0 bottom-1/4 h-96 w-96 translate-x-1/3 rounded-full bg-purple-500/5 blur-3xl" />
+    <div className="relative flex min-h-dvh w-full flex-col items-center justify-center hero-landing-bg overflow-hidden bg-zinc-50">
+      {/* Decorative ambient color spot glows */}
+      <div className="pointer-events-none absolute left-0 top-1/4 h-[350px] w-[350px] rounded-full bg-emerald-400/25 blur-[120px]" />
+      <div className="pointer-events-none absolute right-0 bottom-1/4 h-[350px] w-[350px] rounded-full bg-purple-400/20 blur-[120px]" />
 
-      {/* Logo container */}
+
+
+      {/* Floating Glassmorphic Container Card */}
       <div
-        className={`flex flex-col items-center transition-all duration-1000 ease-out px-6 ${
-          show ? "translate-y-0 opacity-100 scale-100" : "translate-y-12 opacity-0 scale-95"
+        className={`relative z-10 w-full max-w-[320px] flex flex-col items-center rounded-[2.5rem] border border-white/50 bg-white/80 p-8 shadow-[0_24px_50px_rgba(16,185,129,0.12)] backdrop-blur-xl transition-all duration-1000 ease-out transform ${
+          show ? "scale-100 opacity-100 translate-y-0" : "scale-90 opacity-0 translate-y-8"
         }`}
       >
-        {/* Glow behind logo */}
-        <div className="relative mb-8 flex h-28 w-28 items-center justify-center rounded-[2.5rem] bg-white border border-emerald-500/15 p-5 shadow-[0_15px_35px_rgba(16,185,129,0.18)] overflow-hidden animate-float">
-          <img src="/logo/Desava.jpeg" alt="Desava Logo" className="h-16 w-16 object-contain rounded-2xl" />
+        {/* Logo Container with floating animation */}
+        <div className="relative mb-6 flex h-24 w-24 items-center justify-center rounded-3xl bg-white border-2 border-emerald-500/10 p-4 shadow-[0_12px_28px_rgba(16,185,129,0.18)] animate-float overflow-hidden">
+          <img src="/logo/Desava.jpeg" alt="Desava Logo" className="h-full w-full object-contain rounded-xl" />
+          <div className="absolute inset-0 bg-gradient-to-tr from-emerald-500/5 to-transparent pointer-events-none" />
         </div>
         
-        <h1 className="text-5xl font-black tracking-widest text-emerald-900 font-display drop-shadow-[0_2px_8px_rgba(16,185,129,0.15)]">
+        <h1 className="text-4xl font-black tracking-widest bg-clip-text text-transparent bg-gradient-to-r from-emerald-900 via-emerald-800 to-emerald-700 font-display drop-shadow-xs">
           DESAVA
         </h1>
         
-        <div className="mt-4 flex items-center gap-1.5 rounded-full bg-emerald-600/10 border border-emerald-650/30 px-3 py-1">
-          <span className="h-2 w-2 rounded-full bg-emerald-600 animate-pulse" />
-          <span className="text-[10px] font-extrabold uppercase tracking-widest text-emerald-700">Powered by AI</span>
+        <div className="mt-3.5 flex items-center gap-1.5 rounded-full bg-emerald-500/10 border border-emerald-500/20 px-3 py-0.5 shadow-xs">
+          <span className="relative flex h-2 w-2">
+            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75" />
+            <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500" />
+          </span>
+          <span className="text-[9px] font-black uppercase tracking-widest text-emerald-700">Powered by AI</span>
         </div>
 
-        <p className="mt-6 text-center text-xs font-extrabold tracking-wide text-zinc-800 max-w-[280px] leading-relaxed drop-shadow-xs">
-          Smart Sustainable Village Ecosystem
+        <p className="mt-6 text-center text-xs font-black tracking-wide text-zinc-900 leading-relaxed font-display">
+          Smart District Ecosystem
         </p>
         
-        <p className="mt-2 text-center text-[10px] font-bold text-zinc-600 max-w-[300px] leading-relaxed">
+        <p className="mt-1.5 text-center text-[10px] font-bold text-zinc-500 leading-normal max-w-[220px]">
           Connecting Community • Government • Circular Economy
         </p>
 
-        {/* Custom Progress/Loading Bar */}
-        <div className="mt-16 w-40 h-[4px] rounded-full bg-zinc-300 overflow-hidden relative">
-          <div className="absolute left-0 top-0 h-full w-2/3 bg-gradient-to-r from-emerald-600 to-emerald-400 rounded-full shadow-[0_0_8px_rgba(16,185,129,0.4)]" />
+        {/* Premium Loading bar with glowing scanning effect */}
+        <div className="mt-12 w-full h-[6px] rounded-full bg-zinc-200 overflow-hidden relative shadow-inner">
+          <div className="absolute left-0 top-0 h-full w-[80%] bg-gradient-to-r from-emerald-600 via-emerald-500 to-emerald-400 rounded-full shadow-[0_0_12px_rgba(16,185,129,0.5)] animate-pulse" />
         </div>
+        
+        <span className="mt-3.5 text-[8px] font-extrabold text-zinc-400 uppercase tracking-widest">
+          Sistem Memuat...
+        </span>
       </div>
     </div>
   );

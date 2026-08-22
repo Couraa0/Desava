@@ -17,54 +17,22 @@ export function BottomNav({ items }: { items: BottomNavItem[] }) {
 
   return (
     <nav
-      className="fixed bottom-0 left-1/2 z-40 w-full max-w-md -translate-x-1/2"
-      style={{ paddingBottom: "env(safe-area-inset-bottom)" }}
+      className="fixed bottom-5 left-1/2 z-40 w-[calc(100%-32px)] max-w-[390px] -translate-x-1/2 pointer-events-none"
+      style={{ marginBottom: "env(safe-area-inset-bottom)" }}
     >
-      {/* Gradient fade */}
-      <div className="pointer-events-none h-4 w-full bg-gradient-to-t from-background to-transparent" />
+      <div className="relative flex h-[66px] pointer-events-auto items-center justify-between rounded-[22px] border border-zinc-200 bg-white/95 shadow-[0_12px_32px_rgba(0,0,0,0.06)] px-2.5 backdrop-blur-xl">
+        {/* Left items */}
+        {leftItems.map(({ to, label, icon: Icon }) => (
+          <NavItem key={to} to={to} label={label} Icon={Icon} />
+        ))}
 
-      <div className="relative">
-        {/* SVG cutout behind FAB */}
-        {centerItem && (
-          <svg
-            className="absolute left-0 top-0 h-full w-full"
-            viewBox="0 0 360 72"
-            preserveAspectRatio="none"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <path
-              d="
-                M0,0
-                L148,0
-                Q158,0 162,8
-                A36,36 0 0,0 198,8
-                Q202,0 212,0
-                L360,0
-                L360,72
-                L0,72
-                Z
-              "
-              className="fill-background"
-              style={{ filter: "drop-shadow(0 -1px 0 oklch(0.92 0.01 150))" }}
-            />
-          </svg>
-        )}
+        {/* Center FAB placeholder — reserves space */}
+        {centerItem && <div className="w-[70px] shrink-0" />}
 
-        {/* Nav bar */}
-        <div className="relative flex h-[72px] items-center justify-between border-t border-border/50 bg-background/95 px-2 backdrop-blur-2xl sm:border-x">
-          {/* Left items */}
-          {leftItems.map(({ to, label, icon: Icon }) => (
-            <NavItem key={to} to={to} label={label} Icon={Icon} />
-          ))}
-
-          {/* Center FAB placeholder — reserves space */}
-          {centerItem && <div className="w-[80px] shrink-0" />}
-
-          {/* Right items */}
-          {rightItems.map(({ to, label, icon: Icon }) => (
-            <NavItem key={to} to={to} label={label} Icon={Icon} />
-          ))}
-        </div>
+        {/* Right items */}
+        {rightItems.map(({ to, label, icon: Icon }) => (
+          <NavItem key={to} to={to} label={label} Icon={Icon} />
+        ))}
 
         {/* Floating Center FAB */}
         {centerItem && (
@@ -72,13 +40,13 @@ export function BottomNav({ items }: { items: BottomNavItem[] }) {
             <Link
               to={centerItem.to}
               activeOptions={{ exact: true }}
-              className="pointer-events-auto group relative flex h-[66px] w-[66px] items-center justify-center"
+              className="pointer-events-auto group relative flex h-[62px] w-[62px] items-center justify-center"
             >
               {/* Glow */}
               <span className="absolute inset-0 scale-110 rounded-full bg-primary/20 blur-md transition-all duration-300 group-hover:scale-125 group-hover:bg-primary/30" />
               {/* Button */}
-              <span className="relative flex h-[60px] w-[60px] items-center justify-center rounded-full bg-[image:var(--gradient-primary)] shadow-[0_6px_24px_-4px_var(--color-primary)] transition-transform duration-200 active:scale-90 group-hover:-translate-y-0.5">
-                <centerItem.icon className="h-[28px] w-[28px] text-primary-foreground" strokeWidth={2} />
+              <span className="relative flex h-[56px] w-[56px] items-center justify-center rounded-full bg-gradient-to-r from-emerald-500 to-emerald-400 shadow-[0_6px_20px_rgba(16,185,129,0.3)] transition-transform duration-200 active:scale-90 group-hover:-translate-y-0.5">
+                <centerItem.icon className="h-[24px] w-[24px] text-white" strokeWidth={2.5} />
               </span>
             </Link>
           </div>
@@ -102,12 +70,12 @@ function NavItem({
       <Link
         to={to}
         activeOptions={{ exact: true }}
-        className="group flex flex-col items-center gap-[4px] py-2 text-muted-foreground/50 transition-all duration-200 data-[status=active]:text-primary"
+        className="group flex flex-col items-center gap-[4px] py-1.5 text-zinc-400 transition-all duration-200 data-[status=active]:text-primary"
       >
-        <span className="relative flex h-8 w-8 items-center justify-center transition-transform duration-200 group-data-[status=active]:scale-110">
-          <Icon className="h-[22px] w-[22px]" strokeWidth={2} />
+        <span className="relative flex h-8 w-8 items-center justify-center transition-all duration-200 group-data-[status=active]:scale-105 group-data-[status=active]:bg-primary/10 rounded-xl px-2">
+          <Icon className="h-[20px] w-[20px]" strokeWidth={2.2} />
         </span>
-        <span className="text-[11px] font-medium leading-none tracking-wide transition-all duration-200 group-data-[status=active]:font-bold">
+        <span className="text-[9px] font-extrabold uppercase tracking-wider leading-none transition-all duration-200">
           {label}
         </span>
       </Link>

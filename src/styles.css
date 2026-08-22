@@ -233,7 +233,7 @@
 }
 
 .hero-landing-bg {
-  background-image: linear-gradient(to bottom, rgba(255, 255, 255, 0.15) 0%, rgba(255, 255, 255, 0.65) 45%, rgba(248, 249, 250, 0.98) 100%), var(--hero-landing);
+  background-image: var(--hero-landing);
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;

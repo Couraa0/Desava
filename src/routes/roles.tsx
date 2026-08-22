@@ -81,7 +81,7 @@ function Roles() {
         <div className="mt-4 px-2">
           <span className="text-xl font-black tracking-widest text-emerald-700 font-display">DESAVA</span>
           <p className="text-[9px] text-zinc-550 font-bold leading-relaxed mt-2 max-w-xs mx-auto">
-            Smart Sustainable Village Ecosystem | Powered by AI
+            Smart District Ecosystem | Powered by AI
           </p>
         </div>
       </div>
@@ -139,7 +139,7 @@ function Roles() {
       {/* Footer */}
       <div className="py-5 mt-6 border-t border-zinc-100 text-center z-10">
         <p className="text-[9px] font-semibold text-zinc-400 leading-relaxed max-w-xs mx-auto">
-          DESAVA: Smart Sustainable Village Ecosystem | Powered by AI <br />
+          DESAVA: Smart District Ecosystem | Powered by AI <br />
           Connecting Community • Government • Circular Economy
         </p>
         <p className="mt-1.5 text-[8px] text-zinc-300">v0.1 • Desava App</p>

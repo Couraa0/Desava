@@ -46,27 +46,6 @@ const services = [
 function WargaHome() {
   return (
     <div className="px-5 pt-5 pb-6 space-y-5">
-      {/* AI Insight Widget - Hologram Terminal */}
-      <section className="relative overflow-hidden rounded-2xl border border-purple-200 bg-gradient-to-r from-purple-50 via-indigo-50/50 to-purple-50 p-4 shadow-[0_4px_20px_-2px_rgba(168,85,247,0.08)]">
-        <div className="pointer-events-none absolute -right-8 -top-8 h-24 w-24 rounded-full bg-purple-300/10 blur-2xl" />
-        <div className="flex gap-3">
-          <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-purple-100 text-purple-600 border border-purple-200 shadow-sm">
-            <Sparkles className="h-5 w-5 animate-pulse" />
-          </div>
-          <div>
-            <span className="inline-flex items-center gap-1 rounded-full bg-purple-100 border border-purple-200/60 px-2.5 py-0.5 text-[9px] font-extrabold uppercase tracking-widest text-purple-700">
-              💡 AI Insight
-            </span>
-            <p className="mt-2 text-xs font-bold text-zinc-900 leading-snug">
-              Hari ini harga Plastik PET sedang naik / bernilai tinggi (+15%)!
-            </p>
-            <p className="text-[10px] text-zinc-600 leading-relaxed mt-1">
-              Setorkan botol PET Anda ke Drop-Box UNSIKA hari ini untuk mendapatkan bonus poin hijau tambahan.
-            </p>
-          </div>
-        </div>
-      </section>
-
       {/* Hero Balance Card - Image-Backed with Emerald Glow */}
       <section className="relative overflow-hidden rounded-3xl card-warga-bg p-5 text-white neon-glow-warga border border-emerald-500/20 shadow-2xl">
         {/* Glow accent */}
@@ -96,6 +75,27 @@ function WargaHome() {
             <Link to="/warga/scanner" className="rounded-xl bg-white py-3 text-center text-xs font-black text-zinc-950 transition-all duration-200 hover:bg-white/95 hover:shadow-[0_0_15px_rgba(255,255,255,0.4)] active:scale-95">
               📦 Setor Sampah
             </Link>
+          </div>
+        </div>
+      </section>
+
+      {/* AI Insight Widget - Hologram Terminal */}
+      <section className="relative overflow-hidden rounded-2xl border border-purple-200 bg-gradient-to-r from-purple-50 via-indigo-50/50 to-purple-50 p-4 shadow-[0_4px_20px_-2px_rgba(168,85,247,0.08)]">
+        <div className="pointer-events-none absolute -right-8 -top-8 h-24 w-24 rounded-full bg-purple-300/10 blur-2xl" />
+        <div className="flex gap-3">
+          <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-purple-100 text-purple-600 border border-purple-200 shadow-sm">
+            <Sparkles className="h-5 w-5 animate-pulse" />
+          </div>
+          <div>
+            <span className="inline-flex items-center gap-1 rounded-full bg-purple-100 border border-purple-200/60 px-2.5 py-0.5 text-[9px] font-extrabold uppercase tracking-widest text-purple-700">
+              💡 AI Insight
+            </span>
+            <p className="mt-2 text-xs font-bold text-zinc-900 leading-snug">
+              Hari ini harga Plastik PET sedang naik / bernilai tinggi (+15%)!
+            </p>
+            <p className="text-[10px] text-zinc-600 leading-relaxed mt-1">
+              Setorkan botol PET Anda ke Drop-Box UNSIKA hari ini untuk mendapatkan bonus poin hijau tambahan.
+            </p>
           </div>
         </div>
       </section>

@@ -146,7 +146,7 @@ function Login() {
       {/* Tagline footer */}
       <div className="mt-auto pt-6 text-center border-t border-zinc-100 z-10">
         <p className="text-[9px] font-semibold text-zinc-400 leading-relaxed max-w-xs mx-auto">
-          DESAVA: Smart Sustainable Village Ecosystem | Powered by AI <br />
+          DESAVA: Smart District Ecosystem | Powered by AI <br />
           Connecting Community • Government • Circular Economy
         </p>
       </div>
