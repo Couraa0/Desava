@@ -54,7 +54,7 @@ export function AssistantModal({ isOpen, onClose }: { isOpen: boolean; onClose: 
         {/* Header - Gradient Emerald Glass */}
         <div className="flex items-center gap-3 border-b border-zinc-100 px-4 py-3.5 rounded-t-3xl bg-gradient-to-r from-emerald-50 via-teal-50/30 to-white">
           <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-2xl bg-white border border-emerald-500/20 shadow-sm overflow-hidden">
-            <img src="/images/chatbot_avatar.png" alt="AI Avatar" className="h-full w-full object-cover scale-110" />
+            <img src="/images/chatbot_avatar.jpg" alt="AI Avatar" className="h-full w-full object-cover scale-110" />
           </div>
           <div className="flex-1">
             <h1 className="text-sm font-bold text-zinc-900 font-display">Asisten Desa AI</h1>
@@ -84,7 +84,7 @@ export function AssistantModal({ isOpen, onClose }: { isOpen: boolean; onClose: 
             <div key={i} className={`flex gap-2.5 ${m.from === "me" ? "justify-end" : "justify-start"}`}>
               {m.from === "ai" && (
                 <div className="mt-auto flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-white border border-emerald-500/10 shadow-xs overflow-hidden">
-                  <img src="/images/chatbot_avatar.png" alt="AI Avatar" className="h-full w-full object-cover scale-110" />
+                  <img src="/images/chatbot_avatar.jpg" alt="AI Avatar" className="h-full w-full object-cover scale-110" />
                 </div>
               )}
               <div
@@ -102,7 +102,7 @@ export function AssistantModal({ isOpen, onClose }: { isOpen: boolean; onClose: 
           {typing && (
             <div className="flex gap-2 justify-start">
               <div className="mt-auto flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-white border border-emerald-500/10 shadow-xs overflow-hidden">
-                <img src="/images/chatbot_avatar.png" alt="AI Avatar" className="h-full w-full object-cover scale-110" />
+                <img src="/images/chatbot_avatar.jpg" alt="AI Avatar" className="h-full w-full object-cover scale-110" />
               </div>
               <div className="rounded-2xl rounded-bl-sm border border-emerald-500/10 bg-emerald-50/20 px-4 py-3 shadow-xs">
                 <div className="flex gap-1.5">

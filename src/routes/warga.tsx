@@ -61,7 +61,7 @@ function WargaLayout() {
               onClick={() => setAssistantOpen(true)}
               className="pointer-events-auto group relative flex h-14 w-14 shrink-0 items-center justify-center rounded-full bg-white border-2 border-emerald-500/30 shadow-[0_8px_20px_rgba(16,185,129,0.25)] hover:shadow-[0_10px_25px_rgba(16,185,129,0.35)] transition-all duration-300 hover:scale-105 active:scale-95 overflow-hidden"
             >
-              <img src="/images/chatbot_avatar.png" alt="AI Assistant" className="h-full w-full object-cover transition-transform duration-300 group-hover:scale-115" />
+              <img src="/images/chatbot_avatar.jpg" alt="AI Assistant" className="h-full w-full object-cover transition-transform duration-300 group-hover:scale-115" />
               
               {/* Online pulse dot in corner */}
               <span className="absolute top-1 right-1 flex h-2.5 w-2.5">

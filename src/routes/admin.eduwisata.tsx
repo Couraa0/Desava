@@ -18,7 +18,7 @@ const destinations = [
     rating: 4.8, 
     tag: "Alam", 
     icon: Droplets,
-    image: "/eduwisata/embung-hijau.png" 
+    image: "/eduwisata/embung-hijau.jpg" 
   },
   { 
     name: "Kebun Kompos Organik", 
@@ -27,7 +27,7 @@ const destinations = [
     rating: 4.6, 
     tag: "Edukasi", 
     icon: Sprout,
-    image: "/eduwisata/kebun-kompos.png" 
+    image: "/eduwisata/kebun-kompos.jpg" 
   },
   { 
     name: "Sentra UMKM Kerajinan", 
@@ -36,7 +36,7 @@ const destinations = [
     rating: 4.7, 
     tag: "Budaya", 
     icon: ShoppingBag,
-    image: "/eduwisata/sentra-umkm.png" 
+    image: "/eduwisata/sentra-umkm.jpg" 
   },
 ];
 
@@ -68,31 +68,31 @@ const categoryBanners: Record<string, { title: string; subtitle: string; image: 
   Wisata: {
     title: "Destinasi Edu-Wisata",
     subtitle: "Pengembangan kawasan wisata edukatif dan sirkular lingkungan desa",
-    image: "/eduwisata/wisata.png",
+    image: "/eduwisata/wisata.jpg",
     tag: "3 Lokasi Terdaftar"
   },
   UMKM: {
     title: "Mitra UMKM Sirkular",
     subtitle: "Pemberdayaan usaha mikro berbasis daur ulang & produk khas lokal",
-    image: "/eduwisata/umkm.png",
+    image: "/eduwisata/umkm.jpg",
     tag: "18 Mitra Aktif"
   },
   Pertanian: {
     title: "Potensi Agraria Desa",
     subtitle: "Optimalisasi lahan sawah organik, kebun bibit & pemupukan alami",
-    image: "/eduwisata/pertanian.png",
+    image: "/eduwisata/pertanian.jpg",
     tag: "62 Hektar Lahan"
   },
   Produk: {
     title: "Katalog Produk Unggulan",
     subtitle: "Inovasi pupuk, kerajinan & hasil olahan warga berkualitas tinggi",
-    image: "/eduwisata/produk.png",
+    image: "/eduwisata/produk.jpg",
     tag: "24 SKU Terverifikasi"
   },
   Events: {
     title: "Kampanye & Kegiatan Cerdas",
     subtitle: "Gerakan peduli lingkungan & event kebudayaan berkala",
-    image: "/eduwisata/events.png",
+    image: "/eduwisata/events.jpg",
     tag: "3 Program Aktif"
   }
 };
@@ -236,7 +236,7 @@ function Eduwisata() {
             <div className="space-y-3">
               {umkmList.map((u) => (
                 <div key={u.name} className="rounded-2xl border border-border bg-card p-4 shadow-xs flex items-center gap-3">
-                  <img src="/eduwisata/umkm.png" alt={u.name} className="h-14 w-14 rounded-xl object-cover shrink-0 border border-border" />
+                  <img src="/eduwisata/umkm.jpg" alt={u.name} className="h-14 w-14 rounded-xl object-cover shrink-0 border border-border" />
                   <div className="flex-1 min-w-0">
                     <div className="flex justify-between items-start">
                       <p className="text-sm font-bold text-foreground truncate">{u.name}</p>
@@ -270,7 +270,7 @@ function Eduwisata() {
             <div className="space-y-3">
               {agriculture.map((a) => (
                 <div key={a.area} className="rounded-2xl border border-border bg-card p-3.5 flex justify-between items-center gap-3">
-                  <img src="/eduwisata/pertanian.png" alt={a.area} className="h-12 w-12 rounded-xl object-cover shrink-0 border border-border" />
+                  <img src="/eduwisata/pertanian.jpg" alt={a.area} className="h-12 w-12 rounded-xl object-cover shrink-0 border border-border" />
                   <div className="flex-1 min-w-0">
                     <p className="text-sm font-bold text-foreground truncate">{a.area}</p>
                     <p className="text-[10px] text-muted-foreground mt-0.5">Kelompok: {a.group}</p>
@@ -299,7 +299,7 @@ function Eduwisata() {
             <div className="space-y-3">
               {featuredProducts.map((p) => (
                 <div key={p.name} className="rounded-2xl border border-border bg-card p-3 flex justify-between items-center gap-3">
-                  <img src="/eduwisata/produk.png" alt={p.name} className="h-12 w-12 rounded-xl object-cover shrink-0 border border-border" />
+                  <img src="/eduwisata/produk.jpg" alt={p.name} className="h-12 w-12 rounded-xl object-cover shrink-0 border border-border" />
                   <div className="flex-1 min-w-0">
                     <div className="flex items-center gap-1.5">
                       <p className="text-xs font-bold text-foreground truncate">{p.name}</p>
@@ -329,7 +329,7 @@ function Eduwisata() {
               {campaigns.map((c) => (
                 <div key={c.title} className="rounded-2xl border border-border bg-card p-4 shadow-sm space-y-3">
                   <div className="flex items-center gap-3">
-                    <img src="/eduwisata/events.png" alt={c.title} className="h-12 w-12 rounded-xl object-cover shrink-0 border border-border" />
+                    <img src="/eduwisata/events.jpg" alt={c.title} className="h-12 w-12 rounded-xl object-cover shrink-0 border border-border" />
                     <div className="flex-1 min-w-0">
                       <div className="flex items-start justify-between gap-1">
                         <p className="text-xs font-bold text-foreground truncate">{c.title}</p>

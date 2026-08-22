@@ -8,14 +8,14 @@ export const Route = createFileRoute("/umkm/catalog")({
 });
 
 const products = [
-  { id: 1, name: "Pupuk Kompos Premium 5kg", price: "Rp 25.000", stock: 42, sold: 180, rating: 4.9, active: true, img: "/products/pupuk-kompos.png", badges: ["Eco Product", "Best Seller"] },
-  { id: 2, name: "Pot Sabut Kelapa (Set 3)", price: "Rp 35.000", stock: 18, sold: 94, rating: 4.7, active: true, img: "/products/pot-sabut-kelapa.png", badges: ["Circular Product"] },
-  { id: 3, name: "Tas Belanja Daur Ulang", price: "Rp 28.000", stock: 7, sold: 213, rating: 4.6, active: true, img: "/products/tas-anyaman.png", badges: ["Circular Product", "Best Seller"] },
-  { id: 4, name: "Briket Arang Tempurung", price: "Rp 18.000/kg", stock: 30, sold: 56, rating: 4.5, active: true, img: "/products/briket-arang.png", badges: ["Circular Product"] },
-  { id: 5, name: "Sabun Organik Lidah Buaya", price: "Rp 15.000/pcs", stock: 0, sold: 128, rating: 4.8, active: false, img: "/products/sabun-organik.png", badges: ["Eco Product"] },
-  { id: 6, name: "Minyak Kelapa VCO 250ml", price: "Rp 55.000", stock: 12, sold: 67, rating: 4.9, active: true, img: "/products/minyak-vco.png", badges: ["Local Favorite"] },
-  { id: 7, name: "Kerajinan Bambu Mini", price: "Rp 45.000", stock: 5, sold: 39, rating: 4.4, active: true, img: "/products/kerajinan-bambu.png", badges: ["Local Favorite"] },
-  { id: 8, name: "Kompos Cair 1L", price: "Rp 12.000", stock: 0, sold: 91, rating: 4.6, active: false, img: "/products/kompos-cair.png", badges: ["Eco Product"] },
+  { id: 1, name: "Pupuk Kompos Premium 5kg", price: "Rp 25.000", stock: 42, sold: 180, rating: 4.9, active: true, img: "/products/pupuk-kompos.jpg", badges: ["Eco Product", "Best Seller"] },
+  { id: 2, name: "Pot Sabut Kelapa (Set 3)", price: "Rp 35.000", stock: 18, sold: 94, rating: 4.7, active: true, img: "/products/pot-sabut-kelapa.jpg", badges: ["Circular Product"] },
+  { id: 3, name: "Tas Belanja Daur Ulang", price: "Rp 28.000", stock: 7, sold: 213, rating: 4.6, active: true, img: "/products/tas-anyaman.jpg", badges: ["Circular Product", "Best Seller"] },
+  { id: 4, name: "Briket Arang Tempurung", price: "Rp 18.000/kg", stock: 30, sold: 56, rating: 4.5, active: true, img: "/products/briket-arang.jpg", badges: ["Circular Product"] },
+  { id: 5, name: "Sabun Organik Lidah Buaya", price: "Rp 15.000/pcs", stock: 0, sold: 128, rating: 4.8, active: false, img: "/products/sabun-organik.jpg", badges: ["Eco Product"] },
+  { id: 6, name: "Minyak Kelapa VCO 250ml", price: "Rp 55.000", stock: 12, sold: 67, rating: 4.9, active: true, img: "/products/minyak-vco.jpg", badges: ["Local Favorite"] },
+  { id: 7, name: "Kerajinan Bambu Mini", price: "Rp 45.000", stock: 5, sold: 39, rating: 4.4, active: true, img: "/products/kerajinan-bambu.jpg", badges: ["Local Favorite"] },
+  { id: 8, name: "Kompos Cair 1L", price: "Rp 12.000", stock: 0, sold: 91, rating: 4.6, active: false, img: "/products/kompos-cair.jpg", badges: ["Eco Product"] },
 ];
 
 function Catalog() {

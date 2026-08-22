@@ -15,7 +15,7 @@ const slides = [
     icon: ScanLine,
     color: "text-emerald-600",
     bg: "bg-emerald-50",
-    img: "/images/onboarding_recycle.png",
+    img: "/images/onboarding_recycle.jpg",
   },
   {
     title: "Dukung Ekonomi Desa",
@@ -23,7 +23,7 @@ const slides = [
     icon: Store,
     color: "text-amber-600",
     bg: "bg-amber-50",
-    img: "/images/onboarding_umkm.png",
+    img: "/images/onboarding_umkm.jpg",
   },
   {
     title: "Desava dalam Satu Aplikasi",
@@ -31,7 +31,7 @@ const slides = [
     icon: Users,
     color: "text-indigo-600",
     bg: "bg-indigo-50",
-    img: "/images/onboarding_eco.png",
+    img: "/images/onboarding_eco.jpg",
   },
 ];
 

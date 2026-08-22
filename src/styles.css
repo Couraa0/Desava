@@ -205,10 +205,10 @@
 
 /* Card Background Images with Glassmorphism Overlays */
 :root {
-  --card-warga: url('/images/card_warga.png');
-  --card-umkm: url('/images/card_umkm.png');
-  --card-admin: url('/images/card_admin.png');
-  --hero-landing: url('/images/hero_landing.png');
+  --card-warga: url('/images/card_warga.jpg');
+  --card-umkm: url('/images/card_umkm.jpg');
+  --card-admin: url('/images/card_admin.jpg');
+  --hero-landing: url('/images/hero_landing.jpg');
 }
 
 .card-warga-bg {
