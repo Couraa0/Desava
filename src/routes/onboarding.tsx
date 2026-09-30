@@ -61,7 +61,7 @@ function Onboarding() {
       {/* Header controls */}
       <div className="flex justify-between items-center p-5 z-10">
         {canInstall ? (
-          <button 
+          <button
             onClick={install}
             className="flex items-center gap-1.5 rounded-full bg-emerald-500/10 border border-emerald-500/20 px-3 py-1.5 text-xs font-bold text-emerald-600 transition-colors hover:bg-emerald-500/20"
           >
@@ -91,9 +91,8 @@ function Onboarding() {
                 key={index}
                 src={slide.img}
                 alt={slide.title}
-                className={`absolute inset-0 w-full h-full object-cover transition-all duration-700 ease-in-out ${
-                  index === currentSlide ? "opacity-100 scale-100" : "opacity-0 scale-95"
-                }`}
+                className={`absolute inset-0 w-full h-full object-cover transition-all duration-700 ease-in-out ${index === currentSlide ? "opacity-100 scale-100" : "opacity-0 scale-95"
+                  }`}
               />
             ))}
           </div>
@@ -104,9 +103,8 @@ function Onboarding() {
           {slides.map((slide, index) => (
             <div
               key={index}
-              className={`absolute inset-x-6 flex flex-col items-center transition-all duration-500 ${
-                index === currentSlide ? "translate-x-0 opacity-100" : index < currentSlide ? "-translate-x-12 opacity-0" : "translate-x-12 opacity-0"
-              }`}
+              className={`absolute inset-x-6 flex flex-col items-center transition-all duration-500 ${index === currentSlide ? "translate-x-0 opacity-100" : index < currentSlide ? "-translate-x-12 opacity-0" : "translate-x-12 opacity-0"
+                }`}
             >
               <h1 className="text-xl font-bold font-display text-zinc-900 tracking-tight leading-snug">{slide.title}</h1>
               <p className="mt-3 text-xs leading-relaxed text-zinc-500 max-w-xs">
@@ -124,9 +122,8 @@ function Onboarding() {
           {slides.map((_, i) => (
             <div
               key={i}
-              className={`h-2 rounded-full transition-all duration-300 ${
-                i === currentSlide ? "w-8 bg-emerald-500" : "w-2 bg-zinc-200"
-              }`}
+              className={`h-2 rounded-full transition-all duration-300 ${i === currentSlide ? "w-8 bg-emerald-500" : "w-2 bg-zinc-200"
+                }`}
             />
           ))}
         </div>
@@ -158,7 +155,7 @@ function Onboarding() {
         </div>
         {/* Tagline footer */}
         <p className="mt-8 text-center text-[9px] font-semibold text-zinc-400 leading-relaxed max-w-xs mx-auto">
-          DESAVA: Smart District Ecosystem | Powered by AI <br />
+          DESAVA: Smart Sustainable District Ecosystem | Powered by AI <br />
           Connecting Community • Government • Circular Economy
         </p>
       </div>

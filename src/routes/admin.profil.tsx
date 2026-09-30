@@ -3,8 +3,10 @@ import {
   Camera, Edit3, LogOut, ChevronRight,
   Users, Recycle, TrendingUp, Smile,
   Bell, Shield, HelpCircle, Download,
-  FileText, Settings, Database, User, Building
+  FileText, Settings, Database, User, Building, AlertTriangle
 } from "lucide-react";
+import { useState } from "react";
+import { ReportDialog } from "../components/ReportDialog";
 
 export const Route = createFileRoute("/admin/profil")({
   head: () => ({ meta: [{ title: "Profil Admin | Pak Budi | Desava" }] }),
@@ -39,13 +41,15 @@ const menuGroups = [
     title: "Keamanan",
     items: [
       { icon: Shield, label: "Keamanan & Akses", desc: "Role, PIN & log aktivitas" },
-      { icon: HelpCircle, label: "Panduan Administrator", desc: "Dokumentasi sistem" },
+      { id: "help", icon: HelpCircle, label: "Panduan Administrator", desc: "Dokumentasi sistem" },
+      { id: "report", icon: AlertTriangle, label: "Laporan & Pengaduan", desc: "Laporkan masalah infrastruktur" },
     ],
   },
 ];
 
 function AdminProfil() {
   const router = useRouter();
+  const [reportOpen, setReportOpen] = useState(false);
 
   return (
     <div className="pb-4">
@@ -107,6 +111,9 @@ function AdminProfil() {
             {group.items.map((item, i) => (
               <button
                 key={item.label}
+                onClick={() => {
+                  if ((item as any).id === "report") setReportOpen(true);
+                }}
                 className={`flex w-full items-center gap-3 px-4 py-3 text-left transition-colors hover:bg-muted/50 ${i > 0 ? "border-t border-border" : ""}`}
               >
                 <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-violet-50 text-violet-600">
@@ -133,6 +140,8 @@ function AdminProfil() {
         </button>
       </div>
       <p className="mt-5 text-center text-[10px] text-muted-foreground">Desava v0.1 • Admin Portal</p>
+
+      <ReportDialog open={reportOpen} onOpenChange={setReportOpen} role="Admin" />
     </div>
   );
 }

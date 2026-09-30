@@ -3,8 +3,10 @@ import {
   Camera, Edit3, LogOut, ChevronRight,
   Recycle, Trophy, Leaf, Star,
   Bell, Shield, HelpCircle, Moon,
-  TrendingUp, Award, Target, User, Coins, Sprout
+  TrendingUp, Award, Target, User, Coins, Sprout, AlertTriangle
 } from "lucide-react";
+import { useState } from "react";
+import { ReportDialog } from "../components/ReportDialog";
 
 export const Route = createFileRoute("/warga/profil")({
   head: () => ({ meta: [{ title: "Profil Warga | Desava" }] }),
@@ -46,13 +48,15 @@ const menuGroups = [
   {
     title: "Bantuan",
     items: [
-      { icon: HelpCircle, label: "Pusat Bantuan", desc: "FAQ & panduan" },
+      { id: "help", icon: HelpCircle, label: "Pusat Bantuan", desc: "FAQ & panduan" },
+      { id: "report", icon: AlertTriangle, label: "Laporan & Pengaduan", desc: "Laporkan kendala/masalah" },
     ],
   },
 ];
 
 function WargaProfil() {
   const router = useRouter();
+  const [reportOpen, setReportOpen] = useState(false);
 
   return (
     <div className="pb-4">
@@ -158,6 +162,9 @@ function WargaProfil() {
             {group.items.map((item, i) => (
               <button
                 key={item.label}
+                onClick={() => {
+                  if ((item as any).id === "report") setReportOpen(true);
+                }}
                 className={`flex w-full items-center gap-3 px-4 py-3 text-left transition-colors hover:bg-muted/50 active:bg-muted ${
                   i > 0 ? "border-t border-border" : ""
                 }`}
@@ -191,6 +198,8 @@ function WargaProfil() {
       <p className="mt-5 text-center text-[10px] text-muted-foreground">
         Desava v0.1 • Dibuat dengan sepenuh hati
       </p>
+
+      <ReportDialog open={reportOpen} onOpenChange={setReportOpen} role="Warga" />
     </div>
   );
 }

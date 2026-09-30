@@ -3,8 +3,10 @@ import {
   Camera, Edit3, LogOut, ChevronRight,
   TrendingUp, Package2, Star, ShoppingBag,
   Bell, Shield, HelpCircle, BarChart3,
-  Award, FileText, Store as StoreIcon, Medal
+  Award, FileText, Store as StoreIcon, Medal, AlertTriangle
 } from "lucide-react";
+import { useState } from "react";
+import { ReportDialog } from "../components/ReportDialog";
 
 export const Route = createFileRoute("/umkm/profil")({
   head: () => ({ meta: [{ title: "Profil UMKM | Berkah Tani | Desava" }] }),
@@ -38,13 +40,15 @@ const menuGroups = [
   {
     title: "Bantuan",
     items: [
-      { icon: HelpCircle, label: "Panduan UMKM Digital", desc: "Cara jual di marketplace" },
+      { id: "help", icon: HelpCircle, label: "Panduan UMKM Digital", desc: "Cara jual di marketplace" },
+      { id: "report", icon: AlertTriangle, label: "Laporan & Pengaduan", desc: "Laporkan masalah/kendala" },
     ],
   },
 ];
 
 function UmkmProfil() {
   const router = useRouter();
+  const [reportOpen, setReportOpen] = useState(false);
 
   return (
     <div className="pb-4">
@@ -106,6 +110,9 @@ function UmkmProfil() {
             {group.items.map((item, i) => (
               <button
                 key={item.label}
+                onClick={() => {
+                  if ((item as any).id === "report") setReportOpen(true);
+                }}
                 className={`flex w-full items-center gap-3 px-4 py-3 text-left transition-colors hover:bg-muted/50 ${i > 0 ? "border-t border-border" : ""}`}
               >
                 <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-[color:var(--earth-soft)] text-[color:var(--earth)]">
@@ -132,6 +139,8 @@ function UmkmProfil() {
         </button>
       </div>
       <p className="mt-5 text-center text-[10px] text-muted-foreground">Desava v0.1 • Dibuat dengan sepenuh hati</p>
+
+      <ReportDialog open={reportOpen} onOpenChange={setReportOpen} role="UMKM" />
     </div>
   );
 }
