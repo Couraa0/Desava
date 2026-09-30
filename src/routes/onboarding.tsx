@@ -155,7 +155,7 @@ function Onboarding() {
         </div>
         {/* Tagline footer */}
         <p className="mt-8 text-center text-[9px] font-semibold text-zinc-400 leading-relaxed max-w-xs mx-auto">
-          DESAVA: Smart Sustainable District Ecosystem | Powered by AI <br />
+          DESAVA| Powered by AI <br />
           Connecting Community • Government • Circular Economy
         </p>
       </div>

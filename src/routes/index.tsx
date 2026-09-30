@@ -14,7 +14,7 @@ function SplashScreen() {
   useEffect(() => {
     // Reveal animation delay
     const timer1 = setTimeout(() => setShow(true), 100);
-    
+
     // Redirect to onboarding after 2.5 seconds
     const timer2 = setTimeout(() => {
       router.navigate({ to: "/onboarding", replace: true });
@@ -36,20 +36,19 @@ function SplashScreen() {
 
       {/* Floating Glassmorphic Container Card */}
       <div
-        className={`relative z-10 w-full max-w-[320px] flex flex-col items-center rounded-[2.5rem] border border-white/50 bg-white/80 p-8 shadow-[0_24px_50px_rgba(16,185,129,0.12)] backdrop-blur-xl transition-all duration-1000 ease-out transform ${
-          show ? "scale-100 opacity-100 translate-y-0" : "scale-90 opacity-0 translate-y-8"
-        }`}
+        className={`relative z-10 w-full max-w-[320px] flex flex-col items-center rounded-[2.5rem] border border-white/50 bg-white/80 p-8 shadow-[0_24px_50px_rgba(16,185,129,0.12)] backdrop-blur-xl transition-all duration-1000 ease-out transform ${show ? "scale-100 opacity-100 translate-y-0" : "scale-90 opacity-0 translate-y-8"
+          }`}
       >
         {/* Logo Container with floating animation */}
         <div className="relative mb-6 flex h-24 w-24 items-center justify-center rounded-3xl bg-white border-2 border-emerald-500/10 p-4 shadow-[0_12px_28px_rgba(16,185,129,0.18)] animate-float overflow-hidden">
           <img src="/logo/Desava.jpeg" alt="Desava Logo" className="h-full w-full object-contain rounded-xl" />
           <div className="absolute inset-0 bg-gradient-to-tr from-emerald-500/5 to-transparent pointer-events-none" />
         </div>
-        
+
         <h1 className="text-4xl font-black tracking-widest bg-clip-text text-transparent bg-gradient-to-r from-emerald-900 via-emerald-800 to-emerald-700 font-display drop-shadow-xs">
           DESAVA
         </h1>
-        
+
         <div className="mt-3.5 flex items-center gap-1.5 rounded-full bg-emerald-500/10 border border-emerald-500/20 px-3 py-0.5 shadow-xs">
           <span className="relative flex h-2 w-2">
             <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75" />
@@ -59,9 +58,9 @@ function SplashScreen() {
         </div>
 
         <p className="mt-6 text-center text-xs font-black tracking-wide text-zinc-900 leading-relaxed font-display">
-          Smart District Ecosystem
+          Smart Sustainable District Ecosystem
         </p>
-        
+
         <p className="mt-1.5 text-center text-[10px] font-bold text-zinc-500 leading-normal max-w-[220px]">
           Connecting Community • Government • Circular Economy
         </p>
@@ -70,7 +69,7 @@ function SplashScreen() {
         <div className="mt-12 w-full h-[6px] rounded-full bg-zinc-200 overflow-hidden relative shadow-inner">
           <div className="absolute left-0 top-0 h-full w-[80%] bg-gradient-to-r from-emerald-600 via-emerald-500 to-emerald-400 rounded-full shadow-[0_0_12px_rgba(16,185,129,0.5)] animate-pulse" />
         </div>
-        
+
         <span className="mt-3.5 text-[8px] font-extrabold text-zinc-400 uppercase tracking-widest">
           Sistem Memuat...
         </span>
