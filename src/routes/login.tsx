@@ -17,6 +17,8 @@ function Login() {
   const { role } = Route.useSearch();
   const [loading, setLoading] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
   const { install, canInstall } = usePwaInstall();
 
   const handleLogin = (e: React.FormEvent) => {
@@ -27,6 +29,14 @@ function Login() {
       setLoading(false);
       router.navigate({ to: `/${role}` });
     }, 1500);
+  };
+
+  const autofill = (targetRole: "warga" | "umkm" | "admin") => {
+    setEmail(`${targetRole}@desava.id`);
+    setPassword("password");
+    if (role !== targetRole) {
+      router.navigate({ to: "/login", search: { role: targetRole }, replace: true });
+    }
   };
 
   const themeClass = role === "warga" ? "theme-warga" : role === "umkm" ? "theme-umkm" : "theme-admin";
@@ -70,6 +80,30 @@ function Login() {
 
       {/* Form Wrapped in a Glossy Container */}
       <div className={`mt-8 glass-card rounded-3xl p-5 border ${glowClass} z-10 shadow-md`}>
+        <div className="mb-5 flex flex-wrap gap-2 justify-center">
+          <button 
+            type="button" 
+            onClick={() => autofill("warga")} 
+            className="flex-1 py-1.5 px-2 text-[10px] font-bold uppercase tracking-wider bg-emerald-500/10 text-emerald-600 rounded-xl border border-emerald-500/20 hover:bg-emerald-500/20 transition-colors"
+          >
+            Auto Warga
+          </button>
+          <button 
+            type="button" 
+            onClick={() => autofill("umkm")} 
+            className="flex-1 py-1.5 px-2 text-[10px] font-bold uppercase tracking-wider bg-amber-500/10 text-amber-600 rounded-xl border border-amber-500/20 hover:bg-amber-500/20 transition-colors"
+          >
+            Auto Petani
+          </button>
+          <button 
+            type="button" 
+            onClick={() => autofill("admin")} 
+            className="flex-1 py-1.5 px-2 text-[10px] font-bold uppercase tracking-wider bg-indigo-500/10 text-indigo-600 rounded-xl border border-indigo-500/20 hover:bg-indigo-500/20 transition-colors"
+          >
+            Auto Pemdes
+          </button>
+        </div>
+
         <form onSubmit={handleLogin} className="flex flex-col gap-4">
           <div>
             <label className="mb-2 ml-1 block text-xs font-bold uppercase tracking-wider text-zinc-400">Email</label>
@@ -78,6 +112,8 @@ function Login() {
               <input
                 type="email"
                 required
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
                 placeholder="nama@email.com"
                 className="ml-3 flex-1 bg-transparent text-sm outline-none placeholder:text-zinc-400 text-zinc-900"
               />
@@ -91,6 +127,8 @@ function Login() {
               <input
                 type={showPassword ? "text" : "password"}
                 required
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
                 placeholder="Masukkan kata sandi"
                 className="ml-3 flex-1 bg-transparent text-sm outline-none placeholder:text-zinc-400 text-zinc-900"
               />
