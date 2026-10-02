@@ -1,6 +1,6 @@
 import { createFileRoute, Link, useRouter } from "@tanstack/react-router";
 import { useState } from "react";
-import { Leaf, Mail, Lock, Eye, EyeOff, Sprout, Download } from "lucide-react";
+import { Leaf, Mail, Lock, Eye, EyeOff, Sprout, Download, Wand2 } from "lucide-react";
 import { GoogleIcon } from "../components/SocialIcons";
 import { usePwaInstall } from "../hooks/usePwaInstall";
 
@@ -31,12 +31,9 @@ function Login() {
     }, 1500);
   };
 
-  const autofill = (targetRole: "warga" | "umkm" | "admin") => {
-    setEmail(`${targetRole}@desava.id`);
+  const autofill = () => {
+    setEmail(`${role}@desava.id`);
     setPassword("password");
-    if (role !== targetRole) {
-      router.navigate({ to: "/login", search: { role: targetRole }, replace: true });
-    }
   };
 
   const themeClass = role === "warga" ? "theme-warga" : role === "umkm" ? "theme-umkm" : "theme-admin";
@@ -80,29 +77,7 @@ function Login() {
 
       {/* Form Wrapped in a Glossy Container */}
       <div className={`mt-8 glass-card rounded-3xl p-5 border ${glowClass} z-10 shadow-md`}>
-        <div className="mb-5 flex flex-wrap gap-2 justify-center">
-          <button 
-            type="button" 
-            onClick={() => autofill("warga")} 
-            className="flex-1 py-1.5 px-2 text-[10px] font-bold uppercase tracking-wider bg-emerald-500/10 text-emerald-600 rounded-xl border border-emerald-500/20 hover:bg-emerald-500/20 transition-colors"
-          >
-            Auto Warga
-          </button>
-          <button 
-            type="button" 
-            onClick={() => autofill("umkm")} 
-            className="flex-1 py-1.5 px-2 text-[10px] font-bold uppercase tracking-wider bg-amber-500/10 text-amber-600 rounded-xl border border-amber-500/20 hover:bg-amber-500/20 transition-colors"
-          >
-            Auto Petani
-          </button>
-          <button 
-            type="button" 
-            onClick={() => autofill("admin")} 
-            className="flex-1 py-1.5 px-2 text-[10px] font-bold uppercase tracking-wider bg-indigo-500/10 text-indigo-600 rounded-xl border border-indigo-500/20 hover:bg-indigo-500/20 transition-colors"
-          >
-            Auto Pemdes
-          </button>
-        </div>
+
 
         <form onSubmit={handleLogin} className="flex flex-col gap-4">
           <div>
@@ -165,8 +140,25 @@ function Login() {
           <div className="h-px flex-1 bg-zinc-200" />
         </div>
 
-        {/* Social Login */}
-        <div className="mt-4">
+        {/* Social Login & Auto Fill */}
+        <div className="mt-4 flex flex-col gap-3">
+          <button 
+            type="button" 
+            onClick={autofill} 
+            className={`group relative flex w-full items-center justify-center gap-2.5 rounded-2xl border-2 border-dashed ${
+              role === "warga" ? "border-emerald-500/30 bg-emerald-50 text-emerald-700 hover:border-emerald-500/50 hover:bg-emerald-100/50" 
+              : role === "umkm" ? "border-amber-500/30 bg-amber-50 text-amber-700 hover:border-amber-500/50 hover:bg-amber-100/50" 
+              : "border-indigo-500/30 bg-indigo-50 text-indigo-700 hover:border-indigo-500/50 hover:bg-indigo-100/50"
+            } py-3.5 text-xs font-bold transition-all duration-300 hover:shadow-[0_4px_12px_rgba(0,0,0,0.05)] hover:-translate-y-0.5 active:scale-[0.98] active:translate-y-0 overflow-hidden`}
+          >
+            <div className={`absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-700 bg-[length:200%_auto] animate-gradient-xy ${
+              role === "warga" ? "bg-gradient-to-r from-emerald-100/0 via-emerald-200/20 to-emerald-100/0"
+              : role === "umkm" ? "bg-gradient-to-r from-amber-100/0 via-amber-200/20 to-amber-100/0"
+              : "bg-gradient-to-r from-indigo-100/0 via-indigo-200/20 to-indigo-100/0"
+            }`} />
+            <Wand2 className="h-4 w-4 relative z-10 transition-transform duration-300 group-hover:rotate-12 group-hover:scale-110" />
+            <span className="relative z-10">Isi Otomatis (Demo {roleLabel})</span>
+          </button>
           <button type="button" className="flex w-full items-center justify-center gap-3 rounded-2xl border border-zinc-200 bg-white/50 py-3.5 text-xs font-bold text-zinc-700 transition-all hover:bg-zinc-50 active:scale-[0.98]">
             <GoogleIcon className="h-4.5 w-4.5" />
             Masuk dengan Google
