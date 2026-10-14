@@ -9,11 +9,42 @@ export type BottomNavItem = {
   center?: boolean;
 };
 
-export function BottomNav({ items }: { items: BottomNavItem[] }) {
+type CenterColor = "green" | "orange" | "purple";
+
+const CENTER_STYLES: Record<
+  CenterColor,
+  { gradient: string; glow: string; glowHover: string }
+> = {
+  green: {
+    gradient: "bg-gradient-to-br from-emerald-500 to-emerald-400",
+    glow: "shadow-[0_6px_20px_rgba(16,185,129,0.4)]",
+    glowHover: "group-hover:bg-emerald-500/30",
+  },
+  orange: {
+    gradient: "bg-gradient-to-br from-amber-500 to-orange-400",
+    glow: "shadow-[0_6px_20px_rgba(245,158,11,0.4)]",
+    glowHover: "group-hover:bg-amber-500/30",
+  },
+  purple: {
+    gradient: "bg-gradient-to-br from-violet-600 to-indigo-500",
+    glow: "shadow-[0_6px_20px_rgba(139,92,246,0.4)]",
+    glowHover: "group-hover:bg-violet-500/30",
+  },
+};
+
+export function BottomNav({
+  items,
+  centerColor = "green",
+}: {
+  items: BottomNavItem[];
+  centerColor?: CenterColor;
+}) {
   const centerItem = items.find((item) => item.center);
   const sideItems = items.filter((item) => !item.center);
   const leftItems = sideItems.slice(0, Math.ceil(sideItems.length / 2));
   const rightItems = sideItems.slice(Math.ceil(sideItems.length / 2));
+
+  const style = CENTER_STYLES[centerColor];
 
   return (
     <nav
@@ -42,11 +73,18 @@ export function BottomNav({ items }: { items: BottomNavItem[] }) {
               activeOptions={{ exact: true }}
               className="pointer-events-auto group relative flex h-[62px] w-[62px] items-center justify-center"
             >
-              {/* Glow */}
-              <span className="absolute inset-0 scale-110 rounded-full bg-primary/20 blur-md transition-all duration-300 group-hover:scale-125 group-hover:bg-primary/30" />
+              {/* Glow ring */}
+              <span
+                className={`absolute inset-0 scale-110 rounded-full blur-md transition-all duration-300 group-hover:scale-125 bg-primary/15 ${style.glowHover}`}
+              />
               {/* Button */}
-              <span className="relative flex h-[56px] w-[56px] items-center justify-center rounded-full bg-gradient-to-r from-emerald-500 to-emerald-400 shadow-[0_6px_20px_rgba(16,185,129,0.3)] transition-transform duration-200 active:scale-90 group-hover:-translate-y-0.5">
-                <centerItem.icon className="h-[24px] w-[24px] text-white" strokeWidth={2.5} />
+              <span
+                className={`relative flex h-[56px] w-[56px] items-center justify-center rounded-full transition-transform duration-200 active:scale-90 group-hover:-translate-y-0.5 ${style.gradient} ${style.glow}`}
+              >
+                <centerItem.icon
+                  className="h-[24px] w-[24px] text-white"
+                  strokeWidth={2.5}
+                />
               </span>
             </Link>
           </div>

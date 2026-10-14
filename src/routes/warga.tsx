@@ -26,6 +26,7 @@ function WargaLayout() {
         headerName="Bu Ratna"
         headerSubtitle="Warga Desa"
         headerAvatar="/images/avatar_warga.png"
+        centerColor="green"
         items={[
           { to: "/warga", label: "Beranda", icon: Home },
           { to: "/warga/marketplace", label: "Pasar", icon: Store },
