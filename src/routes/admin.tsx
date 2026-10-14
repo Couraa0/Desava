@@ -10,6 +10,7 @@ function AdminLayout() {
       <MobileShell
         headerName="Pak Budi"
         headerSubtitle="Admin Desa"
+        headerAvatar="/images/avatar_admin.png"
         items={[
           { to: "/admin", label: "Statistik", icon: BarChart3 },
           { to: "/admin/dropbox", label: "Drop-Box", icon: MapPin },

@@ -10,6 +10,7 @@ function UmkmLayout() {
       <MobileShell
         headerName="Berkah Tani"
         headerSubtitle="Akun UMKM"
+        headerAvatar="/images/avatar_umkm.png"
         items={[
           { to: "/umkm", label: "Dashboard", icon: LayoutDashboard },
           { to: "/umkm/orders", label: "Pesanan", icon: ClipboardList },

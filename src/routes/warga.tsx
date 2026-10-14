@@ -25,6 +25,7 @@ function WargaLayout() {
       <MobileShell
         headerName="Bu Ratna"
         headerSubtitle="Warga Desa"
+        headerAvatar="/images/avatar_warga.png"
         items={[
           { to: "/warga", label: "Beranda", icon: Home },
           { to: "/warga/marketplace", label: "Pasar", icon: Store },
