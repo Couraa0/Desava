@@ -1,4 +1,4 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, Link } from "@tanstack/react-router";
 import {
   Recycle, Coins, Smile, Users, TrendingUp, ArrowUp,
   BarChart3, Trophy, FileText, FileSpreadsheet, Share2,
@@ -224,56 +224,12 @@ function AdminHome() {
   return (
     <div className="pb-6 space-y-5">
 
-      {/* ── HERO SUMMARY CARD ── */}
-      <div className="mx-5 mt-4">
-        <div className="relative overflow-hidden rounded-3xl card-admin-bg p-5 text-white neon-glow-admin border border-amber-400/20 shadow-2xl">
-          <div className="pointer-events-none absolute -right-8 -top-8 h-40 w-40 rounded-full bg-amber-300/20 blur-3xl" />
-          <div className="pointer-events-none absolute -left-4 bottom-0 h-28 w-28 rounded-full bg-yellow-400/15 blur-2xl" />
-          {/* Sun deco */}
-          <svg className="pointer-events-none absolute right-4 bottom-3 h-20 w-20 opacity-6" viewBox="0 0 80 80" fill="none">
-            <circle cx="40" cy="40" r="14" fill="white"/>
-            <line x1="40" y1="4" x2="40" y2="22" stroke="white" strokeWidth="2.5" strokeLinecap="round"/>
-            <line x1="40" y1="58" x2="40" y2="76" stroke="white" strokeWidth="2.5" strokeLinecap="round"/>
-            <line x1="4" y1="40" x2="22" y2="40" stroke="white" strokeWidth="2.5" strokeLinecap="round"/>
-            <line x1="58" y1="40" x2="76" y2="40" stroke="white" strokeWidth="2.5" strokeLinecap="round"/>
-            <line x1="12" y1="12" x2="24" y2="24" stroke="white" strokeWidth="2" strokeLinecap="round"/>
-            <line x1="56" y1="56" x2="68" y2="68" stroke="white" strokeWidth="2" strokeLinecap="round"/>
-            <line x1="68" y1="12" x2="56" y2="24" stroke="white" strokeWidth="2" strokeLinecap="round"/>
-            <line x1="24" y1="56" x2="12" y2="68" stroke="white" strokeWidth="2" strokeLinecap="round"/>
-          </svg>
-
-          <div className="relative">
-            <div className="flex items-center justify-between">
-              <div className="flex items-center gap-1.5">
-                <div className="flex h-5 w-5 items-center justify-center rounded-full bg-white/20">
-                  <BarChart3 className="h-3 w-3 text-white" />
-                </div>
-                <span className="text-[9px] font-black uppercase tracking-widest text-amber-200">Dampak Desa — Mei 2026</span>
-              </div>
-              <span className="rounded-full bg-white/15 border border-white/20 px-2.5 py-0.5 text-[9px] font-black text-white uppercase">Pemdes</span>
-            </div>
-
-            <p className="mt-3.5 text-[38px] font-black tracking-tight font-display text-white leading-none">1.284 kg</p>
-            <div className="mt-2 flex items-center gap-1.5">
-              <ArrowUp className="h-3.5 w-3.5 text-yellow-300 animate-bounce" />
-              <span className="text-[11px] font-bold text-yellow-200">+18% vs bulan lalu</span>
-            </div>
-
-            {/* Mini bar chart */}
-            <div className="mt-4 flex h-12 items-end gap-1.5">
-              {bars.map((h, i) => (
-                <div key={i} className="flex flex-1 flex-col items-center gap-1">
-                  <div className="w-full rounded-t bg-white/25 border-t border-white/40 transition-all hover:bg-white/40" style={{ height: `${(h / maxBar) * 100}%` }} />
-                  <span className="text-[8px] font-bold text-white/60">{days[i]}</span>
-                </div>
-              ))}
-            </div>
-          </div>
-        </div>
-      </div>
 
       {/* ── BANNER SLIDER ── */}
-      <BannerSlider />
+      <div className="mt-4">
+        <BannerSlider />
+      </div>
+
 
       {/* ── KPI GRID ── */}
       <div className="px-5">

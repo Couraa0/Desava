@@ -232,59 +232,12 @@ function BannerSlider() {
 function WargaHome() {
   return (
     <div className="pb-6 space-y-5">
-      {/* ── HERO BALANCE CARD ── */}
-      <div className="mx-5 mt-4">
-        <div className="relative overflow-hidden rounded-3xl card-warga-bg p-5 text-white neon-glow-warga border border-blue-400/20 shadow-2xl">
-          {/* Orbs */}
-          <div className="pointer-events-none absolute -right-8 -top-8 h-40 w-40 rounded-full bg-blue-300/15 blur-3xl" />
-          <div className="pointer-events-none absolute -left-4 bottom-0 h-28 w-28 rounded-full bg-indigo-400/20 blur-2xl" />
-          {/* Wave */}
-          <svg className="pointer-events-none absolute bottom-0 left-0 w-full opacity-8" viewBox="0 0 390 56" fill="none" preserveAspectRatio="none">
-            <path d="M0 28C78 6 156 50 234 28S351 6 390 28V56H0Z" fill="white" />
-          </svg>
-
-          <div className="relative">
-            {/* Label */}
-            <div className="flex items-center justify-between">
-              <div className="flex items-center gap-1.5">
-                <div className="flex h-5 w-5 items-center justify-center rounded-full bg-white/20">
-                  <Wallet className="h-3 w-3 text-white" />
-                </div>
-                <span className="text-[9px] font-black uppercase tracking-widest text-blue-200">Green Wallet · Bu Ratna</span>
-              </div>
-              <span className="rounded-full bg-white/15 border border-white/20 px-2.5 py-0.5 text-[9px] font-black text-white uppercase tracking-wide">Warga Desa</span>
-            </div>
-
-            {/* Balance */}
-            <p className="mt-3.5 text-[38px] font-black tracking-tight font-display text-white leading-none">Rp 128.400</p>
-
-            {/* Badges */}
-            <div className="mt-2.5 flex items-center gap-2 flex-wrap">
-              <div className="flex items-center gap-1 rounded-full bg-blue-400/25 border border-blue-300/30 px-2.5 py-0.5">
-                <Star className="h-2.5 w-2.5 fill-yellow-300 text-yellow-300" />
-                <span className="text-[9px] font-bold text-blue-100">1.240 Poin</span>
-              </div>
-              <div className="flex items-center gap-1 rounded-full bg-white/12 border border-white/20 px-2.5 py-0.5">
-                <Medal className="h-2.5 w-2.5 text-yellow-300" />
-                <span className="text-[9px] font-black text-white">Peringkat #2</span>
-              </div>
-            </div>
-
-            {/* Actions */}
-            <div className="mt-4 grid grid-cols-2 gap-2.5">
-              <Link to="/warga/wallet" className="flex items-center justify-center gap-1.5 rounded-2xl bg-white/12 border border-white/20 py-2.5 text-xs font-bold backdrop-blur-sm hover:bg-white/20 transition-all active:scale-95">
-                <Wallet className="h-3.5 w-3.5" /> Tarik / Tukar
-              </Link>
-              <Link to="/warga/scanner" className="flex items-center justify-center gap-1.5 rounded-2xl bg-white py-2.5 text-xs font-black text-blue-700 hover:bg-blue-50 transition-all active:scale-95">
-                <ScanLine className="h-3.5 w-3.5" /> Setor Sampah
-              </Link>
-            </div>
-          </div>
-        </div>
-      </div>
 
       {/* ── BANNER SLIDER ── */}
-      <BannerSlider />
+      <div className="mt-4">
+        <BannerSlider />
+      </div>
+
 
       {/* ── LAYANAN CEPAT ── */}
       <div className="px-5">

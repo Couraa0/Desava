@@ -184,7 +184,7 @@ function BannerSlider() {
   ];
 
   return (
-    <div className="relative mx-5 overflow-hidden rounded-3xl shadow-xl" style={{ minHeight: 172 }}>
+    <Link to={b.to} className="relative mx-5 overflow-hidden rounded-3xl shadow-xl block active:scale-[0.98] transition-transform duration-150" style={{ minHeight: 172 }}>
       <div key={idx} className="absolute inset-0 animate-in fade-in duration-500">
         {illustrations[idx]}
       </div>
@@ -214,49 +214,12 @@ function UmkmHome() {
   return (
     <div className="pb-6 space-y-5">
 
-      {/* ── HERO REVENUE CARD ── */}
-      <div className="mx-5 mt-4">
-        <div className="relative overflow-hidden rounded-3xl card-umkm-bg p-5 text-white neon-glow-umkm border border-emerald-400/20 shadow-2xl">
-          <div className="pointer-events-none absolute -right-8 -top-8 h-40 w-40 rounded-full bg-emerald-300/15 blur-3xl" />
-          <div className="pointer-events-none absolute -left-4 bottom-0 h-28 w-28 rounded-full bg-green-400/20 blur-2xl" />
-          {/* Leaf deco */}
-          <svg className="pointer-events-none absolute right-4 bottom-3 h-20 w-20 opacity-6" viewBox="0 0 80 80" fill="none">
-            <path d="M40 4C40 4 12 20 12 44C12 62 24 72 40 76C56 72 68 62 68 44C68 20 40 4 40 4Z" fill="white"/>
-            <line x1="40" y1="76" x2="40" y2="36" stroke="white" strokeWidth="2"/>
-          </svg>
-
-          <div className="relative">
-            <div className="flex items-center justify-between">
-              <div className="flex items-center gap-1.5">
-                <div className="flex h-5 w-5 items-center justify-center rounded-full bg-white/20">
-                  <TrendingUp className="h-3 w-3 text-white" />
-                </div>
-                <span className="text-[9px] font-black uppercase tracking-widest text-emerald-200">Penjualan — Bulan Mei</span>
-              </div>
-              <span className="rounded-full bg-white/15 border border-white/20 px-2.5 py-0.5 text-[9px] font-black text-white uppercase">UMKM</span>
-            </div>
-
-            <p className="mt-3.5 text-[36px] font-black tracking-tight font-display text-white leading-none">Rp 18,4 jt</p>
-            <div className="mt-2 flex items-center gap-1.5">
-              <TrendingUp className="h-3.5 w-3.5 text-emerald-300 animate-bounce" />
-              <span className="text-[11px] font-bold text-emerald-200">+12% vs bulan lalu</span>
-            </div>
-
-            {/* Sparkline */}
-            <div className="mt-4 flex h-14 items-end gap-1.5">
-              {bars.map((h, i) => (
-                <div key={i} className="flex flex-1 flex-col items-center gap-1">
-                  <div className="w-full rounded-t bg-white/25 border-t border-white/40 transition-all hover:bg-white/40" style={{ height: `${(h / maxVal) * 100}%` }} />
-                  <span className="text-[8px] font-bold text-white/60">{days[i]}</span>
-                </div>
-              ))}
-            </div>
-          </div>
-        </div>
-      </div>
 
       {/* ── BANNER SLIDER ── */}
-      <BannerSlider />
+      <div className="mt-4">
+        <BannerSlider />
+      </div>
+
 
       {/* ── KPI GRID ── */}
       <div className="px-5">
