@@ -2,7 +2,6 @@ import { createFileRoute } from "@tanstack/react-router";
 import { useState, useRef, useEffect } from "react";
 import {
   Camera,
-  Zap,
   ImageIcon,
   CheckCircle,
   XCircle,
@@ -16,6 +15,7 @@ import {
   TrendingUp,
   ArrowRight,
   ScanLine,
+  Zap,
   FlashlightOff,
 } from "lucide-react";
 import { toast } from "sonner";
@@ -47,7 +47,7 @@ const CATEGORY_META: Record<
     textDark: "text-cyan-700",
     bg: "bg-cyan-50",
     border: "border-cyan-200",
-    glow: "shadow-[0_4px_20px_rgba(6,182,212,0.15)]",
+    glow: "shadow-[0_4px_20px_rgba(6,182,212,0.18)]",
     icon: Package,
   },
   kertas: {
@@ -55,7 +55,7 @@ const CATEGORY_META: Record<
     textDark: "text-amber-700",
     bg: "bg-amber-50",
     border: "border-amber-200",
-    glow: "shadow-[0_4px_20px_rgba(245,158,11,0.15)]",
+    glow: "shadow-[0_4px_20px_rgba(245,158,11,0.18)]",
     icon: Package,
   },
   logam: {
@@ -63,7 +63,7 @@ const CATEGORY_META: Record<
     textDark: "text-violet-700",
     bg: "bg-violet-50",
     border: "border-violet-200",
-    glow: "shadow-[0_4px_20px_rgba(139,92,246,0.15)]",
+    glow: "shadow-[0_4px_20px_rgba(139,92,246,0.18)]",
     icon: Package,
   },
   organik: {
@@ -71,7 +71,7 @@ const CATEGORY_META: Record<
     textDark: "text-emerald-700",
     bg: "bg-emerald-50",
     border: "border-emerald-200",
-    glow: "shadow-[0_4px_20px_rgba(16,185,129,0.15)]",
+    glow: "shadow-[0_4px_20px_rgba(16,185,129,0.18)]",
     icon: Leaf,
   },
   elektronik: {
@@ -79,7 +79,7 @@ const CATEGORY_META: Record<
     textDark: "text-rose-700",
     bg: "bg-rose-50",
     border: "border-rose-200",
-    glow: "shadow-[0_4px_20px_rgba(244,63,94,0.15)]",
+    glow: "shadow-[0_4px_20px_rgba(244,63,94,0.18)]",
     icon: Cpu,
   },
 };
@@ -87,7 +87,7 @@ const CATEGORY_META: Record<
 const mockResults: ScanResult[] = [
   {
     name: "Botol Plastik PET",
-    type: "Anorganik · Plastik",
+    type: "Plastik · Anorganik",
     category: "plastik",
     price: "Rp 320 / pcs",
     points: 320,
@@ -134,35 +134,6 @@ const history = [
   { name: "Kaleng Soda Aluminium", date: "4 hari lalu", pts: "+255", ok: true, cat: "logam" as WasteCategory },
 ];
 
-const WASTE_TYPES: { label: string; cat: WasteCategory; emoji: string }[] = [
-  { label: "Plastik", cat: "plastik", emoji: "♻️" },
-  { label: "Kertas", cat: "kertas", emoji: "📦" },
-  { label: "Logam", cat: "logam", emoji: "🔩" },
-  { label: "Organik", cat: "organik", emoji: "🌿" },
-  { label: "Elektronik", cat: "elektronik", emoji: "💻" },
-];
-
-function ScanBrackets({ detected }: { detected: boolean }) {
-  return (
-    <>
-      {/* Corner brackets — animate to emerald when detected */}
-      {[
-        "top-5 left-5 border-l-2 border-t-2 rounded-tl-xl",
-        "top-5 right-5 border-r-2 border-t-2 rounded-tr-xl",
-        "bottom-20 left-5 border-l-2 border-b-2 rounded-bl-xl",
-        "bottom-20 right-5 border-r-2 border-b-2 rounded-br-xl",
-      ].map((c) => (
-        <span
-          key={c}
-          className={`absolute h-8 w-8 pointer-events-none transition-colors duration-500 ${c} ${
-            detected ? "border-emerald-500" : "border-white/70"
-          }`}
-        />
-      ))}
-    </>
-  );
-}
-
 function Scanner() {
   const [detected, setDetected] = useState<ScanResult | null>(null);
   const [scanning, setScanning] = useState(false);
@@ -192,10 +163,7 @@ function Scanner() {
       setScanProgress(0);
       progressRef.current = setInterval(() => {
         setScanProgress((p) => {
-          if (p >= 95) {
-            clearInterval(progressRef.current!);
-            return 95;
-          }
+          if (p >= 95) { clearInterval(progressRef.current!); return 95; }
           return p + Math.random() * 15;
         });
       }, 180);
@@ -213,9 +181,7 @@ function Scanner() {
     setScanProgress(0);
     try {
       if (!navigator.mediaDevices?.getUserMedia) {
-        toast.error("Kamera tidak didukung", {
-          description: "Gunakan HTTPS atau localhost.",
-        });
+        toast.error("Kamera tidak didukung", { description: "Gunakan HTTPS atau localhost." });
         return;
       }
       const mediaStream = await navigator.mediaDevices.getUserMedia({
@@ -224,17 +190,12 @@ function Scanner() {
       });
       setStream(mediaStream);
     } catch (err: any) {
-      toast.error("Gagal membuka kamera", {
-        description: err.message || "Pastikan izin kamera diberikan.",
-      });
+      toast.error("Gagal membuka kamera", { description: err.message || "Pastikan izin kamera diberikan." });
     }
   };
 
   const stopCamera = () => {
-    if (stream) {
-      stream.getTracks().forEach((t) => t.stop());
-      setStream(null);
-    }
+    if (stream) { stream.getTracks().forEach((t) => t.stop()); setStream(null); }
   };
 
   const runAI = () => {
@@ -244,9 +205,7 @@ function Scanner() {
       const result = mockResults[Math.floor(Math.random() * mockResults.length)];
       setDetected(result);
       setScanning(false);
-      toast.success("✅ Terdeteksi!", {
-        description: `${result.name} · ${result.accuracy}% akurasi`,
-      });
+      toast.success("✅ Terdeteksi!", { description: `${result.name} · ${result.accuracy}% akurasi` });
     }, 2200);
   };
 
@@ -294,100 +253,66 @@ function Scanner() {
       } else {
         toast.info("Senter tidak didukung di perangkat ini.");
       }
-    } catch {
-      toast.error("Gagal mengontrol senter");
-    }
+    } catch { toast.error("Gagal mengontrol senter"); }
   };
 
   const meta = detected ? CATEGORY_META[detected.category] : null;
 
   return (
     <div className="min-h-screen bg-background">
-      {/* ── Hidden file input ── */}
-      <input
-        type="file"
-        ref={fileInputRef}
-        onChange={handleGalleryUpload}
-        accept="image/*"
-        className="hidden"
-      />
+      <input type="file" ref={fileInputRef} onChange={handleGalleryUpload} accept="image/*" className="hidden" />
 
-      {/* ══════════════════════════════════════════════
-          HERO HEADER — Page title + quick stats
-      ══════════════════════════════════════════════ */}
-      <div className="relative px-5 pt-5 pb-3 overflow-hidden">
-        {/* ambient glow */}
-        <div className="pointer-events-none absolute -top-12 left-1/2 -translate-x-1/2 h-48 w-72 rounded-full bg-emerald-400/8 blur-3xl" />
-
-        <div className="relative flex items-center justify-between">
+      {/* ── PAGE HEADER ── */}
+      <div className="px-5 pt-4 pb-3">
+        <div className="flex items-center justify-between">
           <div>
-            <div className="flex items-center gap-2">
-              <div className="flex h-7 w-7 items-center justify-center rounded-lg bg-emerald-100 border border-emerald-200">
-                <ScanLine className="h-3.5 w-3.5 text-emerald-600" />
+            <div className="flex items-center gap-1.5">
+              <div className="flex h-6 w-6 items-center justify-center rounded-lg bg-blue-100 border border-blue-200">
+                <ScanLine className="h-3 w-3 text-blue-600" />
               </div>
-              <span className="text-[10px] font-black uppercase tracking-widest text-emerald-600">AI Eco-Scanner</span>
+              <span className="text-[10px] font-black uppercase tracking-widest text-blue-600">AI Eco-Scanner</span>
             </div>
-            <h1 className="mt-1 text-xl font-black tracking-tight text-foreground leading-snug whitespace-nowrap">
-              Scan & Kenali <span className="text-emerald-600">Sampahmu</span>
+            <h1 className="mt-0.5 text-xl font-black tracking-tight text-foreground">
+              Scan <span className="text-blue-600">Sampahmu</span>
             </h1>
           </div>
-
-          {/* Mini stats */}
-          <div className="flex flex-col items-end gap-1.5">
-            <div className="flex items-center gap-1.5 rounded-xl border border-emerald-200 bg-emerald-50 px-2.5 py-1">
-              <TrendingUp className="h-3 w-3 text-emerald-600" />
-              <span className="text-[10px] font-bold text-emerald-700">+1.079 poin</span>
+          {/* Points badge */}
+          <div className="flex items-center gap-1.5 rounded-xl border border-blue-200 bg-blue-50 px-2.5 py-1.5">
+            <TrendingUp className="h-3.5 w-3.5 text-blue-600" />
+            <div className="text-right">
+              <p className="text-[10px] font-black text-blue-700 leading-none">+1.079</p>
+              <p className="text-[8px] text-blue-500 font-semibold">poin bulan ini</p>
             </div>
-            <span className="text-[9px] text-muted-foreground font-semibold">Bulan ini</span>
           </div>
-        </div>
-
-        {/* Waste type filter chips */}
-        <div className="mt-4 flex gap-2 overflow-x-auto pb-0.5 [-ms-overflow-style:none] [scrollbar-width:none]">
-          {WASTE_TYPES.map((w) => {
-            const m = CATEGORY_META[w.cat];
-            return (
-              <button
-                key={w.cat}
-                className={`flex shrink-0 items-center gap-1.5 rounded-full border px-3 py-1 text-[10px] font-bold transition-all active:scale-95 ${m.bg} ${m.border} ${m.color}`}
-              >
-                <span>{w.emoji}</span>
-                {w.label}
-              </button>
-            );
-          })}
         </div>
       </div>
 
-      {/* ══════════════════════════════════════════════
-          VIEWFINDER — Camera / Preview (compact)
-      ══════════════════════════════════════════════ */}
-      <div className="relative mx-8 mt-3 overflow-hidden rounded-3xl border-2 border-border shadow-[0_4px_24px_rgba(0,0,0,0.10)]"
-        style={{ aspectRatio: "4/3" }}>
+      {/* ── VIEWFINDER ── Compact height so result card is visible */}
+      <div className="relative mx-4 overflow-hidden rounded-2xl border border-border shadow-[0_8px_32px_rgba(0,0,0,0.12)]"
+        style={{ height: 240 }}>
 
-        {/* Camera feed or captured image */}
+        {/* Camera / Image feed */}
         {capturedImage ? (
           <img src={capturedImage} alt="Captured" className="h-full w-full object-cover" />
         ) : stream ? (
           <video ref={videoRef} autoPlay playsInline muted className="h-full w-full object-cover" />
         ) : (
-          <div className="flex h-full w-full flex-col items-center justify-center gap-4 px-8 text-center bg-white">
-            {/* Animated camera icon ring */}
-            <div className="relative flex h-20 w-20 items-center justify-center">
-              <span className="absolute inset-0 rounded-full bg-emerald-100 animate-ping opacity-30" />
-              <div className="relative flex h-20 w-20 items-center justify-center rounded-full bg-emerald-50 border-2 border-emerald-200">
-                <Camera className="h-9 w-9 text-emerald-500" />
+          <div className="flex h-full w-full flex-col items-center justify-center gap-3 bg-zinc-50">
+            <div className="relative flex h-14 w-14 items-center justify-center">
+              <span className="absolute inset-0 rounded-full bg-blue-200 animate-ping opacity-25" />
+              <div className="relative flex h-14 w-14 items-center justify-center rounded-full bg-blue-50 border-2 border-blue-200">
+                <Camera className="h-7 w-7 text-blue-500" />
               </div>
             </div>
-            <div>
+            <div className="text-center px-8">
               <p className="text-sm font-bold text-foreground">Kamera Belum Aktif</p>
-              <p className="mt-1.5 text-xs text-muted-foreground leading-relaxed">
-                Aktifkan akses kamera untuk mendeteksi sampah langsung di depan Anda.
+              <p className="mt-1 text-xs text-muted-foreground leading-relaxed">
+                Izinkan akses kamera untuk mendeteksi sampah.
               </p>
             </div>
             <button
               onClick={startCamera}
-              className="rounded-full bg-emerald-500 px-6 py-2.5 text-xs font-bold text-white shadow-[0_4px_16px_rgba(16,185,129,0.35)] hover:shadow-[0_4px_24px_rgba(16,185,129,0.5)] transition-all active:scale-95"
+              className="rounded-full bg-blue-600 px-8 py-2.5 text-xs font-bold text-white shadow-[0_4px_16px_rgba(37,99,235,0.35)] hover:shadow-[0_4px_24px_rgba(37,99,235,0.5)] transition-all active:scale-95"
             >
               Izinkan Kamera
             </button>
@@ -395,154 +320,146 @@ function Scanner() {
         )}
 
         {/* Screen flash */}
-        {flashActive && (
-          <div className="absolute inset-0 z-50 bg-white opacity-100 transition-opacity duration-100" />
-        )}
+        {flashActive && <div className="absolute inset-0 z-50 bg-white" />}
 
-        {/* Dark gradient overlays */}
-        <div className="absolute inset-0 pointer-events-none bg-gradient-to-b from-black/40 via-transparent to-black/60" />
+        {/* Gradient vignette */}
+        <div className="absolute inset-0 pointer-events-none bg-gradient-to-b from-black/35 via-transparent to-black/55" />
 
-        {/* Scan brackets */}
-        <ScanBrackets detected={!!detected} />
+        {/* Corner brackets */}
+        {[
+          "top-4 left-4 border-l-2 border-t-2 rounded-tl-xl",
+          "top-4 right-4 border-r-2 border-t-2 rounded-tr-xl",
+          "bottom-24 left-4 border-l-2 border-b-2 rounded-bl-xl",
+          "bottom-24 right-4 border-r-2 border-b-2 rounded-br-xl",
+        ].map((c) => (
+          <span key={c} className={`absolute h-8 w-8 pointer-events-none transition-colors duration-500 ${c} ${detected ? "border-blue-400" : "border-white/60"}`} />
+        ))}
 
         {/* Guide text */}
         {!detected && !scanning && stream && (
-          <div className="absolute top-1/2 inset-x-0 -translate-y-1/2 text-center pointer-events-none">
-            <p className="text-xs font-semibold text-white/60 drop-shadow-md tracking-wide">
-              Arahkan ke objek sampah
-            </p>
+          <div className="absolute inset-x-0 top-1/2 -translate-y-1/2 text-center pointer-events-none">
+            <p className="text-[11px] font-semibold text-white/60 tracking-wide drop-shadow">Arahkan ke objek sampah</p>
           </div>
         )}
 
-        {/* ── Scanning animation overlay ── */}
+        {/* ── Scanning overlay ── */}
         {scanning && (
-          <div className="absolute inset-0 flex flex-col items-center justify-center bg-black/50 backdrop-blur-sm">
-            {/* Spinning ring */}
+          <div className="absolute inset-0 flex flex-col items-center justify-center bg-black/55 backdrop-blur-sm">
             <div className="relative flex h-20 w-20 items-center justify-center">
-              <div className="absolute inset-0 rounded-full border-2 border-emerald-500/20 animate-ping" />
-              <div className="h-16 w-16 animate-spin rounded-full border-[3px] border-emerald-500/20 border-t-emerald-400" />
-              <Sparkles className="absolute h-6 w-6 text-emerald-400 animate-pulse" />
+              <div className="absolute inset-0 rounded-full border-2 border-blue-400/25 animate-ping" />
+              <div className="h-16 w-16 animate-spin rounded-full border-[3px] border-blue-400/20 border-t-blue-400" />
+              <Sparkles className="absolute h-6 w-6 text-blue-300 animate-pulse" />
             </div>
             <p className="mt-4 text-xs font-black text-white tracking-widest uppercase">Menganalisis…</p>
-            <p className="mt-1 text-[10px] text-emerald-400/80 font-semibold">AI Vision Processing</p>
-
-            {/* Progress bar */}
-            <div className="mt-4 w-40 h-1 rounded-full bg-white/10 overflow-hidden">
+            <p className="mt-1 text-[10px] text-blue-300/80 font-semibold">AI Vision Processing</p>
+            <div className="mt-4 w-36 h-1 rounded-full bg-white/10 overflow-hidden">
               <div
-                className="h-full rounded-full bg-gradient-to-r from-emerald-500 to-cyan-400 transition-all duration-200"
+                className="h-full rounded-full bg-gradient-to-r from-blue-500 to-cyan-400 transition-all duration-200"
                 style={{ width: `${Math.min(scanProgress, 100)}%` }}
               />
             </div>
             <p className="mt-1.5 text-[9px] text-white/40 font-mono">{Math.round(Math.min(scanProgress, 100))}%</p>
-
-            {/* Scan line */}
-            <span className="absolute inset-x-8 top-1/3 h-px animate-pulse bg-gradient-to-r from-transparent via-emerald-400 to-transparent shadow-[0_0_8px_rgba(16,185,129,0.8)]" />
+            {/* Animated scan line */}
+            <span className="absolute inset-x-8 top-1/3 h-px animate-pulse bg-gradient-to-r from-transparent via-blue-400 to-transparent shadow-[0_0_8px_rgba(37,99,235,0.8)]" />
           </div>
         )}
 
-        {/* ── Detected overlay ── */}
+        {/* Detected accuracy badge */}
         {detected && !scanning && meta && (
-          <div className="absolute inset-0 flex flex-col items-end justify-start p-4 pointer-events-none">
-            <div className={`flex items-center gap-1.5 rounded-full border px-2.5 py-1 backdrop-blur-md ${meta.bg} ${meta.border}`}>
-              <CheckCircle className={`h-3 w-3 ${meta.color}`} />
-              <span className={`text-[10px] font-black uppercase tracking-wider ${meta.color}`}>
-                {detected.accuracy}% Cocok
-              </span>
-            </div>
+          <div className="absolute top-3 right-3 flex items-center gap-1.5 rounded-full border px-2.5 py-1 backdrop-blur-md bg-white/90 border-white/50">
+            <CheckCircle className={`h-3 w-3 ${meta.color}`} />
+            <span className={`text-[10px] font-black uppercase tracking-wider ${meta.color}`}>
+              {detected.accuracy}% Cocok
+            </span>
           </div>
         )}
 
         {/* ── Camera controls bar ── */}
-        <div className="absolute bottom-5 left-1/2 flex -translate-x-1/2 items-center gap-5 z-10">
-          {/* Gallery */}
-          <button
-            onClick={() => fileInputRef.current?.click()}
-            className="flex h-12 w-12 items-center justify-center rounded-2xl bg-white/10 text-white border border-white/15 backdrop-blur-sm transition-all active:scale-90 hover:bg-white/20"
-            title="Pilih dari Galeri"
-          >
-            <ImageIcon className="h-5 w-5" />
-          </button>
-
-          {/* Shutter / Restart */}
-          {detected ? (
+        {(stream || capturedImage) && (
+          <div className="absolute bottom-4 inset-x-0 flex items-center justify-center gap-5 z-10">
+            {/* Gallery */}
             <button
-              onClick={startCamera}
-              className="group relative flex h-[72px] w-[72px] items-center justify-center rounded-full bg-white text-zinc-900 shadow-[0_0_30px_rgba(255,255,255,0.3)] transition-all active:scale-90"
-              title="Pindai Ulang"
+              onClick={() => fileInputRef.current?.click()}
+              className="flex h-11 w-11 items-center justify-center rounded-2xl bg-white/15 text-white border border-white/20 backdrop-blur-sm transition-all active:scale-90 hover:bg-white/25"
+              title="Pilih dari Galeri"
             >
-              <RefreshCw className="h-6 w-6 group-hover:rotate-180 transition-transform duration-500" />
+              <ImageIcon className="h-5 w-5" />
             </button>
-          ) : (
-            <button
-              onClick={handleCapture}
-              disabled={scanning || !stream}
-              className="relative flex h-[72px] w-[72px] items-center justify-center rounded-full bg-emerald-500 shadow-[0_0_30px_rgba(16,185,129,0.6)] transition-all active:scale-90 disabled:opacity-40 disabled:shadow-none hover:shadow-[0_0_40px_rgba(16,185,129,0.8)]"
-              title="Ambil Foto"
-            >
-              {/* outer ring */}
-              <span className="absolute inset-[-6px] rounded-full border-2 border-emerald-400/40" />
-              <Camera className="h-7 w-7 text-zinc-950" strokeWidth={2.5} />
-            </button>
-          )}
 
-          {/* Flashlight */}
-          <button
-            onClick={toggleFlashlight}
-            disabled={!stream}
-            className={`flex h-12 w-12 items-center justify-center rounded-2xl border transition-all active:scale-90 disabled:opacity-30 ${
-              flashlight
-                ? "bg-yellow-400 text-zinc-950 border-yellow-400 shadow-[0_0_16px_rgba(250,204,21,0.5)]"
-                : "bg-white/10 text-white border-white/15 backdrop-blur-sm hover:bg-white/20"
-            }`}
-            title="Senter"
-          >
-            {flashlight ? <Zap className="h-5 w-5" /> : <FlashlightOff className="h-5 w-5" />}
-          </button>
-        </div>
+            {/* Shutter / Restart */}
+            {detected ? (
+              <button
+                onClick={startCamera}
+                className="group flex h-16 w-16 items-center justify-center rounded-full bg-white text-zinc-900 shadow-[0_0_24px_rgba(255,255,255,0.3)] transition-all active:scale-90"
+                title="Pindai Ulang"
+              >
+                <RefreshCw className="h-6 w-6 group-hover:rotate-180 transition-transform duration-500" />
+              </button>
+            ) : (
+              <button
+                onClick={handleCapture}
+                disabled={scanning || !stream}
+                className="relative flex h-16 w-16 items-center justify-center rounded-full bg-blue-600 shadow-[0_0_28px_rgba(37,99,235,0.65)] transition-all active:scale-90 disabled:opacity-40 disabled:shadow-none hover:shadow-[0_0_36px_rgba(37,99,235,0.85)]"
+                title="Ambil Foto"
+              >
+                <span className="absolute inset-[-5px] rounded-full border-2 border-blue-400/40" />
+                <Camera className="h-7 w-7 text-white" strokeWidth={2.5} />
+              </button>
+            )}
+
+            {/* Flashlight */}
+            <button
+              onClick={toggleFlashlight}
+              disabled={!stream}
+              className={`flex h-11 w-11 items-center justify-center rounded-2xl border transition-all active:scale-90 disabled:opacity-30 ${
+                flashlight
+                  ? "bg-yellow-400 text-zinc-950 border-yellow-400 shadow-[0_0_16px_rgba(250,204,21,0.5)]"
+                  : "bg-white/15 text-white border-white/20 backdrop-blur-sm hover:bg-white/25"
+              }`}
+              title="Senter"
+            >
+              {flashlight ? <Zap className="h-5 w-5" /> : <FlashlightOff className="h-5 w-5" />}
+            </button>
+          </div>
+        )}
       </div>
 
-      {/* ══════════════════════════════════════════════
-          RESULT CARD — shown after scan
-      ══════════════════════════════════════════════ */}
+      {/* ── RESULT CARD ── */}
       {detected && meta && (
-        <div className="mx-4 mt-4 animate-in fade-in slide-in-from-bottom-5 duration-400">
-          {/* Main result card */}
+        <div className="mx-4 mt-4 animate-in fade-in slide-in-from-bottom-4 duration-300">
           <div className={`relative overflow-hidden rounded-3xl border bg-white p-5 ${meta.border} ${meta.glow}`}>
             {/* Ambient blob */}
             <div className={`pointer-events-none absolute -top-8 -right-8 h-28 w-28 rounded-full blur-2xl opacity-40 ${meta.bg}`} />
-
             <div className="relative">
-              {/* Top row — name + accuracy */}
-              <div className="flex items-start justify-between gap-3">
+              {/* Top row */}
+              <div className="flex items-start gap-3">
                 <div className="flex-1 min-w-0">
-                  {/* Badges */}
-                  <div className="flex items-center gap-1.5 flex-wrap">
+                  <div className="flex items-center gap-1.5">
                     <span className={`inline-flex items-center gap-1 rounded-full border px-2 py-0.5 text-[9px] font-black uppercase tracking-widest ${meta.bg} ${meta.border} ${meta.color}`}>
                       <meta.icon className="h-2.5 w-2.5" />
                       {detected.type}
                     </span>
-                    <span className="inline-flex items-center gap-0.5 rounded-full bg-purple-50 border border-purple-200 px-2 py-0.5 text-[9px] font-black text-purple-600 uppercase tracking-widest">
+                    <span className="inline-flex items-center gap-0.5 rounded-full bg-blue-50 border border-blue-200 px-2 py-0.5 text-[9px] font-black text-blue-600 uppercase tracking-widest">
                       <Sparkles className="h-2.5 w-2.5" />
-                      AI Vision
+                      AI
                     </span>
                   </div>
                   <p className="mt-2 text-lg font-black text-foreground leading-tight">{detected.name}</p>
                 </div>
-
-                {/* Accuracy circle */}
+                {/* Accuracy */}
                 <div className={`flex h-14 w-14 shrink-0 flex-col items-center justify-center rounded-2xl border ${meta.bg} ${meta.border}`}>
                   <span className={`text-sm font-black leading-none ${meta.color}`}>{detected.accuracy}%</span>
                   <span className="text-[8px] text-muted-foreground font-semibold mt-0.5">akurasi</span>
                 </div>
               </div>
 
-              {/* AI tip */}
+              {/* Tip */}
               <p className="mt-3 text-xs text-muted-foreground leading-relaxed border-t border-border pt-3">
                 💡 {detected.tip}
               </p>
 
-              {/* Impact badge */}
-              <div className="mt-3 flex items-center gap-2">
+              {/* Impact */}
+              <div className="mt-2.5 flex items-center gap-2">
                 <Leaf className="h-3 w-3 text-emerald-600 shrink-0" />
                 <span className="text-[10px] text-emerald-700 font-semibold">
                   Mengurangi <strong>{detected.impactKg}</strong> emisi karbon
@@ -550,13 +467,13 @@ function Scanner() {
               </div>
 
               {/* Price + CTA */}
-              <div className="mt-4 flex items-center justify-between rounded-2xl bg-muted/50 border border-border px-4 py-3">
+              <div className="mt-4 flex items-center justify-between rounded-2xl bg-muted/40 border border-border px-4 py-3">
                 <div>
                   <p className="text-[9px] text-muted-foreground font-black uppercase tracking-widest">Estimasi Harga</p>
                   <p className={`text-xl font-black mt-0.5 ${meta.textDark}`}>{detected.price}</p>
-                  <p className="text-[9px] text-muted-foreground mt-0.5">+{detected.points} Poin Hijau</p>
+                  <p className="text-[9px] text-muted-foreground mt-0.5">+{detected.points} Poin</p>
                 </div>
-                <button className="flex items-center gap-2 rounded-xl bg-emerald-500 px-4 py-2.5 text-xs font-black text-white shadow-[0_4px_16px_rgba(16,185,129,0.3)] hover:shadow-[0_4px_24px_rgba(16,185,129,0.45)] transition-all active:scale-95 hover:-translate-y-0.5">
+                <button className="flex items-center gap-2 rounded-xl bg-blue-600 px-4 py-2.5 text-xs font-black text-white shadow-[0_4px_16px_rgba(37,99,235,0.35)] hover:shadow-[0_4px_24px_rgba(37,99,235,0.5)] transition-all active:scale-95 hover:-translate-y-0.5">
                   Setor Sekarang
                   <ArrowRight className="h-3.5 w-3.5" />
                 </button>
@@ -566,37 +483,23 @@ function Scanner() {
         </div>
       )}
 
-      {/* ══════════════════════════════════════════════
-          SCAN HISTORY
-      ══════════════════════════════════════════════ */}
+      {/* ── HISTORY ── */}
       <div className="mx-4 mt-5 pb-28">
         <div className="flex items-center justify-between mb-3">
           <h2 className="text-sm font-black text-foreground">Riwayat Pindaian</h2>
-          <button className="flex items-center gap-1 text-[11px] font-bold text-emerald-600 hover:text-emerald-700 transition-colors">
+          <button className="flex items-center gap-1 text-[11px] font-bold text-blue-600 hover:text-blue-700 transition-colors">
             Lihat semua <ChevronRight className="h-3 w-3" />
           </button>
         </div>
 
-        <div className="space-y-2.5">
+        <div className="space-y-2">
           {history.map((h, i) => {
             const m = CATEGORY_META[h.cat];
             return (
-              <div
-                key={i}
-                className="flex items-center gap-3 rounded-2xl border border-border bg-card p-3.5 transition-all hover:border-primary/20 hover:shadow-sm"
-              >
-                {/* Icon */}
-                <span className={`flex h-10 w-10 shrink-0 items-center justify-center rounded-xl border ${
-                  h.ok ? `${m.bg} ${m.border} ${m.color}` : "bg-red-50 border-red-200 text-red-500"
-                }`}>
-                  {h.ok ? (
-                    <CheckCircle className="h-4.5 w-4.5" />
-                  ) : (
-                    <XCircle className="h-4.5 w-4.5" />
-                  )}
+              <div key={i} className="flex items-center gap-3 rounded-2xl border border-border bg-card p-3.5 transition-all hover:border-blue-200/50 hover:shadow-sm">
+                <span className={`flex h-9 w-9 shrink-0 items-center justify-center rounded-xl border ${h.ok ? `${m.bg} ${m.border} ${m.color}` : "bg-red-50 border-red-200 text-red-500"}`}>
+                  {h.ok ? <CheckCircle className="h-4 w-4" /> : <XCircle className="h-4 w-4" />}
                 </span>
-
-                {/* Info */}
                 <div className="min-w-0 flex-1">
                   <p className="truncate text-sm font-bold text-foreground">{h.name}</p>
                   <div className="flex items-center gap-1 text-[10px] text-muted-foreground mt-0.5">
@@ -604,29 +507,25 @@ function Scanner() {
                     {h.date}
                   </div>
                 </div>
-
-                {/* Points */}
-                <div className={`flex items-center gap-1 shrink-0 rounded-full border px-2.5 py-1 text-[10px] font-black ${
-                  h.ok ? `${m.bg} ${m.border} ${m.color}` : "bg-muted border-border text-muted-foreground"
-                }`}>
+                <span className={`shrink-0 rounded-full border px-2.5 py-1 text-[10px] font-black flex items-center gap-1 ${h.ok ? `${m.bg} ${m.border} ${m.color}` : "bg-muted border-border text-muted-foreground"}`}>
                   {h.ok && <TrendingUp className="h-2.5 w-2.5" />}
-                  {h.pts} {h.ok ? "poin" : ""}
-                </div>
+                  {h.pts}{h.ok ? " poin" : ""}
+                </span>
               </div>
             );
           })}
         </div>
 
-        {/* Bottom promo card */}
-        <div className="mt-5 rounded-3xl border border-emerald-200 bg-gradient-to-br from-emerald-50 via-white to-cyan-50 p-4 flex items-center gap-4 shadow-sm">
-          <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl bg-emerald-100 border border-emerald-200">
-            <Leaf className="h-6 w-6 text-emerald-600" />
+        {/* Bottom promo */}
+        <div className="mt-4 rounded-3xl border border-blue-200 bg-gradient-to-br from-blue-50 via-white to-indigo-50 p-4 flex items-center gap-4 shadow-sm">
+          <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl bg-blue-100 border border-blue-200">
+            <ScanLine className="h-5 w-5 text-blue-600" />
           </div>
           <div className="flex-1 min-w-0">
             <p className="text-xs font-black text-foreground leading-snug">Jadikan daur ulang kebiasaan harian!</p>
             <p className="text-[10px] text-muted-foreground mt-0.5">Setor rutin = Bonus poin mingguan 2×</p>
           </div>
-          <ChevronRight className="h-4 w-4 text-emerald-600 shrink-0" />
+          <ChevronRight className="h-4 w-4 text-blue-500 shrink-0" />
         </div>
       </div>
     </div>

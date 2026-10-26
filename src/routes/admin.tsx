@@ -11,7 +11,7 @@ function AdminLayout() {
         headerName="Pak Budi"
         headerSubtitle="Admin Desa"
         headerAvatar="/images/avatar_admin.png"
-        centerColor="purple"
+        centerColor="yellow"
         items={[
           { to: "/admin", label: "Statistik", icon: BarChart3 },
           { to: "/admin/dropbox", label: "Drop-Box", icon: MapPin },

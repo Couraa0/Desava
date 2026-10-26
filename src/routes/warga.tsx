@@ -26,7 +26,7 @@ function WargaLayout() {
         headerName="Bu Ratna"
         headerSubtitle="Warga Desa"
         headerAvatar="/images/avatar_warga.png"
-        centerColor="green"
+        centerColor="blue"
         items={[
           { to: "/warga", label: "Beranda", icon: Home },
           { to: "/warga/marketplace", label: "Pasar", icon: Store },
@@ -44,7 +44,7 @@ function WargaLayout() {
           <div className="relative flex items-center">
             {/* Opaque, dismissible speech bubble / tooltip message on the left */}
             {showTooltip && (
-              <div className="pointer-events-auto mr-3 flex items-center bg-white border-2 border-emerald-500/20 px-3 py-1.5 rounded-2xl rounded-tr-sm shadow-[0_6px_16px_rgba(16,185,129,0.15)] text-[10px] font-black text-emerald-800 tracking-wide uppercase font-display select-none !opacity-100">
+              <div className="pointer-events-auto mr-3 flex items-center bg-white border-2 border-blue-500/20 px-3 py-1.5 rounded-2xl rounded-tr-sm shadow-[0_6px_16px_rgba(37,99,235,0.15)] text-[10px] font-black text-blue-800 tracking-wide uppercase font-display select-none !opacity-100">
                 <span>Tanya AI 🔮</span>
                 <button 
                   onClick={(e) => {
@@ -61,14 +61,13 @@ function WargaLayout() {
             {/* Circular Avatar Trigger Button */}
             <button
               onClick={() => setAssistantOpen(true)}
-              className="pointer-events-auto group relative flex h-14 w-14 shrink-0 items-center justify-center rounded-full bg-white border-2 border-emerald-500/30 shadow-[0_8px_20px_rgba(16,185,129,0.25)] hover:shadow-[0_10px_25px_rgba(16,185,129,0.35)] transition-all duration-300 hover:scale-105 active:scale-95 overflow-hidden"
+              className="pointer-events-auto group relative flex h-14 w-14 shrink-0 items-center justify-center rounded-full bg-white border-2 border-blue-500/30 shadow-[0_8px_20px_rgba(37,99,235,0.25)] hover:shadow-[0_10px_25px_rgba(37,99,235,0.35)] transition-all duration-300 hover:scale-105 active:scale-95 overflow-hidden"
             >
               <img src="/images/chatbot_avatar.jpg" alt="AI Assistant" className="h-full w-full object-cover transition-transform duration-300 group-hover:scale-115" />
               
-              {/* Online pulse dot in corner */}
               <span className="absolute top-1 right-1 flex h-2.5 w-2.5">
-                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75" />
-                <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-emerald-500 border border-white" />
+                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-blue-400 opacity-75" />
+                <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-blue-500 border border-white" />
               </span>
             </button>
           </div>

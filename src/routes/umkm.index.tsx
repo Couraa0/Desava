@@ -1,260 +1,369 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { 
-  TrendingUp, Package2, Boxes, Leaf, ArrowRight, ShoppingBag, 
-  Clock, CheckCircle, Eye, Heart, Sparkles, Sprout, Star, Award 
+import {
+  TrendingUp, Package2, Boxes, Leaf, ArrowRight, ShoppingBag,
+  Clock, CheckCircle, Eye, Heart, Sparkles, Star,
+  ChevronRight, Package, Sprout, Award
 } from "lucide-react";
-import { CircularFlywheel } from "@/components/CircularFlywheel";
+import { useState, useEffect } from "react";
 
 export const Route = createFileRoute("/umkm/")({
   head: () => ({ meta: [{ title: "Dashboard UMKM | DESAVA" }] }),
   component: UmkmHome,
 });
 
+/* ── DATA ── */
 const bars = [32, 48, 41, 62, 58, 75, 68];
 const days = ["Sen", "Sel", "Rab", "Kam", "Jum", "Sab", "Min"];
 const maxVal = Math.max(...bars);
 
+const banners = [
+  {
+    id: 0,
+    emoji: "🌿",
+    tag: "AI Insight",
+    title: "Sabut Kelapa Melimpah!",
+    desc: "Tingkatkan produksi Pot Sabut Kelapa — permintaan naik 25% minggu ini.",
+    cta: "Tambah Produk",
+    to: "/umkm/catalog",
+    accent: "from-emerald-700/90 to-green-600/95",
+  },
+  {
+    id: 1,
+    emoji: "📦",
+    tag: "Order Baru",
+    title: "23 Pesanan Menanti",
+    desc: "Ada 5 order baru hari ini! Segera proses sebelum batas waktu.",
+    cta: "Lihat Pesanan",
+    to: "/umkm/orders",
+    accent: "from-teal-700/90 to-emerald-600/95",
+  },
+  {
+    id: 2,
+    emoji: "🏅",
+    tag: "Sertifikasi",
+    title: "Circular Champion Badge!",
+    desc: "Kamu berhasil mempertahankan skor sirkular 88/100 bulan ini.",
+    cta: "Lihat Profil",
+    to: "/umkm/profil",
+    accent: "from-green-700/90 to-emerald-700/95",
+  },
+];
+
+const kpis = [
+  { icon: ShoppingBag, label: "Order Baru",    value: "23",   sub: "+5 hari ini",          color: "bg-emerald-500/10 text-emerald-600 border-emerald-200" },
+  { icon: Package2,    label: "Produk Aktif",  value: "14",   sub: "3 hampir habis",       color: "bg-teal-500/10 text-teal-600 border-teal-200" },
+  { icon: Boxes,       label: "Stok Rendah",   value: "3",    sub: "perlu restock",        color: "bg-amber-500/10 text-amber-600 border-amber-200" },
+  { icon: Leaf,        label: "Bahan Sirkular",value: "62 kg",sub: "minggu ini",           color: "bg-green-500/10 text-green-600 border-green-200" },
+];
+
 const recentOrders = [
-  { id: "#ORD-087", item: "Pupuk Kompos 5kg × 3", buyer: "Bu Sari — RW 03", time: "1 jam lalu", status: "Baru", ok: true },
-  { id: "#ORD-086", item: "Pot Sabut Kelapa × 6", buyer: "Pak Hendra — RW 01", time: "3 jam lalu", status: "Proses", ok: true },
-  { id: "#ORD-085", item: "Tas Daur Ulang × 2", buyer: "Ibu Dewi — RW 05", time: "Kemarin", status: "Selesai", ok: false },
+  { id: "#ORD-087", item: "Pupuk Kompos 5kg × 3",  buyer: "Bu Sari — RW 03",    time: "1 jam lalu",  status: "Baru",    statusCls: "bg-emerald-500/10 text-emerald-600 border-emerald-500/20" },
+  { id: "#ORD-086", item: "Pot Sabut Kelapa × 6",  buyer: "Pak Hendra — RW 01", time: "3 jam lalu",  status: "Proses",  statusCls: "bg-yellow-500/10 text-yellow-600 border-yellow-500/20" },
+  { id: "#ORD-085", item: "Tas Daur Ulang × 2",    buyer: "Ibu Dewi — RW 05",   time: "Kemarin",     status: "Selesai", statusCls: "bg-zinc-100 text-zinc-500 border-zinc-200" },
 ];
 
 const materials = [
-  { name: "Sabut kelapa", qty: "120 kg", src: "Bank Sampah RW 02", pct: 80 },
-  { name: "Plastik PET cacah", qty: "45 kg", src: "Bank Sampah RW 05", pct: 45 },
-  { name: "Kompos organik", qty: "210 kg", src: "TPS3R Desa", pct: 90 },
+  { name: "Sabut kelapa",     qty: "120 kg", pct: 80 },
+  { name: "Plastik PET cacah",qty: "45 kg",  pct: 45 },
+  { name: "Kompos organik",   qty: "210 kg", pct: 90 },
 ];
 
-const topProducts = [
-  { name: "Pupuk Kompos Premium", sold: 182, rev: "Rp 2,7 jt" },
-  { name: "Pot Sabut Kelapa", sold: 94, rev: "Rp 3,2 jt" },
+const marketMetrics = [
+  { icon: Eye,         val: "1.420", lbl: "Views",    cls: "text-blue-500 bg-blue-50 border-blue-200" },
+  { icon: Heart,       val: "86",    lbl: "Wishlist", cls: "text-rose-500 bg-rose-50 border-rose-200" },
+  { icon: TrendingUp,  val: "4.8%",  lbl: "Konversi", cls: "text-emerald-500 bg-emerald-50 border-emerald-200" },
+  { icon: ShoppingBag, val: "312",   lbl: "Terjual",  cls: "text-amber-500 bg-amber-50 border-amber-200" },
 ];
 
-const topCustomers = [
-  { name: "Bu Ratna (RW 03)", points: 3240, orders: 12 },
-  { name: "Pak Slamet (RW 02)", points: 3840, orders: 9 },
-];
+/* ── BANNER SLIDER with Illustrated Backgrounds ── */
+function BannerSlider() {
+  const [idx, setIdx] = useState(0);
+  useEffect(() => {
+    const t = setInterval(() => setIdx((i) => (i + 1) % banners.length), 4200);
+    return () => clearInterval(t);
+  }, []);
+  const b = banners[idx];
 
+  const illustrations = [
+    /* Slide 0 — Coconut / AI Insight */
+    <svg key="u0" className="absolute inset-0 w-full h-full" viewBox="0 0 360 180" preserveAspectRatio="xMidYMid slice" fill="none">
+      <rect width="360" height="180" fill="url(#ug0)"/>
+      <defs>
+        <linearGradient id="ug0" x1="0" y1="0" x2="360" y2="180" gradientUnits="userSpaceOnUse">
+          <stop offset="0%" stopColor="#14532d"/>
+          <stop offset="100%" stopColor="#065f46"/>
+        </linearGradient>
+      </defs>
+      {/* Big leaf clusters */}
+      <g opacity="0.18" transform="translate(195,0)">
+        <path d="M50 0 C50 0 10 30 10 70 C10 100 30 120 50 130 C70 120 90 100 90 70 C90 30 50 0 50 0Z" fill="white"/>
+        <line x1="50" y1="130" x2="50" y2="50" stroke="url(#ug0)" strokeWidth="2"/>
+        <line x1="50" y1="80" x2="30" y2="60" stroke="url(#ug0)" strokeWidth="1.5"/>
+        <line x1="50" y1="95" x2="70" y2="75" stroke="url(#ug0)" strokeWidth="1.5"/>
+      </g>
+      <g opacity="0.11" transform="translate(255,10) scale(0.8)">
+        <path d="M50 0 C50 0 10 30 10 70 C10 100 30 120 50 130 C70 120 90 100 90 70 C90 30 50 0 50 0Z" fill="white"/>
+      </g>
+      {/* Coconut */}
+      <circle cx="310" cy="60" r="22" fill="white" opacity="0.12"/>
+      <circle cx="310" cy="60" r="15" fill="white" opacity="0.08"/>
+      {/* Ground dots */}
+      <circle cx="50" cy="155" r="30" fill="white" opacity="0.05"/>
+      <circle cx="150" cy="170" r="20" fill="white" opacity="0.04"/>
+      {/* Sparkle */}
+      {[[240,40],[300,110],[260,130]].map(([x,y],i)=>(
+        <g key={i} transform={`translate(${x},${y})`} opacity={0.22}>
+          <line x1="-4" y1="0" x2="4" y2="0" stroke="white" strokeWidth="1.5"/>
+          <line x1="0" y1="-4" x2="0" y2="4" stroke="white" strokeWidth="1.5"/>
+        </g>
+      ))}
+      {/* Sparkles AI chip */}
+      <rect x="225" y="100" width="30" height="20" rx="4" fill="white" opacity="0.08"/>
+      <rect x="230" y="105" width="20" height="3" rx="1" fill="white" opacity="0.15"/>
+      <rect x="230" y="111" width="14" height="3" rx="1" fill="white" opacity="0.1"/>
+    </svg>,
+
+    /* Slide 1 — Package / Orders */
+    <svg key="u1" className="absolute inset-0 w-full h-full" viewBox="0 0 360 180" preserveAspectRatio="xMidYMid slice" fill="none">
+      <rect width="360" height="180" fill="url(#ug1)"/>
+      <defs>
+        <linearGradient id="ug1" x1="0" y1="0" x2="360" y2="180" gradientUnits="userSpaceOnUse">
+          <stop offset="0%" stopColor="#134e4a"/>
+          <stop offset="100%" stopColor="#065f46"/>
+        </linearGradient>
+      </defs>
+      {/* Big box */}
+      <g opacity="0.2" transform="translate(205,15) scale(1.1)">
+        <rect x="10" y="30" width="80" height="70" rx="4" fill="white"/>
+        <path d="M10 30 L50 10 L90 30" fill="white" opacity="0.7"/>
+        <line x1="50" y1="30" x2="50" y2="100" stroke="url(#ug1)" strokeWidth="2"/>
+        <line x1="10" y1="50" x2="90" y2="50" stroke="url(#ug1)" strokeWidth="1.5" opacity="0.5"/>
+      </g>
+      {/* Small boxes */}
+      <g opacity="0.12" transform="translate(25,60)">
+        <rect x="0" y="20" width="50" height="40" rx="3" fill="white"/>
+        <path d="M0 20 L25 8 L50 20" fill="white" opacity="0.6"/>
+      </g>
+      <g opacity="0.09" transform="translate(30,108)">
+        <rect width="40" height="30" rx="3" fill="white"/>
+      </g>
+      {/* Arrows (delivery) */}
+      <g opacity="0.15" transform="translate(155,130)">
+        <path d="M0 12 L20 12 M14 6 L20 12 L14 18" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+      </g>
+      {/* Circles */}
+      <circle cx="330" cy="40" r="35" fill="white" opacity="0.05"/>
+      <circle cx="300" cy="150" r="28" fill="white" opacity="0.04"/>
+    </svg>,
+
+    /* Slide 2 — Circular Economy / Badge */
+    <svg key="u2" className="absolute inset-0 w-full h-full" viewBox="0 0 360 180" preserveAspectRatio="xMidYMid slice" fill="none">
+      <rect width="360" height="180" fill="url(#ug2)"/>
+      <defs>
+        <linearGradient id="ug2" x1="0" y1="0" x2="360" y2="180" gradientUnits="userSpaceOnUse">
+          <stop offset="0%" stopColor="#166534"/>
+          <stop offset="100%" stopColor="#14532d"/>
+        </linearGradient>
+      </defs>
+      {/* Circular arrows (economy) */}
+      <g opacity="0.17" transform="translate(195,10) scale(1.4)">
+        <path d="M50 20 A30 30 0 1 1 20 50 L28 50 L14 65 L0 50 H8 A40 40 0 1 0 50 10 Z" fill="white"/>
+      </g>
+      {/* Badge / shield */}
+      <g opacity="0.14" transform="translate(225,90)">
+        <path d="M40 0 L80 15 L80 55 C80 75 60 90 40 95 C20 90 0 75 0 55 L0 15 Z" fill="white"/>
+        <path d="M20 48 L34 62 L60 36" stroke="url(#ug2)" strokeWidth="5" strokeLinecap="round" strokeLinejoin="round"/>
+      </g>
+      {/* Dots pattern */}
+      {[0,1,2,3,4,5,6,7].map(i=>(
+        <circle key={i} cx={30 + (i%4)*30} cy={130 + Math.floor(i/4)*25} r="2" fill="white" opacity="0.1"/>
+      ))}
+      <circle cx="300" cy="30" r="30" fill="white" opacity="0.06"/>
+      <circle cx="340" cy="120" r="40" fill="white" opacity="0.04"/>
+    </svg>,
+  ];
+
+  return (
+    <div className="relative mx-5 overflow-hidden rounded-3xl shadow-xl" style={{ minHeight: 172 }}>
+      <div key={idx} className="absolute inset-0 animate-in fade-in duration-500">
+        {illustrations[idx]}
+      </div>
+      <div className="relative p-5 flex flex-col" style={{ minHeight: 172 }}>
+        <span className="inline-flex w-fit items-center gap-1.5 rounded-full bg-white/20 border border-white/25 px-2.5 py-0.5 text-[9px] font-black text-white uppercase tracking-widest">
+          {b.emoji} {b.tag}
+        </span>
+        <p className="mt-2.5 text-lg font-black text-white leading-tight max-w-[210px]">{b.title}</p>
+        <p className="mt-1 text-[11px] text-white/75 leading-snug max-w-[200px]">{b.desc}</p>
+        <div className="mt-auto pt-3">
+          <span className="inline-flex items-center gap-1.5 rounded-xl bg-white px-4 py-2 text-[11px] font-black text-emerald-700">
+            {b.cta} <ArrowRight className="h-3 w-3" />
+          </span>
+        </div>
+      </div>
+      <div className="absolute bottom-3 right-4 flex gap-1.5">
+        {banners.map((_, i) => (
+          <button key={i} onClick={(e) => { e.preventDefault(); setIdx(i); }} className={`h-1.5 rounded-full transition-all duration-300 ${i === idx ? "w-5 bg-white" : "w-1.5 bg-white/40"}`} />
+        ))}
+      </div>
+    </Link>
+  );
+}
+
+/* ── MAIN ── */
 function UmkmHome() {
   return (
     <div className="pb-6 space-y-5">
-      {/* Revenue hero - Image-Backed with Amber Glow */}
+
+      {/* ── HERO REVENUE CARD ── */}
       <div className="mx-5 mt-4">
-        <div className="relative overflow-hidden rounded-3xl card-umkm-bg p-5 text-white neon-glow-umkm border border-amber-500/20 shadow-2xl">
-          {/* Glow accent */}
-          <div className="pointer-events-none absolute right-0 top-0 h-32 w-32 rounded-full bg-amber-400/10 blur-3xl" />
+        <div className="relative overflow-hidden rounded-3xl card-umkm-bg p-5 text-white neon-glow-umkm border border-emerald-400/20 shadow-2xl">
+          <div className="pointer-events-none absolute -right-8 -top-8 h-40 w-40 rounded-full bg-emerald-300/15 blur-3xl" />
+          <div className="pointer-events-none absolute -left-4 bottom-0 h-28 w-28 rounded-full bg-green-400/20 blur-2xl" />
+          {/* Leaf deco */}
+          <svg className="pointer-events-none absolute right-4 bottom-3 h-20 w-20 opacity-6" viewBox="0 0 80 80" fill="none">
+            <path d="M40 4C40 4 12 20 12 44C12 62 24 72 40 76C56 72 68 62 68 44C68 20 40 4 40 4Z" fill="white"/>
+            <line x1="40" y1="76" x2="40" y2="36" stroke="white" strokeWidth="2"/>
+          </svg>
 
-          <p className="text-[10px] font-extrabold uppercase tracking-wider text-amber-400">Total Penjualan — Bulan Mei</p>
-          <p className="mt-1.5 text-3xl font-black tracking-tight font-display text-white">Rp 18.420.000</p>
-          
-          <div className="mt-2 flex items-center gap-1.5">
-            <TrendingUp className="h-4 w-4 text-emerald-450 animate-bounce" />
-            <span className="text-xs font-bold text-emerald-400">+12% vs bulan lalu</span>
-          </div>
-
-          {/* Bar chart - Glowing Neon Bars */}
-          <div className="mt-6 flex h-16 items-end gap-2.5">
-            {bars.map((h, i) => (
-              <div key={i} className="flex flex-1 flex-col items-center gap-1.5">
-                <div
-                  className="w-full rounded-t-lg bg-white/20 border-t border-white/40 shadow-[0_0_10px_rgba(255,255,255,0.2)] transition-all hover:bg-white/40"
-                  style={{ height: `${(h / maxVal) * 100}%` }}
-                />
-                <span className="text-[9px] font-bold text-white/70">{days[i]}</span>
+          <div className="relative">
+            <div className="flex items-center justify-between">
+              <div className="flex items-center gap-1.5">
+                <div className="flex h-5 w-5 items-center justify-center rounded-full bg-white/20">
+                  <TrendingUp className="h-3 w-3 text-white" />
+                </div>
+                <span className="text-[9px] font-black uppercase tracking-widest text-emerald-200">Penjualan — Bulan Mei</span>
               </div>
-            ))}
+              <span className="rounded-full bg-white/15 border border-white/20 px-2.5 py-0.5 text-[9px] font-black text-white uppercase">UMKM</span>
+            </div>
+
+            <p className="mt-3.5 text-[36px] font-black tracking-tight font-display text-white leading-none">Rp 18,4 jt</p>
+            <div className="mt-2 flex items-center gap-1.5">
+              <TrendingUp className="h-3.5 w-3.5 text-emerald-300 animate-bounce" />
+              <span className="text-[11px] font-bold text-emerald-200">+12% vs bulan lalu</span>
+            </div>
+
+            {/* Sparkline */}
+            <div className="mt-4 flex h-14 items-end gap-1.5">
+              {bars.map((h, i) => (
+                <div key={i} className="flex flex-1 flex-col items-center gap-1">
+                  <div className="w-full rounded-t bg-white/25 border-t border-white/40 transition-all hover:bg-white/40" style={{ height: `${(h / maxVal) * 100}%` }} />
+                  <span className="text-[8px] font-bold text-white/60">{days[i]}</span>
+                </div>
+              ))}
+            </div>
           </div>
         </div>
       </div>
 
-      {/* AI Business Suggestion Widget - Hologram Terminal */}
-      <div className="mx-5">
-        <section className="relative overflow-hidden rounded-2xl border border-purple-200 bg-gradient-to-r from-purple-50 via-indigo-50/50 to-purple-50 p-4 shadow-[0_4px_20px_-2px_rgba(168,85,247,0.08)]">
-          <div className="pointer-events-none absolute -right-8 -top-8 h-24 w-24 rounded-full bg-purple-300/10 blur-2xl" />
-          <div className="flex gap-3">
-            <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-purple-100 text-purple-600 border border-purple-200 shadow-sm">
-              <Sparkles className="h-5 w-5 animate-pulse" />
-            </div>
-            <div>
-              <span className="inline-flex items-center gap-1 rounded-full bg-purple-100 border border-purple-200/60 px-2.5 py-0.5 text-[9px] font-extrabold uppercase tracking-widest text-purple-700">
-                🔮 AI Business Suggestion
+      {/* ── BANNER SLIDER ── */}
+      <BannerSlider />
+
+      {/* ── KPI GRID ── */}
+      <div className="px-5">
+        <h2 className="text-sm font-black text-foreground mb-3">Ringkasan Bisnis</h2>
+        <div className="grid grid-cols-2 gap-2.5">
+          {kpis.map((k) => (
+            <div key={k.label} className="rounded-2xl border border-border bg-card p-4">
+              <span className={`flex h-9 w-9 items-center justify-center rounded-xl border ${k.color}`}>
+                <k.icon className="h-4.5 w-4.5" />
               </span>
-              <p className="mt-2 text-xs font-bold text-zinc-900 leading-snug">
-                Stok Sabut Kelapa melimpah di TPS3R Desa!
-              </p>
-              <p className="text-[10px] text-zinc-600 leading-relaxed mt-1">
-                Disarankan untuk meningkatkan produksi <strong>Pot Sabut Kelapa</strong>. Permintaan pasar lokal sedang meningkat sebesar 25% minggu ini.
-              </p>
-            </div>
-          </div>
-        </section>
-      </div>
-
-      {/* Circular Economy Score & Performance Metrics */}
-      <div className="mx-5 grid grid-cols-2 gap-3.5">
-        {/* Circular Score */}
-        <div className="rounded-2xl border border-border bg-card p-4 flex flex-col justify-between shadow-xs">
-          <div>
-            <div className="flex items-center justify-between">
-              <span className="text-[9px] font-extrabold text-primary uppercase tracking-wider">Circular Score</span>
-              <Sprout className="h-4.5 w-4.5 text-primary" />
-            </div>
-            <p className="text-2xl font-black text-foreground mt-2 font-display">88 / 100</p>
-            <p className="text-[10px] text-muted-foreground leading-tight mt-0.5">Kategori: <strong>Sangat Sirkular</strong></p>
-          </div>
-          <div className="mt-4 pt-3 border-t border-border/60 flex items-center gap-1.5">
-            <div className="h-2 w-2 rounded-full bg-emerald-500 animate-pulse" />
-            <span className="text-[9px] font-extrabold text-emerald-600">100% Bahan Daur Ulang</span>
-          </div>
-        </div>
-
-        {/* Circular Badge Awards */}
-        <div className="rounded-2xl border border-border bg-card p-4 flex flex-col justify-between shadow-xs">
-          <div>
-            <div className="flex items-center justify-between">
-              <span className="text-[9px] font-extrabold text-primary uppercase tracking-wider">Sertifikasi</span>
-              <Award className="h-4.5 w-4.5 text-primary" />
-            </div>
-            <div className="mt-3 flex flex-wrap gap-1">
-              <span className="rounded bg-emerald-500/10 border border-emerald-500/20 px-1.5 py-0.5 text-[8px] font-black text-emerald-400">VERIFIED BUSINESS</span>
-              <span className="rounded bg-amber-500/10 border border-amber-500/20 px-1.5 py-0.5 text-[8px] font-black text-amber-400">CIRCULAR CHAMPION</span>
-            </div>
-          </div>
-          <p className="text-[8px] text-zinc-550 font-bold leading-tight">Terverifikasi Pemdes</p>
-        </div>
-      </div>
-
-      {/* Marketplace Performance Metrics */}
-      <div className="mx-5">
-        <h3 className="text-xs font-bold text-foreground uppercase tracking-wider mb-3">Kinerja Marketplace</h3>
-        <div className="grid grid-cols-4 gap-2.5">
-          {[
-            { icon: Eye, val: "1.420", lbl: "Views", color: "text-blue-650 border-blue-200 bg-blue-500/10" },
-            { icon: Heart, val: "86", lbl: "Wishlist", color: "text-rose-650 border-rose-200 bg-rose-500/10" },
-            { icon: TrendingUp, val: "4.8%", lbl: "Konversi", color: "text-emerald-650 border-emerald-200 bg-emerald-500/10" },
-            { icon: ShoppingBag, val: "312", lbl: "Terjual", color: "text-amber-650 border-amber-200 bg-amber-500/10" },
-          ].map(({ icon: Icon, val, lbl, color }) => (
-            <div key={lbl} className="rounded-xl border border-border/60 bg-background/30 p-2.5 text-center shadow-xs flex flex-col items-center">
-              <span className={`flex h-8 w-8 items-center justify-center rounded-lg ${color} mb-2 shadow-xs`}>
-                <Icon className="h-4.5 w-4.5" />
-              </span>
-              <p className="text-xs font-black text-foreground">{val}</p>
-              <p className="text-[8px] text-muted-foreground font-bold mt-1 uppercase tracking-wide">{lbl}</p>
+              <p className="mt-2.5 text-[10px] text-muted-foreground font-semibold">{k.label}</p>
+              <p className="text-xl font-black text-foreground font-display">{k.value}</p>
+              <p className="text-[9px] text-muted-foreground mt-0.5">{k.sub}</p>
             </div>
           ))}
         </div>
       </div>
 
-      {/* Ecosystem Flywheel */}
-      <div className="mx-5">
-        <CircularFlywheel />
-      </div>
-
-      {/* KPI grid */}
-      <div className="mx-5 grid grid-cols-2 gap-3.5">
-        {[
-          { icon: ShoppingBag, label: "Order baru", value: "23", sub: "+5 hari ini" },
-          { icon: Package2, label: "Produk aktif", value: "14", sub: "3 hampir habis" },
-          { icon: Boxes, label: "Stok rendah", value: "3", sub: "perlu restock" },
-          { icon: Leaf, label: "Bahan sirkular", value: "62 kg", sub: "terpakai minggu ini" },
-        ].map((s) => (
-          <div key={s.label} className="rounded-2xl border border-border bg-card p-4 shadow-xs">
-            <span className="flex h-9 w-9 items-center justify-center rounded-xl bg-primary/10 text-primary border border-primary/20 shadow-xs">
-              <s.icon className="h-5 w-5" />
-            </span>
-            <p className="mt-3 text-xs text-muted-foreground">{s.label}</p>
-            <p className="text-xl font-black text-foreground font-display mt-0.5">{s.value}</p>
-            <p className="text-[10px] text-zinc-500 font-semibold">{s.sub}</p>
-          </div>
-        ))}
-      </div>
-
-      {/* Trend Analytics */}
-      <div className="mx-5 grid grid-cols-2 gap-3.5">
-        {/* Top Products */}
-        <div className="rounded-2xl border border-border bg-card p-4 shadow-xs">
-          <h4 className="text-[9px] font-extrabold text-primary uppercase tracking-wider mb-3">Top Produk Sirkular</h4>
-          <div className="space-y-2.5">
-            {topProducts.map((p, idx) => (
-              <div key={idx} className="flex justify-between items-center text-xs">
-                <span className="font-semibold text-foreground truncate max-w-[90px]">{p.name}</span>
-                <span className="text-muted-foreground font-bold shrink-0">{p.sold} pcs</span>
-              </div>
-            ))}
-          </div>
+      {/* ── MARKETPLACE METRICS ── */}
+      <div className="px-5">
+        <h2 className="text-sm font-black text-foreground mb-3">Kinerja Toko</h2>
+        <div className="grid grid-cols-4 gap-2">
+          {marketMetrics.map(({ icon: Icon, val, lbl, cls }) => (
+            <div key={lbl} className="flex flex-col items-center gap-1.5 rounded-2xl border border-border bg-card p-2.5">
+              <span className={`flex h-8 w-8 items-center justify-center rounded-lg border ${cls}`}>
+                <Icon className="h-4 w-4" />
+              </span>
+              <p className="text-xs font-black text-foreground">{val}</p>
+              <p className="text-[8px] text-muted-foreground font-bold uppercase tracking-wide">{lbl}</p>
+            </div>
+          ))}
         </div>
+      </div>
 
-        {/* Top Customers */}
-        <div className="rounded-2xl border border-border bg-card p-4 shadow-xs">
-          <h4 className="text-[9px] font-extrabold text-primary uppercase tracking-wider mb-3">Nasabah Hijau Terbaik</h4>
-          <div className="space-y-2.5">
-            {topCustomers.map((c, idx) => (
-              <div key={idx} className="flex justify-between items-center text-xs">
-                <span className="font-semibold text-foreground truncate max-w-[90px]">{c.name}</span>
-                <span className="text-primary font-bold shrink-0">{c.orders}x</span>
-              </div>
-            ))}
+      {/* ── CIRCULAR SCORE ── */}
+      <div className="mx-5 grid grid-cols-2 gap-2.5">
+        <div className="rounded-2xl border border-emerald-200 bg-emerald-50 p-4">
+          <div className="flex items-center justify-between">
+            <span className="text-[9px] font-black text-emerald-700 uppercase tracking-wider">Circular Score</span>
+            <Sprout className="h-4 w-4 text-emerald-600" />
+          </div>
+          <p className="text-2xl font-black text-emerald-800 mt-2 font-display">88<span className="text-sm text-emerald-500">/100</span></p>
+          <div className="mt-2 h-1.5 overflow-hidden rounded-full bg-emerald-200">
+            <div className="h-full rounded-full bg-gradient-to-r from-emerald-600 to-emerald-400" style={{ width: "88%" }} />
+          </div>
+          <p className="text-[9px] text-emerald-600 font-bold mt-1.5">Sangat Sirkular ✓</p>
+        </div>
+        <div className="rounded-2xl border border-border bg-card p-4">
+          <div className="flex items-center justify-between">
+            <span className="text-[9px] font-black text-primary uppercase tracking-wider">Sertifikasi</span>
+            <Award className="h-4 w-4 text-primary" />
+          </div>
+          <div className="mt-2.5 flex flex-col gap-1.5">
+            <span className="rounded-lg bg-emerald-500/10 border border-emerald-500/20 px-2 py-1 text-[8px] font-black text-emerald-600">✓ VERIFIED BUSINESS</span>
+            <span className="rounded-lg bg-amber-500/10 border border-amber-500/20 px-2 py-1 text-[8px] font-black text-amber-600">⭐ CIRCULAR CHAMPION</span>
           </div>
         </div>
       </div>
 
-      {/* Recent orders */}
-      <div className="mx-5">
-        <div className="flex items-center justify-between">
-          <h2 className="text-sm font-bold">Order Terkini</h2>
-          <Link to="/umkm/orders" className="flex items-center gap-1 text-[11px] font-bold text-primary">
-            Lihat semua <ArrowRight className="h-3 w-3" />
+      {/* ── ORDER TERKINI ── */}
+      <div className="px-5">
+        <div className="flex items-center justify-between mb-3">
+          <h2 className="text-sm font-black text-foreground">Order Terkini</h2>
+          <Link to="/umkm/orders" className="flex items-center gap-0.5 text-[11px] font-bold text-primary">
+            Semua <ChevronRight className="h-3 w-3" />
           </Link>
         </div>
-        <div className="mt-3 space-y-2.5">
+        <div className="space-y-2">
           {recentOrders.map((o) => (
-            <div key={o.id} className="rounded-2xl border border-border bg-card p-4 shadow-xs">
+            <div key={o.id} className="rounded-2xl border border-border bg-card p-4">
               <div className="flex items-start justify-between">
-                <div>
-                  <p className="text-xs font-bold text-primary">{o.id}</p>
-                  <p className="mt-1 text-sm font-bold text-foreground leading-snug">{o.item}</p>
-                  <p className="text-[11px] text-muted-foreground mt-0.5">{o.buyer}</p>
+                <div className="flex-1 min-w-0 pr-2">
+                  <p className="text-[10px] font-bold text-primary">{o.id}</p>
+                  <p className="text-sm font-bold text-foreground mt-0.5 leading-snug">{o.item}</p>
+                  <p className="text-[10px] text-muted-foreground mt-0.5">{o.buyer}</p>
                 </div>
-                <span className={`rounded-full px-2.5 py-0.5 text-[9px] font-extrabold uppercase tracking-wide ${
-                  o.status === "Baru" ? "bg-emerald-500/10 text-emerald-600 border border-emerald-500/20" :
-                  o.status === "Proses" ? "bg-yellow-500/10 text-yellow-600 border border-yellow-500/20" :
-                  "bg-zinc-100 text-zinc-500 border border-zinc-200"
-                }`}>
+                <span className={`rounded-full px-2.5 py-0.5 text-[9px] font-black uppercase border shrink-0 ${o.statusCls}`}>
                   {o.status}
                 </span>
               </div>
-              <div className="mt-3 pt-2 border-t border-border/40 flex items-center gap-1 text-[10px] text-muted-foreground">
-                <Clock className="h-3.5 w-3.5" /> {o.time}
+              <div className="mt-2.5 pt-2 border-t border-border/40 flex items-center gap-1 text-[10px] text-muted-foreground">
+                <Clock className="h-3 w-3" /> {o.time}
               </div>
             </div>
           ))}
         </div>
       </div>
 
-      {/* Materials */}
-      <div className="mx-5">
-        <h2 className="text-sm font-bold">Bahan Baku Tersedia</h2>
-        <div className="mt-3 space-y-2.5">
-          {materials.map((r) => (
-            <div key={r.name} className="rounded-2xl border border-border bg-card p-4 shadow-xs">
-              <div className="flex items-center justify-between">
-                <div>
-                  <p className="text-sm font-bold text-foreground">{r.name}</p>
-                  <p className="text-[11px] text-muted-foreground mt-0.5">{r.src}</p>
-                </div>
-                <span className="rounded-full bg-primary/10 border border-primary/20 px-3 py-1 text-xs font-black text-primary">{r.qty}</span>
+      {/* ── BAHAN BAKU ── */}
+      <div className="px-5">
+        <h2 className="text-sm font-black text-foreground mb-3">Bahan Baku Tersedia</h2>
+        <div className="space-y-2.5">
+          {materials.map((m) => (
+            <div key={m.name} className="rounded-2xl border border-border bg-card p-4">
+              <div className="flex items-center justify-between mb-2.5">
+                <p className="text-sm font-bold text-foreground">{m.name}</p>
+                <span className="rounded-full bg-primary/10 border border-primary/20 px-2.5 py-0.5 text-xs font-black text-primary">{m.qty}</span>
               </div>
-              <div className="mt-3.5 h-1.5 overflow-hidden rounded-full bg-muted/80">
-                <div
-                  className="h-full rounded-full bg-gradient-to-r from-primary to-primary-glow transition-all"
-                  style={{ width: `${r.pct}%` }}
-                />
+              <div className="h-1.5 overflow-hidden rounded-full bg-muted/60">
+                <div className="h-full rounded-full bg-gradient-to-r from-emerald-600 to-emerald-400 transition-all" style={{ width: `${m.pct}%` }} />
               </div>
+              <p className="mt-1 text-[9px] text-muted-foreground text-right">{m.pct}%</p>
             </div>
           ))}
         </div>
       </div>
+
     </div>
   );
 }

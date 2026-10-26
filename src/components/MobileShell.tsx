@@ -8,7 +8,7 @@ interface MobileShellProps {
   headerName?: string;
   headerSubtitle?: string;
   headerAvatar?: string;
-  centerColor?: "green" | "orange" | "purple";
+  centerColor?: "blue" | "green" | "orange" | "yellow" | "purple";
 }
 
 export function MobileShell({

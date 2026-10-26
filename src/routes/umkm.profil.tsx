@@ -138,7 +138,7 @@ function UmkmProfil() {
           <LogOut className="h-4 w-4" /> Keluar dari Akun
         </button>
       </div>
-      <p className="mt-5 text-center text-[10px] text-muted-foreground">Desava v0.1 • Dibuat dengan sepenuh hati</p>
+      <p className="mt-5 text-center text-[10px] text-muted-foreground">Desava v2.0 • Dibuat dengan sepenuh hati</p>
 
       <ReportDialog open={reportOpen} onOpenChange={setReportOpen} role="UMKM" />
     </div>

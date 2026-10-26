@@ -139,7 +139,7 @@ function AdminProfil() {
           <LogOut className="h-4 w-4" /> Keluar dari Sistem
         </button>
       </div>
-      <p className="mt-5 text-center text-[10px] text-muted-foreground">Desava v0.1 • Admin Portal</p>
+      <p className="mt-5 text-center text-[10px] text-muted-foreground">Desava v2.0 • Admin Portal</p>
 
       <ReportDialog open={reportOpen} onOpenChange={setReportOpen} role="Admin" />
     </div>

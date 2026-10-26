@@ -11,7 +11,7 @@ function UmkmLayout() {
         headerName="Berkah Tani"
         headerSubtitle="Akun UMKM"
         headerAvatar="/images/avatar_umkm.png"
-        centerColor="orange"
+        centerColor="green"
         items={[
           { to: "/umkm", label: "Dashboard", icon: LayoutDashboard },
           { to: "/umkm/orders", label: "Pesanan", icon: ClipboardList },

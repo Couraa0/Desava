@@ -196,7 +196,7 @@ function WargaProfil() {
 
       {/* App version */}
       <p className="mt-5 text-center text-[10px] text-muted-foreground">
-        Desava v0.1 • Dibuat dengan sepenuh hati
+        Desava v2.0 • Dibuat dengan sepenuh hati
       </p>
 
       <ReportDialog open={reportOpen} onOpenChange={setReportOpen} role="Warga" />

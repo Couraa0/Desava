@@ -38,23 +38,56 @@ function Login() {
 
   const themeClass = role === "warga" ? "theme-warga" : role === "umkm" ? "theme-umkm" : "theme-admin";
 
-  const glowClass = role === "warga" ? "neon-glow-warga border-emerald-500/20" : role === "umkm" ? "neon-glow-umkm border-amber-500/20" : "neon-glow-admin border-indigo-500/20";
-  const btnGradient = role === "warga" ? "from-emerald-500 to-emerald-400 text-white shadow-[0_8px_24px_rgba(16,185,129,0.25)] hover:shadow-[0_8px_30px_rgba(16,185,129,0.35)]" : role === "umkm" ? "from-amber-500 to-amber-400 text-white shadow-[0_8px_24px_rgba(217,119,6,0.25)] hover:shadow-[0_8px_30px_rgba(217,119,6,0.35)]" : "from-indigo-500 to-indigo-400 text-white shadow-[0_8px_24px_rgba(99,102,241,0.25)] hover:shadow-[0_8px_30px_rgba(99,102,241,0.35)]";
+  // ── Warga=Blue, UMKM=Green, Admin=Yellow ──
+  const glowClass =
+    role === "warga" ? "neon-glow-warga border-blue-400/25" :
+    role === "umkm"  ? "neon-glow-umkm border-emerald-400/25" :
+                       "neon-glow-admin border-amber-400/25";
+  const btnGradient =
+    role === "warga" ? "from-blue-600 to-blue-400 text-white shadow-[0_8px_24px_rgba(37,99,235,0.30)] hover:shadow-[0_8px_30px_rgba(37,99,235,0.45)]" :
+    role === "umkm"  ? "from-emerald-600 to-emerald-400 text-white shadow-[0_8px_24px_rgba(5,150,105,0.30)] hover:shadow-[0_8px_30px_rgba(5,150,105,0.45)]" :
+                       "from-amber-500 to-yellow-400 text-zinc-900 shadow-[0_8px_24px_rgba(217,119,6,0.30)] hover:shadow-[0_8px_30px_rgba(217,119,6,0.45)]";
   const roleLabel = role === "admin" ? "Pemerintah Desa" : role === "umkm" ? "UMKM & Petani" : "Warga Desa";
-  const roleTextCol = role === "warga" ? "text-emerald-600" : role === "umkm" ? "text-amber-600" : "text-indigo-600";
-  const roleBgClass = role === "warga" ? "bg-emerald-500/10 border-emerald-500/20" : role === "umkm" ? "bg-amber-500/10 border-amber-500/20" : "bg-indigo-500/10 border-indigo-500/20";
+  const roleTextCol =
+    role === "warga" ? "text-blue-600" :
+    role === "umkm"  ? "text-emerald-600" :
+                       "text-amber-600";
+  const roleBgClass =
+    role === "warga" ? "bg-blue-500/10 border-blue-400/25" :
+    role === "umkm"  ? "bg-emerald-500/10 border-emerald-400/25" :
+                       "bg-amber-500/10 border-amber-400/25";
+  const glowBg1 =
+    role === "warga" ? "bg-blue-500/6" :
+    role === "umkm"  ? "bg-emerald-500/6" :
+                       "bg-amber-500/6";
+  const glowBg2 =
+    role === "warga" ? "bg-indigo-500/5" :
+    role === "umkm"  ? "bg-green-500/5" :
+                       "bg-yellow-500/5";
+  const installBtnClass =
+    role === "warga" ? "bg-blue-500/10 border-blue-400/25 text-blue-600 hover:bg-blue-500/20" :
+    role === "umkm"  ? "bg-emerald-500/10 border-emerald-400/25 text-emerald-600 hover:bg-emerald-500/20" :
+                       "bg-amber-500/10 border-amber-400/25 text-amber-600 hover:bg-amber-500/20";
+  const autofillClass =
+    role === "warga" ? "border-blue-500/30 bg-blue-50 text-blue-700 hover:border-blue-500/50 hover:bg-blue-100/50" :
+    role === "umkm"  ? "border-emerald-500/30 bg-emerald-50 text-emerald-700 hover:border-emerald-500/50 hover:bg-emerald-100/50" :
+                       "border-amber-500/30 bg-amber-50 text-amber-700 hover:border-amber-500/50 hover:bg-amber-100/50";
+  const autofillGradient =
+    role === "warga" ? "bg-gradient-to-r from-blue-100/0 via-blue-200/20 to-blue-100/0" :
+    role === "umkm"  ? "bg-gradient-to-r from-emerald-100/0 via-emerald-200/20 to-emerald-100/0" :
+                       "bg-gradient-to-r from-amber-100/0 via-amber-200/20 to-amber-100/0";
 
   return (
     <div className={`${themeClass} flex min-h-dvh flex-col bg-background text-foreground px-6 pt-12 pb-8 relative overflow-hidden`}>
       {/* Glow backgrounds */}
-      <div className="pointer-events-none absolute -left-20 top-1/4 h-80 w-80 rounded-full bg-emerald-500/5 blur-3xl opacity-60" />
-      <div className="pointer-events-none absolute -right-20 bottom-1/4 h-80 w-80 rounded-full bg-indigo-500/5 blur-3xl opacity-60" />
+      <div className={`pointer-events-none absolute -left-20 top-1/4 h-80 w-80 rounded-full ${glowBg1} blur-3xl opacity-70`} />
+      <div className={`pointer-events-none absolute -right-20 bottom-1/4 h-80 w-80 rounded-full ${glowBg2} blur-3xl opacity-60`} />
 
       {/* Install App Button */}
       {canInstall && (
-        <button 
+        <button
           onClick={install}
-          className="absolute top-4 right-4 flex items-center gap-1.5 rounded-full bg-emerald-500/10 border border-emerald-500/20 px-3 py-1.5 text-xs font-bold text-emerald-600 transition-colors hover:bg-emerald-500/20"
+          className={`absolute top-4 right-4 flex items-center gap-1.5 rounded-full border px-3 py-1.5 text-xs font-bold transition-colors ${installBtnClass}`}
         >
           <Download className="h-3.5 w-3.5" />
           Install App
@@ -145,17 +178,9 @@ function Login() {
           <button 
             type="button" 
             onClick={autofill} 
-            className={`group relative flex w-full items-center justify-center gap-2.5 rounded-2xl border-2 border-dashed ${
-              role === "warga" ? "border-emerald-500/30 bg-emerald-50 text-emerald-700 hover:border-emerald-500/50 hover:bg-emerald-100/50" 
-              : role === "umkm" ? "border-amber-500/30 bg-amber-50 text-amber-700 hover:border-amber-500/50 hover:bg-amber-100/50" 
-              : "border-indigo-500/30 bg-indigo-50 text-indigo-700 hover:border-indigo-500/50 hover:bg-indigo-100/50"
-            } py-3.5 text-xs font-bold transition-all duration-300 hover:shadow-[0_4px_12px_rgba(0,0,0,0.05)] hover:-translate-y-0.5 active:scale-[0.98] active:translate-y-0 overflow-hidden`}
+            className={`group relative flex w-full items-center justify-center gap-2.5 rounded-2xl border-2 border-dashed ${autofillClass} py-3.5 text-xs font-bold transition-all duration-300 hover:shadow-[0_4px_12px_rgba(0,0,0,0.05)] hover:-translate-y-0.5 active:scale-[0.98] active:translate-y-0 overflow-hidden`}
           >
-            <div className={`absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-700 bg-[length:200%_auto] animate-gradient-xy ${
-              role === "warga" ? "bg-gradient-to-r from-emerald-100/0 via-emerald-200/20 to-emerald-100/0"
-              : role === "umkm" ? "bg-gradient-to-r from-amber-100/0 via-amber-200/20 to-amber-100/0"
-              : "bg-gradient-to-r from-indigo-100/0 via-indigo-200/20 to-indigo-100/0"
-            }`} />
+            <div className={`absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-700 ${autofillGradient}`} />
             <Wand2 className="h-4 w-4 relative z-10 transition-transform duration-300 group-hover:rotate-12 group-hover:scale-110" />
             <span className="relative z-10">Isi Otomatis (Demo {roleLabel})</span>
           </button>

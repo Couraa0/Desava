@@ -9,12 +9,17 @@ export type BottomNavItem = {
   center?: boolean;
 };
 
-type CenterColor = "green" | "orange" | "purple";
+type CenterColor = "blue" | "green" | "orange" | "yellow" | "purple";
 
 const CENTER_STYLES: Record<
   CenterColor,
   { gradient: string; glow: string; glowHover: string }
 > = {
+  blue: {
+    gradient: "bg-gradient-to-br from-blue-600 to-blue-400",
+    glow: "shadow-[0_6px_20px_rgba(37,99,235,0.45)]",
+    glowHover: "group-hover:bg-blue-500/30",
+  },
   green: {
     gradient: "bg-gradient-to-br from-emerald-500 to-emerald-400",
     glow: "shadow-[0_6px_20px_rgba(16,185,129,0.4)]",
@@ -25,6 +30,11 @@ const CENTER_STYLES: Record<
     glow: "shadow-[0_6px_20px_rgba(245,158,11,0.4)]",
     glowHover: "group-hover:bg-amber-500/30",
   },
+  yellow: {
+    gradient: "bg-gradient-to-br from-amber-400 to-yellow-300",
+    glow: "shadow-[0_6px_20px_rgba(217,119,6,0.45)]",
+    glowHover: "group-hover:bg-amber-400/30",
+  },
   purple: {
     gradient: "bg-gradient-to-br from-violet-600 to-indigo-500",
     glow: "shadow-[0_6px_20px_rgba(139,92,246,0.4)]",
@@ -34,7 +44,7 @@ const CENTER_STYLES: Record<
 
 export function BottomNav({
   items,
-  centerColor = "green",
+  centerColor = "blue",
 }: {
   items: BottomNavItem[];
   centerColor?: CenterColor;
